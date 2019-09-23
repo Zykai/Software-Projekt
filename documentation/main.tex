@@ -1,0 +1,101 @@
+\documentclass[12pt, a4paper, oneside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[ngerman]{babel}
+\usepackage{amssymb}
+\usepackage{appendix}
+\usepackage{listings}
+\lstset{language=c++}
+\lstset{
+    tabsize=2,
+    numbers=left
+}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    linkcolor=black,
+    urlcolor=blue,
+    citecolor=black
+}
+% to add references
+\usepackage{biblatex}
+\addbibresource{ref.bib}
+% to prevent warning
+\usepackage{csquotes}
+
+%to prevent graphics from floating ([H])
+\usepackage{float}
+% Table colors
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{booktabs}
+% Tims Zeug
+\usepackage{contour}
+\usepackage{ulem}
+\renewcommand{\ULdepth}{1.8pt}
+\contourlength{0.8pt}
+\newcommand{\myuline}[1]{%
+  \uline{\phantom{#1}}%
+  \llap{\contour{white}{#1}}%
+}
+
+\begin{document}
+
+% Titelseite
+\begin{titlepage}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{img/lmg8.png}\\[1.5cm]
+\textsc{\Large Facharbeit im Fach Informatik }\\[0.4cm]
+\textsc{Leitung: Frau Müller}\\[0.4cm]
+\hrule
+\bigskip
+\huge Die Entwicklung eines Compilers zu einem auf Java basierenden Befehlssatz\\[0.5cm]
+\hrule
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\end{flushleft}
+\end{minipage}
+\hfill
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\bigskip
+\medskip
+Tobias Palzer \\
+MSS 11 \\
+Stammkurs M1  \\[0.8cm]
+\end{flushright}
+\end{minipage}
+\vfill
+{\large \today}
+\end{center}
+\end{titlepage}
+
+% Inhaltsverzeichnis
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+
+\pagenumbering{arabic}
+
+\section{Lastenheft}
+\textbf{UR001}\\
+\textbf{Aussage} TODO.\\
+\textbf{Priorität A} \\
+\newline
+\textbf{UR001}\\
+\textbf{Aussage} TODO.\\
+\textbf{Priorität A} \\
+
+\newpage
+\section{Pflichtenheft}
+
+\newpage
+\section{Dokumentation}
+\myuline{23.09.2019:} \\
+Tobias hat eine Vorlage für ein Eclipse-Projekt erstellt, die als Grundlage für das Softwareprojekt dient.
+Diese kann über den \glqq git clone\grqq{}-Befehl heruntergeladen werden und funktioniert über Eclipse.
+Außerdem enthält die Vorlage die Grafikbefehle, die als Grundlage für die grafische Oberfläche dienen sollen.
+
+
+\end{document}
