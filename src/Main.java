@@ -23,7 +23,7 @@ public class Main extends JPanel {
  	 super();
  	 BufferedImage img = null;
  	 try {
-     	 img = ImageIO.read(new File("car.jpg"));
+     	 img = ImageIO.read(new File("res/car.jpg"));
  	 } catch (IOException e) {
      	 System.out.println(e.getMessage());
  	 }
@@ -60,7 +60,7 @@ public class Main extends JPanel {
  
     while(true){
         try {
-            Thread.sleep(16);
+            //Thread.sleep(16);
         } catch (Exception e) {
             //TODO: handle exception
         }
