@@ -4,6 +4,9 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
  
 import javax.swing.JButton;
@@ -13,6 +16,9 @@ import javax.swing.JPanel;
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
+
+import Player.Player;
+
 import java.awt.Font;
  
 // https://docs.oracle.com/javase/tutorial/2d/geometry/primitives.html
@@ -22,6 +28,7 @@ public class Main extends JPanel {
  private int frameNumber = 1;
  static private float deltaTime;
  private Image image;
+ private Player player;
  
  public Main(){
  	 super();
@@ -32,10 +39,33 @@ public class Main extends JPanel {
      	 System.out.println(e.getMessage());
  	 }
  	 image = img.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+ 	 player = new Player();
+ 	 this.addMouseListener(new MouseListener(){
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			player.moveTo(e.getX(), e.getY());
+		}
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub		
+		}
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub		
+		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub	
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub	
+		} 
+ 	 });
  }
  
- public void update(float deltaTime){
-    
+ public void updateGame(float deltaTime){
+    player.update(deltaTime);
  }
  
  public void paint(Graphics g) {
@@ -51,11 +81,13 @@ public class Main extends JPanel {
     g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
     g.drawString(String.format("%.2f", fps),30, 30);
     Toolkit.getDefaultToolkit().sync();
+    
+    player.draw(g);
  }
  
  public static void main(String[] args) {
    JFrame frame = new JFrame();
-   JPanel main = new Main();
+   Main main = new Main();
    frame.add(main);
    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
    frame.setBounds(20,20, 1000,750);
@@ -75,6 +107,7 @@ public class Main extends JPanel {
         long newTime = System.currentTimeMillis();
         deltaTime = (float) (newTime - time);
         time = newTime;
+        main.updateGame(deltaTime);
         frame.repaint();
     }
  }
