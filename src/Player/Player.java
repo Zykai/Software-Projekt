@@ -1,39 +1,28 @@
 package Player;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import Entity.Entity;;
 
-public class Player {
+public class Player extends Entity{
 
-	private int hp;
 	private int level;
 	
-	private double xPosition;
-	private double yPosition;
+	private Color playerColor;
 	
-	double xdirection;
-	double ydirection;
 	
-	public void update(float deltaTime){
-		xPosition += xdirection;
-		yPosition += ydirection;
+	
+	public Player(){
+		playerColor = new Color(1.0f, 0.5f, 0.2f);
+		height = 30;
+		width = 30;
 	}
+	
+	
 	
 	public void draw(Graphics g){
-		g.drawOval((int)xPosition, (int)yPosition, 40, 40);
+		g.setColor(playerColor);
+		g.fillOval((int)xPosition, (int)yPosition, 40, 40);
 	}
-	public void moveTo(int x, int y){
-		double xdif = x - xPosition;
-		System.out.println("XDIF: " + xdif);
-		double ydif = y - yPosition;
-		System.out.println("YDIF: " + ydif);
-		//xPosition = x;
-		//yPosition = y;
-		double magnitude = Math.sqrt(xdif* xdif + ydif * ydif);
-		System.out.println("M: " + magnitude);
-		xdirection = xdif / magnitude;
-		ydirection = ydif / magnitude;
-		System.out.println(xdirection);
-		System.out.println(ydirection);
-
-	}
+	
 }

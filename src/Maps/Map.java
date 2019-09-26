@@ -2,10 +2,13 @@ package Maps;
 
 import java.awt.Graphics;
 import java.awt.List;
+import java.util.LinkedList;
+
+import Enemies.Enemy;
 
 public abstract class Map {
 
-	private List enemyList;
+	protected LinkedList<Enemy> enemyList;
 	private int xSize, ySize;
 	public Map(){
 		
@@ -14,7 +17,7 @@ public abstract class Map {
 	
 	public abstract void update(float deltaTime);
 	
-	public List getEnemyList(){
+	public LinkedList<Enemy> getEnemyList(){
 		return this.enemyList;
 	}
 	

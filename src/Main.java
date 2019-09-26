@@ -13,6 +13,10 @@ import javax.swing.JButton;
 //from   w ww  .j  a v a  2  s  .c  o m
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import Maps.Map;
+import Maps.TestMap;
+
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
@@ -29,6 +33,7 @@ public class Main extends JPanel {
  static private float deltaTime;
  private Image image;
  private Player player;
+ private Map map;
  
  public Main(){
  	 super();
@@ -40,49 +45,39 @@ public class Main extends JPanel {
  	 }
  	 image = img.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
  	 player = new Player();
+ 	 map = new TestMap();
  	 this.addMouseListener(new MouseListener(){
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			player.moveTo(e.getX(), e.getY());
 		}
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub		
 		}
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub		
+			player.moveTo(e.getX(), e.getY());	
 		}
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub	
 		}
 		@Override
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub	
 		} 
  	 });
  }
  
  public void updateGame(float deltaTime){
     player.update(deltaTime);
+    map.update(deltaTime);
  }
  
- public void paint(Graphics g) {
-   g.setColor (Color.red);
-   g.fillRect(0,0,500,500);
- 
-    g.setColor (Color.green);
-    g.fillRect(150, 150 + (int) (50 * Math.sin(System.currentTimeMillis() / 1000.0)),200, 50);
- 
-    g.drawImage(image, 0, 0,null);
- 
+ public void paint(Graphics g) { 
     float fps = (float) (1000.0/deltaTime);
     g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
     g.drawString(String.format("%.2f", fps),30, 30);
-    Toolkit.getDefaultToolkit().sync();
-    
+    map.draw(g);
     player.draw(g);
+    Toolkit.getDefaultToolkit().sync();
  }
  
  public static void main(String[] args) {
