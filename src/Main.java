@@ -83,15 +83,16 @@ public class Main extends JPanel {
  public static void main(String[] args) {
    JFrame frame = new JFrame();
    Main main = new Main();
-   frame.add(main);
+   //frame.add(main);
    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
    frame.setBounds(20,20, 1000,750);
    frame.setLocationRelativeTo(null);
    frame.setVisible(true);
    long time = System.currentTimeMillis();
-   frame.remove(main);
+   //frame.remove(main);
    
-   frame.add(main);
+   frame.add(new Menu(frame, main));
+   //frame.add(main);
     while(true){
         try {
             Thread.sleep(16);
@@ -104,7 +105,9 @@ public class Main extends JPanel {
         time = newTime;
         main.updateGame(deltaTime);
         frame.repaint();
-    }
+        }
+        
+    
  }
 }
  
