@@ -1,8 +1,15 @@
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,7 +29,22 @@ private JButton options;
 private JButton loadSaves;
 private JButton newGame;
 
+private Image playButton, playButtonB;
+
 public Menu(final JFrame frame, Main main){
+	
+	/*
+	BufferedImage img = null;
+	try {
+		playButtonB = ImageIO.read(new File("playbutton.png"));
+		playButton = playButtonB.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+	} 
+	catch (IOException e) {
+		System.out.println(e.getMessage());
+	}
+	*/
+	
+	
 	this.main = main;
 	test = new JLabel("test");
 	
@@ -30,11 +52,12 @@ public Menu(final JFrame frame, Main main){
 	startScreen = new JPanel();
 	playScreen = new JPanel();
 	optionScreen = new JPanel();
-	play = new JButton("Play Game"); 
+	play = new JButton(/*new ImageIcon(playButton)*/"Play Game"); 
 	options = new JButton("Options");
 	newGame = new JButton("Create new Game");
 	saves = new JButton("Load Game");
 	
+	//play.setIcon((Icon) startButton);
 	
 	add(startScreen);
 	startScreen.setLayout(new GridLayout());
@@ -59,12 +82,11 @@ public Menu(final JFrame frame, Main main){
 		public void actionPerformed(ActionEvent e) {
 			frame.remove(self);
 			frame.add(optionScreen);
+			frame.validate();
 		}
 	});
 	
 	
 	}
-		
-
 }
 

@@ -18,11 +18,10 @@ public class Player extends Entity{
 		width = 30;
 	}
 	
-	
+
 	
 	public void draw(Graphics g){
 		g.setColor(playerColor);
 		g.fillOval((int)xPosition, (int)yPosition, 40, 40);
 	}
-	
 }
