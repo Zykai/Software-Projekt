@@ -12,7 +12,7 @@ public class Enemy extends Entity{
 	
 	public Enemy() {
 		movespeed = 0.35f;
-		enemyColor = new Color(255, 255, 255);
+		enemyColor = new Color(10, 255, 255);
 	}
 	
 	@Override

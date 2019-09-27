@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 
 public class Menu extends JPanel{
 	private Main main;
-	private Menu menu;
+	
 	
 	private JLabel optionsL;
 	private JFrame frame;
@@ -51,7 +51,7 @@ public class Menu extends JPanel{
 		this.main = main;
 		optionsL = new JLabel("coming soon");
 		
-		final Menu self = menu;
+		final Menu self = this;
 		startScreenP = new JPanel();
 		playScreenP = new JPanel();
 		optionScreenP = new JPanel();
