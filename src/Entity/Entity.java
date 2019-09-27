@@ -39,7 +39,7 @@ public abstract class Entity {
 		moving = true;
 		xgoal = x;
 		ygoal = y;
-		// Quadrieren, da um späteres Wurzelziehen beim Distanz-berechnen zu vermeiden
+		// Quadrieren, um späteres Wurzelziehen beim Distanz-berechnen zu vermeiden
 		prevDistance *= prevDistance;
 	}
 }

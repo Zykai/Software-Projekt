@@ -17,76 +17,105 @@ import javax.swing.JPanel;
 
 
 public class Menu extends JPanel{
-private Main main;
-private JLabel test;
-private JFrame frame;
-private JPanel startScreen;
-private JPanel playScreen;
-private JPanel optionScreen;
-private JButton saves;
-private JButton play;
-private JButton options;
-private JButton loadSaves;
-private JButton newGame;
-
-private Image playButton, playButtonB;
-
-public Menu(final JFrame frame, Main main){
+	private Main main;
+	private Menu menu;
 	
-	/*
-	BufferedImage img = null;
-	try {
-		playButtonB = ImageIO.read(new File("playbutton.png"));
-		playButton = playButtonB.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
-	} 
-	catch (IOException e) {
-		System.out.println(e.getMessage());
-	}
-	*/
+	private JLabel optionsL;
+	private JFrame frame;
+	private JPanel startScreenP;
+	private JPanel playScreenP;
+	private JPanel optionScreenP;
+	private JButton savesB;
+	private JButton playB;
+	private JButton optionsB;
+	private JButton loadSavesB;
+	private JButton newGameB;
+	private JButton backB;
+	private JButton exitB;
+	private Image playButton, playButtonB;
 	
-	
-	this.main = main;
-	test = new JLabel("test");
-	
-	final Menu self = this;
-	startScreen = new JPanel();
-	playScreen = new JPanel();
-	optionScreen = new JPanel();
-	play = new JButton(/*new ImageIcon(playButton)*/"Play Game"); 
-	options = new JButton("Options");
-	newGame = new JButton("Create new Game");
-	saves = new JButton("Load Game");
-	
-	//play.setIcon((Icon) startButton);
-	
-	add(startScreen);
-	startScreen.setLayout(new GridLayout());
-	startScreen.add(play);
-	startScreen.add(options);
-	setVisible(true);
-	setSize(1000, 700);
-	
-	optionScreen.setLayout(new GridLayout());
-	optionScreen.add(test);
-	
-	play.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			frame.remove(self);
-			frame.add(self.main);
-			frame.validate();
+	public Menu(final JFrame frame, final Main main){
+		
+		/*
+		BufferedImage img = null;
+		try {
+			playButtonB = ImageIO.read(new File("playbutton.png"));
+			playButton = playButtonB.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+		} 
+		catch (IOException e) {
+			System.out.println(e.getMessage());
 		}
-	});
-	options.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			frame.remove(self);
-			frame.add(optionScreen);
-			frame.validate();
-		}
-	});
-	
-	
+		*/
+		
+		
+		this.main = main;
+		optionsL = new JLabel("coming soon");
+		
+		final Menu self = menu;
+		startScreenP = new JPanel();
+		playScreenP = new JPanel();
+		optionScreenP = new JPanel();
+		playB = new JButton(/*new ImageIcon(playButton)*/"Play Game"); 
+		optionsB = new JButton("Options");
+		newGameB = new JButton("Create new Game");
+		savesB = new JButton("Load Game");
+		backB = new JButton("Back to menu");
+		exitB = new JButton("Exit Game");
+		
+		//playB.setIcon((Icon) startButton);
+		
+		add(startScreenP);
+		setVisible(true);
+		
+		
+		//Startscreen
+		startScreenP.setLayout(new GridLayout());
+		startScreenP.add(playB);
+		startScreenP.add(optionsB);
+		startScreenP.add(exitB);
+		
+		
+		//Optionscreen
+		optionScreenP.setLayout(new GridLayout());
+		optionScreenP.add(optionsL);
+		optionScreenP.add(backB);
+		
+		
+		
+		playB.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.remove(self);
+				frame.add(self.main);
+				frame.validate();
+			}
+		});
+		
+		optionsB.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.remove(self);
+				frame.add(optionScreenP);
+				frame.validate();
+			}
+		});
+		
+		exitB.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		
+		backB.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.remove(self);
+				System.out.println("asd");
+				frame.add(self);
+				frame.validate();
+			}
+		});
 	}
 }
 
