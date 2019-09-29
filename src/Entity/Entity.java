@@ -1,5 +1,7 @@
 package Entity;
 
+import Maps.Map;
+
 public abstract class Entity {
 	private int hp;
 	protected float movespeed = 0.6f;
@@ -12,11 +14,20 @@ public abstract class Entity {
 	double prevDistance;
 	protected boolean moving;
 	
-	public void update(float deltaTime){
+	public void update(float deltaTime, Map map){
 		if(moving) {
-			xPosition += xdirection * deltaTime * movespeed;
-			yPosition += ydirection * deltaTime * movespeed;
-			// Distanz mit Satz des Pythagoars, Vermeiden von Wurzeln für bessere Performance
+			//xPosition += xdirection * deltaTime * movespeed;
+			//yPosition += ydirection * deltaTime * movespeed;
+			double newX = xPosition + xdirection * deltaTime * movespeed;
+			double newY = yPosition + ydirection * deltaTime * movespeed;
+			if(map.isCorrectPosition(newX, newY, this.width)) {
+				xPosition = newX;
+				yPosition = newY;
+			} else {
+				moving = false;
+				return;
+			}
+			// Distanz mit Satz des Pythagoras, Vermeiden von Wurzeln für bessere Performance
 			double distance = (xgoal - xPosition) * (xgoal - xPosition) + (ygoal - yPosition) * (ygoal - yPosition);
 			// Erster Teil: Erreichen des Ziels, Zweiter Teil behebt einen Fehler, wenn man sich auf den aktuellen Punkt bewegt
 			if(prevDistance < distance || Double.isNaN(distance)) {

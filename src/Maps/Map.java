@@ -10,7 +10,7 @@ import Player.Player;
 public abstract class Map {
 
 	protected LinkedList<Enemy> enemyList;
-	private int xSize, ySize;
+	protected int xSize, ySize;
 	public Map(){
 		
 	}
@@ -22,5 +22,11 @@ public abstract class Map {
 		return this.enemyList;
 	}
 	
+	public boolean isCorrectPosition(double x, double y, double radius) {
+		if(x-radius <0 || x+radius > xSize || y-radius < 0 || y+radius > ySize) {
+			return false;
+		}
+		return true;
+	}
 	
 }

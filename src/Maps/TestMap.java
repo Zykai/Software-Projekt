@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 
 import Enemies.Enemy;
 import Player.Player;
+import Constants.Constants;
 
 public class TestMap extends Map {
 
@@ -19,7 +20,8 @@ public class TestMap extends Map {
 	private Image img;
 	
 	public TestMap() {
-		
+		this.xSize = Constants.SCREEN_X;
+		this.ySize = Constants.SCREEN_Y;
 		mapColor = new Color(0.5f, 0.5f, 0.5f);
 		this.enemyList = new LinkedList<Enemy>();
 		enemyList.add(new Enemy());
@@ -35,7 +37,7 @@ public class TestMap extends Map {
 	public void draw(Graphics g, int xoffset, int yoffset) {
 		//g.setColor(mapColor);
 		//g.fillRect(0, 0, 1000, 750);
-		g.drawImage(img, xoffset, yoffset, null);
+		g.drawImage(img, xoffset, yoffset, Constants.SCREEN_X, Constants.SCREEN_Y, null);
 		for(Iterator<Enemy> i = enemyList.iterator(); i.hasNext();) {
 			Enemy e = i.next();
 			e.draw(g, xoffset, yoffset);
@@ -46,7 +48,7 @@ public class TestMap extends Map {
 	public void update(float deltaTime) {
 		for(Iterator<Enemy> i = enemyList.iterator(); i.hasNext();) {
 			Enemy e = i.next();
-			e.update(deltaTime);
+			e.update(deltaTime, this);
 		}
 	}
 

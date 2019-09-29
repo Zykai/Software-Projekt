@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.util.Random;
 
 import Entity.Entity;
+import Maps.Map;
 import Player.Player;
 
 public class Enemy extends Entity{
@@ -25,8 +26,8 @@ public class Enemy extends Entity{
 	}
 
 	@Override
-	public void update(float deltaTime) {
-		super.update(deltaTime);
+	public void update(float deltaTime, Map map) {
+		super.update(deltaTime, map);
 		if(!moving) {
 			Random rand = new Random();
 			int newx = rand.nextInt(300) + 350;
