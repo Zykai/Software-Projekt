@@ -1,9 +1,13 @@
 package Player;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 import Constants.Constants;
-import Entity.Entity;;
+import Enemies.Enemy;
+import Entity.Entity;
+import Maps.Map;;
 
 public class Player extends Entity{
 
@@ -15,8 +19,8 @@ public class Player extends Entity{
 	
 	public Player(){
 		playerColor = new Color(1.0f, 0.5f, 0.2f);
-		xPosition = 480;
-		yPosition = 335;
+		xPosition = Constants.SCREEN_X / 2;
+		yPosition = Constants.SCREEN_Y / 2;
 		height = 30;
 		width = 30;
 	}
@@ -25,7 +29,7 @@ public class Player extends Entity{
 	
 	public void draw(Graphics g){
 		g.setColor(getPlayerColor());
-		g.fillOval((int)(Constants.SCREEN_X/2-width), (int)(Constants.SCREEN_Y/2-height), 40, 40);
+		g.fillOval((int)(Constants.SCREEN_X/2-width/2), (int)(Constants.SCREEN_Y/2-height/2), (int)width, (int)height);
 	}
 
 
@@ -50,17 +54,38 @@ public class Player extends Entity{
 	public Color getPlayerColor() {
 		return playerColor;
 	}
-
-	public double getX() {
-		return this.xPosition;
-	}
-	
-	public double getY() {
-		return this.yPosition;
-	}
 	
 	public void setPlayerColor(Color playerColor) {
 		this.playerColor = playerColor;
+	}
+	
+	public void qAbility(int xMouse, int yMouse, Map map) {
+		System.out.println("q");
+		map.getEnemyList().add(new Enemy(xMouse, yMouse));
+	}
+	
+	public void wAbility(int xMouse, int yMouse, Map map) {
+		System.out.println("w");
+		for(int i = 0; i < 10; i++) {
+			map.getEnemyList().add(new Enemy(xMouse, yMouse));
+		}
+	}
+	
+	public void eAbility(int xMouse, int yMouse, Map map) {
+		LinkedList<Enemy> enemyList = map.getEnemyList();
+		ListIterator<Enemy> iter = enemyList.listIterator();
+		while(iter.hasNext()){
+		    Enemy current = iter.next();
+		    double xDistance = current.getX() - xMouse;
+		    double yDistance = current.getY() - yMouse;
+		    if (xDistance * xDistance + yDistance * yDistance < 1600) {
+		    	iter.remove();
+		    }
+		}
+	}
+	
+	public void rAbility(int xMouse, int yMouse, Map map) {
+		System.out.println("r");
 	}
 	
 }

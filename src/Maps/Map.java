@@ -14,7 +14,7 @@ public abstract class Map {
 	public Map(){
 		
 	}
-	public abstract void draw(Graphics g, Player p);
+	public abstract void draw(Graphics g, int xoffset, int yoffset);
 	
 	public abstract void update(float deltaTime);
 	

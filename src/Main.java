@@ -1,18 +1,27 @@
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Desktop.Action;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
- 
+
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 //from   w ww  .j  a v a  2  s  .c  o m
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import Maps.Map;
 import Maps.TestMap;
@@ -23,6 +32,7 @@ import javax.imageio.*;
 
 import Player.Player;
 import Constants.Constants;
+import Enemies.Enemy;
 
 import java.awt.Font;
  
@@ -38,6 +48,8 @@ public class Main extends JPanel {
 	private Player player;
 	private Map map;
  
+	private int xMouse, yMouse;
+	
 	public Main(){
 		super();
 		BufferedImage img = null;
@@ -70,6 +82,51 @@ public class Main extends JPanel {
 			public void mouseExited(MouseEvent e) {
 			} 
 		});
+		this.addMouseMotionListener(new MouseMotionListener() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				
+			}
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				xMouse = (int) (player.getX() + e.getX()- Constants.SCREEN_X/2);
+				yMouse = (int) (player.getY() + e.getY()- Constants.SCREEN_Y/2);
+			}
+			
+		});
+		
+		createKeyBinding("Q", new AbstractAction() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		      player.qAbility(xMouse, yMouse, map);
+		    }
+		});
+		createKeyBinding("W", new AbstractAction() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		      player.wAbility(xMouse, yMouse, map);
+		    }
+		});
+		createKeyBinding("E", new AbstractAction() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		      player.eAbility(xMouse, yMouse, map);
+		    }
+		});
+		createKeyBinding("R", new AbstractAction() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		      player.rAbility(xMouse, yMouse, map);
+		    }
+		});
+	    
+	}
+	
+	private void createKeyBinding(String button, AbstractAction action) {
+		InputMap iMap = this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+	    ActionMap aMap = this.getActionMap();
+	    iMap.put(KeyStroke.getKeyStroke(button), button+"action");
+	    aMap.put(button+"action", action);
 	}
  
 	public void updateGame(float deltaTime){
@@ -77,11 +134,14 @@ public class Main extends JPanel {
 		map.update(deltaTime);
 	}
  
-	public void paint(Graphics g) { 
+	public void paint(Graphics g) {
+		int xoffset = (int)(-player.getX()+Constants.SCREEN_X / 2);
+		int yoffset = (int)(-player.getY()+Constants.SCREEN_Y / 2);
+		
 		float fps = (float) (1000.0/deltaTime);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
 		g.drawString(String.format("%.2f", fps),30, 30);
-		map.draw(g, player);
+		map.draw(g, xoffset, yoffset);
 		player.draw(g);
 		Toolkit.getDefaultToolkit().sync();
 	}

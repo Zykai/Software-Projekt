@@ -32,13 +32,13 @@ public class TestMap extends Map {
 		}
 	}
 	@Override
-	public void draw(Graphics g, Player p) {
+	public void draw(Graphics g, int xoffset, int yoffset) {
 		//g.setColor(mapColor);
 		//g.fillRect(0, 0, 1000, 750);
-		g.drawImage(img, (int)-p.getX(), (int)-p.getY(), null);
+		g.drawImage(img, xoffset, yoffset, null);
 		for(Iterator<Enemy> i = enemyList.iterator(); i.hasNext();) {
 			Enemy e = i.next();
-			e.draw(g, p);
+			e.draw(g, xoffset, yoffset);
 		}
 	}
 

@@ -53,4 +53,12 @@ public abstract class Entity {
 		// Quadrieren, um späteres Wurzelziehen beim Distanz-berechnen zu vermeiden
 		prevDistance *= prevDistance;
 	}
+	
+	public double getX() {
+		return this.xPosition;
+	}
+	
+	public double getY() {
+		return this.yPosition;
+	}
 }

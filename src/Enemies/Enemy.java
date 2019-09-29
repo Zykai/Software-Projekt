@@ -16,6 +16,14 @@ public class Enemy extends Entity{
 		enemyColor = new Color(10, 255, 255);
 	}
 	
+	public Enemy(int xPos, int yPos) {
+		movespeed = 0.35f;
+		enemyColor = new Color(10, 100, 50);
+		this.xPosition = xPos;
+		this.yPosition = yPos;
+		System.out.println("ned ");
+	}
+
 	@Override
 	public void update(float deltaTime) {
 		super.update(deltaTime);
@@ -28,8 +36,8 @@ public class Enemy extends Entity{
 		}
 	}
 	
-	public void draw(Graphics g, Player p) {
+	public void draw(Graphics g, int xoffset, int yoffset) {
 		g.setColor(enemyColor);
-		g.fillOval((int)(xPosition-p.getX()), (int)(yPosition-p.getY()), 40, 40);
+		g.fillOval((int)xPosition+xoffset, (int) (yPosition+yoffset), 40, 40);
 	}
 }
