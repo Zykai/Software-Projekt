@@ -30,6 +30,7 @@ public class Darkness extends Map {
 	private Image[][] imageGrid;
 	
 	private Random rand;
+	private Color backgroundColor;
 	
 	private Image randomSpace() {
 		return scaledAll[rand.nextInt(2)][rand.nextInt(4)+9];
@@ -91,9 +92,10 @@ public class Darkness extends Map {
 	public Darkness() {
 		super();
 		rand = new Random();
+		backgroundColor = new Color(38, 30, 48, 255);
 		this.xSize = Map.TILE_SIZE * Darkness.X_TILES;
 		this.ySize = Map.TILE_SIZE * Darkness.Y_TILES;
-		enemyList.add(new Enemy());
+		//enemyList.add(new Enemy());
 		all = null;
 		try {
 			all = ImageIO.read(new File("res/darkness/ground.png"));
@@ -174,14 +176,7 @@ public class Darkness extends Map {
 	
 	@Override
 	public void draw(Graphics g, int xoffset, int yoffset) {
-		/*
-		for(int x = 0; x < 10; x++) {
-			for(int y = 0; y < 10; y++) {
-				g.drawImage(background, x * Map.TILE_SIZE * 8 + xoffset, y * Map.TILE_SIZE * 3 + yoffset, null);
-			}
-		}
-		*/
-		g.setColor(new Color(38, 30, 48, 255));
+		g.setColor(backgroundColor);
 		g.fillRect(0, 0, Constants.SCREEN_X, Constants.SCREEN_Y);
 		for(int x = 0; x < Darkness.X_TILES; x++) {
 			for(int y = 0; y < Darkness.Y_TILES; y++) {
@@ -197,6 +192,17 @@ public class Darkness extends Map {
 			Enemy e = i.next();
 			e.update(deltaTime, this);
 		}
+	}
+	
+	@Override
+	public boolean isCorrectPosition(double x, double y, double radius) {
+		if(!super.isCorrectPosition(x, y, radius)) {
+			return false;
+		}
+		if(this.tiles[(int) x / Map.TILE_SIZE][(int) (y+Map.TILE_SIZE/4) / Map.TILE_SIZE]==0 || this.tiles[(int) x / Map.TILE_SIZE][(int) (y) / Map.TILE_SIZE]==0) {
+			return false;
+		}
+		return true;
 	}
 
 }

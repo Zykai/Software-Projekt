@@ -19,8 +19,8 @@ public class Player extends Entity{
 	
 	public Player(){
 		playerColor = new Color(1.0f, 0.5f, 0.2f);
-		xPosition = Constants.SCREEN_X / 2;
-		yPosition = Constants.SCREEN_Y / 2;
+		xPosition = Constants.SCREEN_X / 2 + 100;
+		yPosition = Constants.SCREEN_Y / 2 + 400;
 		height = 30;
 		width = 30;
 	}
