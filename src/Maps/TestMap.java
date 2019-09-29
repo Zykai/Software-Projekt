@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import javax.imageio.ImageIO;
 
 import Enemies.Enemy;
+import Player.Player;
 
 public class TestMap extends Map {
 
@@ -31,13 +32,13 @@ public class TestMap extends Map {
 		}
 	}
 	@Override
-	public void draw(Graphics g) {
+	public void draw(Graphics g, Player p) {
 		//g.setColor(mapColor);
 		//g.fillRect(0, 0, 1000, 750);
-		g.drawImage(img, 0, 0, null);
+		g.drawImage(img, (int)-p.getX(), (int)-p.getY(), null);
 		for(Iterator<Enemy> i = enemyList.iterator(); i.hasNext();) {
 			Enemy e = i.next();
-			e.draw(g);
+			e.draw(g, p);
 		}
 	}
 

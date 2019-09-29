@@ -1,6 +1,8 @@
 package Player;
 import java.awt.Color;
 import java.awt.Graphics;
+
+import Constants.Constants;
 import Entity.Entity;;
 
 public class Player extends Entity{
@@ -13,6 +15,8 @@ public class Player extends Entity{
 	
 	public Player(){
 		playerColor = new Color(1.0f, 0.5f, 0.2f);
+		xPosition = 480;
+		yPosition = 335;
 		height = 30;
 		width = 30;
 	}
@@ -21,7 +25,7 @@ public class Player extends Entity{
 	
 	public void draw(Graphics g){
 		g.setColor(getPlayerColor());
-		g.fillOval((int)xPosition, (int)yPosition, 40, 40);
+		g.fillOval((int)(Constants.SCREEN_X/2-width), (int)(Constants.SCREEN_Y/2-height), 40, 40);
 	}
 
 
@@ -47,6 +51,14 @@ public class Player extends Entity{
 		return playerColor;
 	}
 
+	public double getX() {
+		return this.xPosition;
+	}
+	
+	public double getY() {
+		return this.yPosition;
+	}
+	
 	public void setPlayerColor(Color playerColor) {
 		this.playerColor = playerColor;
 	}

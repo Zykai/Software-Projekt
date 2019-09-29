@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.util.Random;
 
 import Entity.Entity;
+import Player.Player;
 
 public class Enemy extends Entity{
 	
@@ -27,8 +28,8 @@ public class Enemy extends Entity{
 		}
 	}
 	
-	public void draw(Graphics g) {
+	public void draw(Graphics g, Player p) {
 		g.setColor(enemyColor);
-		g.fillOval((int)xPosition, (int)yPosition, 40, 40);
+		g.fillOval((int)(xPosition-p.getX()), (int)(yPosition-p.getY()), 40, 40);
 	}
 }

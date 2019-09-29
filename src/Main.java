@@ -22,6 +22,7 @@ import java.io.*;
 import javax.imageio.*;
 
 import Player.Player;
+import Constants.Constants;
 
 import java.awt.Font;
  
@@ -29,6 +30,8 @@ import java.awt.Font;
  
 public class Main extends JPanel {
  
+	
+	
 	private int frameNumber = 1;
 	static private float deltaTime;
 	private Image image;
@@ -57,7 +60,8 @@ public class Main extends JPanel {
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				player.moveTo(e.getX(), e.getY());	
+				//player.moveTo((int)player.getX() + e.getX() - Main.SCREEN_X / 2, (int) player.getY() );	
+				player.moveDif(e.getX()-Constants.SCREEN_X/2, e.getY()-Constants.SCREEN_Y/2);	
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -77,7 +81,7 @@ public class Main extends JPanel {
 		float fps = (float) (1000.0/deltaTime);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
 		g.drawString(String.format("%.2f", fps),30, 30);
-		map.draw(g);
+		map.draw(g, player);
 		player.draw(g);
 		Toolkit.getDefaultToolkit().sync();
 	}
@@ -87,7 +91,7 @@ public class Main extends JPanel {
 		Main main = new Main();
 		//frame.add(main);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(20,20, 1000,750);
+		frame.setBounds(20,20, Constants.SCREEN_X,Constants.SCREEN_Y);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);

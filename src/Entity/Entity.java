@@ -42,4 +42,15 @@ public abstract class Entity {
 		// Quadrieren, um späteres Wurzelziehen beim Distanz-berechnen zu vermeiden
 		prevDistance *= prevDistance;
 	}
+	
+	public void moveDif(int xdif, int ydif){
+		prevDistance = Math.sqrt(xdif* xdif + ydif * ydif);
+		xdirection = xdif / prevDistance;
+		ydirection = ydif / prevDistance;
+		moving = true;
+		xgoal = this.xPosition + xdif;
+		ygoal = this.yPosition + ydif;
+		// Quadrieren, um späteres Wurzelziehen beim Distanz-berechnen zu vermeiden
+		prevDistance *= prevDistance;
+	}
 }
