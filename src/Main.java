@@ -23,6 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+import Maps.Darkness;
 import Maps.Map;
 import Maps.TestMap;
 
@@ -52,6 +53,7 @@ public class Main extends JPanel {
 	
 	public Main(){
 		super();
+		setBackground(Color.BLUE);
 		BufferedImage img = null;
 		try {
 			img = ImageIO.read(new File("res/held.png"));
@@ -61,7 +63,7 @@ public class Main extends JPanel {
 		}
 		image = img.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
 		player = new Player();
-		map = new TestMap();
+		map = new Darkness();
 		
 		this.addMouseListener(new MouseListener(){
 			@Override
@@ -72,7 +74,6 @@ public class Main extends JPanel {
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				//player.moveTo((int)player.getX() + e.getX() - Main.SCREEN_X / 2, (int) player.getY() );	
 				player.moveDif(e.getX()-Constants.SCREEN_X/2, e.getY()-Constants.SCREEN_Y/2);	
 			}
 			@Override
@@ -137,6 +138,7 @@ public class Main extends JPanel {
 	public void paint(Graphics g) {
 		int xoffset = (int)(-player.getX()+Constants.SCREEN_X / 2);
 		int yoffset = (int)(-player.getY()+Constants.SCREEN_Y / 2);
+		// TODO: g.translate
 		
 		float fps = (float) (1000.0/deltaTime);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));

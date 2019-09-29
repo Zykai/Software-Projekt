@@ -22,7 +22,6 @@ public class Enemy extends Entity{
 		enemyColor = new Color(10, 100, 50);
 		this.xPosition = xPos;
 		this.yPosition = yPos;
-		System.out.println("ned ");
 	}
 
 	@Override

@@ -16,8 +16,6 @@ public abstract class Entity {
 	
 	public void update(float deltaTime, Map map){
 		if(moving) {
-			//xPosition += xdirection * deltaTime * movespeed;
-			//yPosition += ydirection * deltaTime * movespeed;
 			double newX = xPosition + xdirection * deltaTime * movespeed;
 			double newY = yPosition + ydirection * deltaTime * movespeed;
 			if(map.isCorrectPosition(newX, newY, this.width)) {

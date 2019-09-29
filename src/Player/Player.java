@@ -60,12 +60,10 @@ public class Player extends Entity{
 	}
 	
 	public void qAbility(int xMouse, int yMouse, Map map) {
-		System.out.println("q");
 		map.getEnemyList().add(new Enemy(xMouse, yMouse));
 	}
 	
 	public void wAbility(int xMouse, int yMouse, Map map) {
-		System.out.println("w");
 		for(int i = 0; i < 10; i++) {
 			map.getEnemyList().add(new Enemy(xMouse, yMouse));
 		}
@@ -85,7 +83,6 @@ public class Player extends Entity{
 	}
 	
 	public void rAbility(int xMouse, int yMouse, Map map) {
-		System.out.println("r");
 	}
 	
 }

@@ -20,10 +20,10 @@ public class TestMap extends Map {
 	private Image img;
 	
 	public TestMap() {
+		super();
 		this.xSize = Constants.SCREEN_X;
 		this.ySize = Constants.SCREEN_Y;
 		mapColor = new Color(0.5f, 0.5f, 0.5f);
-		this.enemyList = new LinkedList<Enemy>();
 		enemyList.add(new Enemy());
 	
 		try {
@@ -38,10 +38,7 @@ public class TestMap extends Map {
 		//g.setColor(mapColor);
 		//g.fillRect(0, 0, 1000, 750);
 		g.drawImage(img, xoffset, yoffset, Constants.SCREEN_X, Constants.SCREEN_Y, null);
-		for(Iterator<Enemy> i = enemyList.iterator(); i.hasNext();) {
-			Enemy e = i.next();
-			e.draw(g, xoffset, yoffset);
-		}
+		super.draw(g, xoffset, yoffset);
 	}
 
 	@Override
