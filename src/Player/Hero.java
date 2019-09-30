@@ -26,9 +26,9 @@ public class Hero extends Player {
 		idle[1] = new Animation("res/hero/adventurer-idle-2-0", 4, 1000);
 		run = new Animation("res/hero/adventurer-run-0", 5, 750);
 		attack = new Animation[3];
-		attack[0] = new Animation("res/hero/adventurer-attack1-0", 	5, 400);
-		attack[1] = new Animation("res/hero/adventurer-attack2-0", 	6, 400);
-		attack[2] = new Animation("res/hero/adventurer-attack3-0", 	6, 400);
+		attack[0] = new Animation("res/hero/adventurer-attack1-0", 	5, 1000);
+		attack[1] = new Animation("res/hero/adventurer-attack2-0", 	6, 1000);
+		attack[2] = new Animation("res/hero/adventurer-attack3-0", 	6, 1000);
 		this.currentAnimation = idle[0];
 	}
 	

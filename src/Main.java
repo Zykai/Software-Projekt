@@ -146,10 +146,11 @@ public class Main extends JPanel {
 		
 		float fps = (float) (1000.0/deltaTime);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
-		g.drawString(String.format("%.2f", fps),30, 30);
 		map.draw(g, xoffset, yoffset);
 		player.draw(g);
 		g.setColor(new Color(0.0f, 1.0f, 1.0f));
+		g.drawString(String.format("%.2f", fps),30, 30);
+
 		Toolkit.getDefaultToolkit().sync();
 	}
  
@@ -170,10 +171,9 @@ public class Main extends JPanel {
 		frame.validate();
 		while(true){
 			try {
-				Thread.sleep(16);
+				Thread.sleep(6);
 			}
 			catch (Exception e) {
-				//TODO: handle exception
 			}
 		long newTime = System.currentTimeMillis();
 		deltaTime = (float) (newTime - time);

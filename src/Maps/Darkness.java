@@ -23,7 +23,7 @@ public class Darkness extends Map {
 	private BufferedImage all;
 	private Image[][] scaledAll;
 	private Image[] ground;
-	private Image background;
+	private Image[][] background;
 	
 	private static int VOID = 0;
 	private static int GROUND;
@@ -37,12 +37,15 @@ public class Darkness extends Map {
 	private double startingX, startingY;
 	
 	private Image randomSpace() {
+		if (rand.nextInt(5)<3) {
+			return scaledAll[0][8];
+		}
 		return scaledAll[rand.nextInt(2)][rand.nextInt(4)+9];
 	}
 	
 	private Image getTexture(int x, int y) {
 		if (x >= X_TILES || x <= 0 || y >= Y_TILES || y <= 0) {
-			return randomSpace();
+			return null;
 		}
 		if(tiles[x][y] == 0) {
 			if(tiles[x][y-1] == 1) {
@@ -53,7 +56,7 @@ public class Darkness extends Map {
 				}
 				return scaledAll[4][7];
 			} 
-			return randomSpace();
+			return null;
 		} else {
 			if(tiles[x][y+1] == 0) {
 				if(tiles[x+1][y] == 0) {
@@ -142,16 +145,28 @@ public class Darkness extends Map {
 				imageGrid[x][y] = this.getTexture(x, y);
 			}
 		}
-		
+		background = new Image[65][65];
+		for (int x = 0; x < background.length; x++) {
+			for(int y = 0; y < background[0].length; y++) {
+				background[x][y] = this.randomSpace();
+			}
+		}
 	}
 	
 	@Override
 	public void draw(Graphics g, int xoffset, int yoffset) {
 		g.setColor(backgroundColor);
 		g.fillRect(0, 0, Constants.SCREEN_X, Constants.SCREEN_Y);
+		for(int x = -2; x < background.length-2; x++) {
+			for(int y = -2; y < background[0].length-2; y++) {
+				g.drawImage(background[x+2][y+2], x * Map.TILE_SIZE*2 + xoffset/10, y * Map.TILE_SIZE*2 + yoffset / 10, 64, 64, null);
+			}
+		}
 		for(int x = 0; x < Darkness.X_TILES; x++) {
 			for(int y = 0; y < Darkness.Y_TILES; y++) {
-				g.drawImage(imageGrid[x][y], x * Map.TILE_SIZE + xoffset, y * Map.TILE_SIZE + yoffset, null);
+				if(imageGrid[x][y] != null) {
+					g.drawImage(imageGrid[x][y], x * Map.TILE_SIZE + xoffset, y * Map.TILE_SIZE + yoffset, null);
+				}
 			}
 		}
 		super.draw(g, xoffset, yoffset);
