@@ -12,12 +12,14 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import Constants.Constants;
+import DungeonGenerator.DungeonGenerator;
+import DungeonGenerator.Room;
 import Enemies.Enemy;
 
 public class Darkness extends Map {
 
-	private static int X_TILES = 60;
-	private static int Y_TILES = 50;
+	private static int X_TILES = 200;
+	private static int Y_TILES = 200;
 	private BufferedImage all;
 	private Image[][] scaledAll;
 	private Image[] ground;
@@ -32,12 +34,14 @@ public class Darkness extends Map {
 	private Random rand;
 	private Color backgroundColor;
 	
+	private double startingX, startingY;
+	
 	private Image randomSpace() {
 		return scaledAll[rand.nextInt(2)][rand.nextInt(4)+9];
 	}
 	
 	private Image getTexture(int x, int y) {
-		if (x >= X_TILES || x == 0 || y >= Y_TILES || y == 0) {
+		if (x >= X_TILES || x <= 0 || y >= Y_TILES || y <= 0) {
 			return randomSpace();
 		}
 		if(tiles[x][y] == 0) {
@@ -111,67 +115,34 @@ public class Darkness extends Map {
 			}
 		}
 		
-		ground = new Image[7];
 		
-		for(int i = 0; i < 7; i++) {
-			ground[i] = all.getSubimage(i * 16 + 16, 0, 16, 16).getScaledInstance(Map.TILE_SIZE, Map.TILE_SIZE, Image.SCALE_DEFAULT);
-		}
-		background = all.getSubimage(0, 16*9, 128, 16 * 3).getScaledInstance(Map.TILE_SIZE * 8, Map.TILE_SIZE * 3, Image.SCALE_DEFAULT);
-		
-		tiles = new int[X_TILES][Y_TILES];
 		imageGrid = new Image[X_TILES][Y_TILES];
+		DungeonGenerator d = new DungeonGenerator();
+		tiles = d.generateBooleanMap(X_TILES, Y_TILES, 4);
+		Room startingRoom = d.tree.getLefternMostRoom();
+		this.startingX = startingRoom.cx;
+		this.startingY = startingRoom.cy;
+
 		for(int x = 0; x < X_TILES; x++) {
-			for(int y = 0; y < Y_TILES; y++) {
-				if(x > 35 && x < 45 && y > 25 && y < 35) {
-					tiles[x][y] = 1;
-				} else {
-					tiles[x][y] = 0;
-				}
-			}
+			tiles[x][0] = 0;
 		}
-		for(int x = 4; x < 35; x++) {
-			for(int y = 10; y <  25; y++) {
-				tiles[x][y] = 1;
-			}
+		for(int x = 0; x < X_TILES; x++) {
+			tiles[x][Y_TILES-1] = 0;
 		}
-		for(int x = 35; x < 39; x++) {
-			for(int y = 17; y < 23; y++) {
-				tiles[x][y] = 1;
-			}
+		for(int y = 0; y < X_TILES; y++) {
+			tiles[0][y] = 0;
 		}
-		for(int x = 35; x < 40; x++) {
-			for(int y = 17; y < 23; y++) {
-				tiles[x][y] = 1;
-			}
+		for(int y = 0; y < X_TILES; y++) {
+			tiles[X_TILES-1][y] = 0;
 		}
-		for(int x = 39; x < 41; x++) {
-			for(int y = 21; y < 27; y++) {
-				tiles[x][y] = 1;
-			}
-		}
-		for(int x = 10; x < 30; x++) {
-			tiles[x][4] = 1;
-		}
-		for(int x = 10; x < 30; x++) {
-			tiles[x][5] = 1;
-		}
-		for(int x = 10; x < 30; x++) {
-			tiles[x][7] = 1;
-		}
-		for(int x = 10; x < 30; x++) {
-			tiles[x][8] = 1;
-		}
-		for(int x = 4; x < 30; x++) {
-			tiles[10][x] = 1;
-		}
-		for(int x = 5; x < 30; x++) {
-			tiles[11][x] = 1;
-		}
+		
+		
 		for(int x = 0; x < X_TILES; x++) {
 			for(int y = 0; y < Y_TILES; y++) {
 				imageGrid[x][y] = this.getTexture(x, y);
 			}
 		}
+		
 	}
 	
 	@Override
@@ -195,6 +166,16 @@ public class Darkness extends Map {
 	}
 	
 	@Override
+	public double getStartingX() {
+		return startingX * Map.TILE_SIZE;
+	}
+	
+	@Override
+	public double getStartingY() {
+		return startingY * Map.TILE_SIZE;
+	}
+	
+	@Override
 	public boolean isCorrectPosition(double x, double y, double radius) {
 		if(!super.isCorrectPosition(x, y, radius)) {
 			return false;
@@ -204,12 +185,13 @@ public class Darkness extends Map {
 		}
 		return true;
 	}
+	
 	public boolean isCorrectPosition(double x, double y, double width, double height) {
 		if(!super.isCorrectPosition(x, y, width)) {
 			return false;
 		}
 		if(this.tiles[(int) (x-width/2) / Map.TILE_SIZE][(int) (y+height/2+Map.TILE_SIZE / 8) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+width/2) / Map.TILE_SIZE][(int) (y+height/2+Map.TILE_SIZE / 8) / Map.TILE_SIZE]==0 
-				|| this.tiles[(int) (x-width/2) / Map.TILE_SIZE][(int) (y-height/8) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+width/2) / Map.TILE_SIZE][(int) (y-height/8) / Map.TILE_SIZE]==0 ) {
+				|| this.tiles[(int) (x-width/2) / Map.TILE_SIZE][(int) (y+0.25*height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+width/2) / Map.TILE_SIZE][(int) (y+0.25*height) / Map.TILE_SIZE]==0 ) {
 			return false;
 		}
 		return true;

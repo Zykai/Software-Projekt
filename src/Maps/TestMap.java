@@ -40,6 +40,16 @@ public class TestMap extends Map {
 		g.drawImage(img, xoffset, yoffset, Constants.SCREEN_X, Constants.SCREEN_Y, null);
 		super.draw(g, xoffset, yoffset);
 	}
+	
+	@Override
+	public double getStartingX() {
+		return 0;
+	}
+	
+	@Override
+	public double getStartingY() {
+		return 0;
+	}
 
 	@Override
 	public void update(float deltaTime) {

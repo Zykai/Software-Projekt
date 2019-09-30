@@ -10,7 +10,7 @@ import Player.Player;
 
 public abstract class Map {
 
-	public static int TILE_SIZE = 64;
+	public static int TILE_SIZE = 32;
 	
 	protected LinkedList<Enemy> enemyList;
 	protected int xSize, ySize;
@@ -31,6 +31,10 @@ public abstract class Map {
 	public LinkedList<Enemy> getEnemyList(){
 		return this.enemyList;
 	}
+	
+	public abstract double getStartingX();
+	
+	public abstract double getStartingY();
 	
 	public boolean isCorrectPosition(double x, double y, double radius) {
 		if(x-radius <0 || x+radius > xSize || y-radius < 0 || y+radius > ySize) {

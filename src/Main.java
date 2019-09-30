@@ -34,6 +34,7 @@ import javax.imageio.*;
 import Player.Hero;
 import Player.Player;
 import Constants.Constants;
+import DungeonGenerator.RoomTree;
 import Enemies.Enemy;
 
 import java.awt.Font;
@@ -65,6 +66,8 @@ public class Main extends JPanel {
 		image = img.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
 		player = new Hero();
 		map = new Darkness();
+		player.setX(map.getStartingX());
+		player.setY(map.getStartingY());
 		
 		this.addMouseListener(new MouseListener(){
 			@Override
@@ -146,10 +149,11 @@ public class Main extends JPanel {
 		g.drawString(String.format("%.2f", fps),30, 30);
 		map.draw(g, xoffset, yoffset);
 		player.draw(g);
+		g.setColor(new Color(0.0f, 1.0f, 1.0f));
 		Toolkit.getDefaultToolkit().sync();
 	}
  
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
 		JFrame frame = new JFrame();
 		Main main = new Main();
 		//frame.add(main);

@@ -83,4 +83,12 @@ public abstract class Entity {
 	public double getY() {
 		return this.yPosition;
 	}
+	
+	public void setX(double x) {
+		this.xPosition = x;
+	}
+	
+	public void setY(double y) {
+		this.yPosition = y;
+	}
 }

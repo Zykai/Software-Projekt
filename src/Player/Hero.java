@@ -18,17 +18,17 @@ public class Hero extends Player {
 	public Hero() {
 		super();
 		attacking = false;
-		this.height = 128;
-		this.width = 100;
+		this.height = 100;
+		this.width = 80;
 		this.movespeed = 0.45f;
 		idle = new Animation[2];
 		idle[0] = new Animation("res/hero/adventurer-idle-0", 4, 1000);
 		idle[1] = new Animation("res/hero/adventurer-idle-2-0", 4, 1000);
-		run = new Animation("res/hero/adventurer-run-0", 5, 450);
+		run = new Animation("res/hero/adventurer-run-0", 5, 750);
 		attack = new Animation[3];
-		attack[0] = new Animation("res/hero/adventurer-attack1-0", 	5, 500);
-		attack[1] = new Animation("res/hero/adventurer-attack2-0", 	6, 500);
-		attack[2] = new Animation("res/hero/adventurer-attack3-0", 	6, 500);
+		attack[0] = new Animation("res/hero/adventurer-attack1-0", 	5, 400);
+		attack[1] = new Animation("res/hero/adventurer-attack2-0", 	6, 400);
+		attack[2] = new Animation("res/hero/adventurer-attack3-0", 	6, 400);
 		this.currentAnimation = idle[0];
 	}
 	
@@ -57,6 +57,7 @@ public class Hero extends Player {
 			if(prevDistance < distance || Double.isNaN(distance)) {
 				moving = false;
 				this.currentAnimation = this.idle[(int)Math.round(Math.random())];
+				return;
 			}
 			prevDistance = distance;
 			this.currentAnimation.advance(deltaTime);
@@ -68,6 +69,7 @@ public class Hero extends Player {
 				attacking = false;
 			}
 		}
+		this.currentAnimation.advance(deltaTime);
 	}
 	
 	@Override
@@ -80,6 +82,12 @@ public class Hero extends Player {
 			this.currentAnimation.reset();
 
 		}
+	}
+	
+	@Override
+	public void wAbility(int xMouse, int yMouse, Map map) {
+		this.xPosition = map.getStartingX();
+		this.yPosition = map.getStartingY();
 	}
 	
 	public void draw(Graphics g) {
