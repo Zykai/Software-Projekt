@@ -9,10 +9,13 @@ public abstract class Entity {
 	protected double xPosition, yPosition;
 	protected double width, height;
 	// Variablen für die Bewegung
-	double xdirection, ydirection;
-	double xgoal, ygoal;
-	double prevDistance;
+	protected double xdirection, ydirection;
+	protected double xgoal;
+	protected double ygoal;
+	protected double prevDistance;
 	protected boolean moving;
+	
+	protected int direction;
 	
 	public void update(float deltaTime, Map map){
 		if(moving) {
@@ -50,6 +53,11 @@ public abstract class Entity {
 		ygoal = y;
 		// Quadrieren, um späteres Wurzelziehen beim Distanz-berechnen zu vermeiden
 		prevDistance *= prevDistance;
+		if (xdirection > 0) {
+			this.direction = 1;
+		} else {
+			this.direction = -1;
+		}
 	}
 	
 	public void moveDif(int xdif, int ydif){
@@ -61,6 +69,11 @@ public abstract class Entity {
 		ygoal = this.yPosition + ydif;
 		// Quadrieren, um späteres Wurzelziehen beim Distanz-berechnen zu vermeiden
 		prevDistance *= prevDistance;
+		if (xdirection > 0) {
+			this.direction = 1;
+		} else {
+			this.direction = -1;
+		}
 	}
 	
 	public double getX() {

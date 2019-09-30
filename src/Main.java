@@ -31,6 +31,7 @@ import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
 
+import Player.Hero;
 import Player.Player;
 import Constants.Constants;
 import Enemies.Enemy;
@@ -62,7 +63,7 @@ public class Main extends JPanel {
 			System.out.println(e.getMessage());
 		}
 		image = img.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
-		player = new Player();
+		player = new Hero();
 		map = new Darkness();
 		
 		this.addMouseListener(new MouseListener(){

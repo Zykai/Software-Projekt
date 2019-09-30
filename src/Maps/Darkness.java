@@ -204,5 +204,14 @@ public class Darkness extends Map {
 		}
 		return true;
 	}
-
+	public boolean isCorrectPosition(double x, double y, double width, double height) {
+		if(!super.isCorrectPosition(x, y, width)) {
+			return false;
+		}
+		if(this.tiles[(int) (x-width/2) / Map.TILE_SIZE][(int) (y+height/2+Map.TILE_SIZE / 8) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+width/2) / Map.TILE_SIZE][(int) (y+height/2+Map.TILE_SIZE / 8) / Map.TILE_SIZE]==0 
+				|| this.tiles[(int) (x-width/2) / Map.TILE_SIZE][(int) (y-height/8) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+width/2) / Map.TILE_SIZE][(int) (y-height/8) / Map.TILE_SIZE]==0 ) {
+			return false;
+		}
+		return true;
+	}
 }

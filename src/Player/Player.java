@@ -14,13 +14,13 @@ public class Player extends Entity{
 	private int level;
 	private int hp; //warum in entity und nicht hier? Wenn wir das in Entity machen, sollte auch das Level rüber.
 	private Color playerColor;
-	
+			
 	
 	
 	public Player(){
 		playerColor = new Color(1.0f, 0.5f, 0.2f);
 		xPosition = Constants.SCREEN_X / 2 + 100;
-		yPosition = Constants.SCREEN_Y / 2 + 400;
+		yPosition = Constants.SCREEN_Y / 2 + 200;
 		height = 30;
 		width = 30;
 	}

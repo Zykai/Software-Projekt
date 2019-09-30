@@ -39,4 +39,7 @@ public abstract class Map {
 		return true;
 	}
 	
+	public boolean isCorrectPosition(double x, double y, double width, double height) {
+		return isCorrectPosition(x,y,width);
+	}
 }
