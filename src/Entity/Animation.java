@@ -33,6 +33,10 @@ public class Animation {
 		this.currentDuration += d;
 	}
 	
+	public boolean isFinished() {
+		return this.totalDuration <= this.currentDuration;
+	}
+	
 	public void reset() {
 		this.currentDuration = 0;
 	}

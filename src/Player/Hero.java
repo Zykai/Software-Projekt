@@ -1,5 +1,6 @@
 package Player;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import Constants.Constants;
@@ -9,18 +10,25 @@ import Maps.Map;
 public class Hero extends Player {
 
 	private Animation[] idle;
+	private Animation[] attack;
 	private Animation run;
 	private Animation currentAnimation;
+	private boolean attacking;
 	
 	public Hero() {
 		super();
+		attacking = false;
 		this.height = 128;
-		this.width = 80;
+		this.width = 100;
 		this.movespeed = 0.45f;
 		idle = new Animation[2];
 		idle[0] = new Animation("res/hero/adventurer-idle-0", 4, 1000);
 		idle[1] = new Animation("res/hero/adventurer-idle-2-0", 4, 1000);
 		run = new Animation("res/hero/adventurer-run-0", 5, 450);
+		attack = new Animation[3];
+		attack[0] = new Animation("res/hero/adventurer-attack1-0", 	5, 500);
+		attack[1] = new Animation("res/hero/adventurer-attack2-0", 	6, 500);
+		attack[2] = new Animation("res/hero/adventurer-attack3-0", 	6, 500);
 		this.currentAnimation = idle[0];
 	}
 	
@@ -46,19 +54,35 @@ public class Hero extends Player {
 			// Distanz mit Satz des Pythagoras, Vermeiden von Wurzeln für bessere Performance
 			double distance = (xgoal - xPosition) * (xgoal - xPosition) + (ygoal - yPosition) * (ygoal - yPosition);
 			// Erster Teil: Erreichen des Ziels, Zweiter Teil behebt einen Fehler, wenn man sich auf den aktuellen Punkt bewegt
-			if((prevDistance < distance || Double.isNaN(distance))) {
+			if(prevDistance < distance || Double.isNaN(distance)) {
 				moving = false;
 				this.currentAnimation = this.idle[(int)Math.round(Math.random())];
 			}
 			prevDistance = distance;
-			
+			this.currentAnimation.advance(deltaTime);
+		} else if(attacking) {
+			this.currentAnimation.advance(deltaTime);
+			if(this.currentAnimation.isFinished()) {
+				this.currentAnimation.reset();
+				this.currentAnimation = this.idle[(int)Math.round(Math.random())];
+				attacking = false;
+			}
 		}
-		this.currentAnimation.advance(deltaTime);
+	}
+	
+	@Override
+	public void qAbility(int xMouse, int yMouse, Map map) {
+		if(!attacking) {
+			attacking = true;
+			this.moving = false;
+			this.currentAnimation.reset();
+			this.currentAnimation = this.attack[(int) Math.round(Math.random()*2.0)];
+			this.currentAnimation.reset();
+
+		}
 	}
 	
 	public void draw(Graphics g) {
-		g.fillOval((int)(Constants.SCREEN_X/2-width/2), (int)(Constants.SCREEN_Y/2-height/2), (int)this.width, (int)this.width);
-		g.fillRect((int)(Constants.SCREEN_X/2-width/2), (int)(Constants.SCREEN_Y/2-height/2), (int)width, (int)height);
 		if(this.direction>0) {
 			g.drawImage(this.currentAnimation.getCurrentImage(), (int)(Constants.SCREEN_X/2-width/2), (int)(Constants.SCREEN_Y/2-height/2), (int)this.width, (int)this.height, null);	
 		} else {
