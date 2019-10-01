@@ -23,6 +23,13 @@ public class Enemy extends Entity{
 		this.xPosition = xPos;
 		this.yPosition = yPos;
 	}
+	
+	public Enemy(int xPos, int yPos, int type) {
+		movespeed = 0.35f;
+		enemyColor = new Color(type * 30, type * 30, 0);
+		this.xPosition = xPos;
+		this.yPosition = yPos;
+	}
 
 	@Override
 	public void update(float deltaTime, Map map) {
@@ -38,6 +45,6 @@ public class Enemy extends Entity{
 	
 	public void draw(Graphics g, int xoffset, int yoffset) {
 		g.setColor(enemyColor);
-		g.fillOval((int)xPosition+xoffset, (int) (yPosition+yoffset), 40, 40);
+		g.fillOval((int)xPosition * Map.TILE_SIZE + xoffset, (int) yPosition * Map.TILE_SIZE + yoffset, 40, 40);
 	}
 }

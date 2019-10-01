@@ -26,7 +26,7 @@ public abstract class Map {
 		}
 	}
 	
-	public abstract void update(float deltaTime);
+	public abstract void update(float deltaTime, Player p);
 	
 	public LinkedList<Enemy> getEnemyList(){
 		return this.enemyList;

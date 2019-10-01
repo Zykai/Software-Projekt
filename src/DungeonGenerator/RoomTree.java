@@ -2,6 +2,8 @@ package DungeonGenerator;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class RoomTree {
 	
@@ -20,17 +22,6 @@ public class RoomTree {
 		System.out.println(leaf + ", ");
 		if(right != null) {
 			right.print();
-		}
-	}
-	public void draw(Graphics g) {
-		if(left == null && right == null) {
-			leaf.draw(g);
-		} else {
-			left.draw(g);
-			right.draw(g);
-			Graphics2D g2 = (Graphics2D) g;
-		    g2.setStroke(new java.awt.BasicStroke(8));
-			g2.drawLine(left.leaf.cx, left.leaf.cy, right.leaf.cx, right.leaf.cy);
 		}
 	}
 
@@ -68,5 +59,20 @@ public class RoomTree {
 			current = current.left;
 		}
 		return current.leaf.room;
+	}
+	
+	private void collectList(ArrayList<Room> roomList) {
+		if(left != null && right != null) {
+			left.collectList(roomList);
+			right.collectList(roomList);
+		} else {
+			roomList.add(leaf.room);
+		}
+	}
+	
+	public ArrayList<Room> getRoomList(){
+		ArrayList<Room> roomList = new ArrayList<Room>();
+		collectList(roomList);
+		return roomList;
 	}
 }

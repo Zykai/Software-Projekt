@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -15,6 +16,7 @@ import Constants.Constants;
 import DungeonGenerator.DungeonGenerator;
 import DungeonGenerator.Room;
 import Enemies.Enemy;
+import Player.Player;
 
 public class Darkness extends Map {
 
@@ -35,6 +37,9 @@ public class Darkness extends Map {
 	private Color backgroundColor;
 	
 	private double startingX, startingY;
+	
+	private Room currentRoom;
+	private ArrayList<Room> roomList;
 	
 	private Image randomSpace() {
 		if (rand.nextInt(5)<3) {
@@ -122,9 +127,11 @@ public class Darkness extends Map {
 		imageGrid = new Image[X_TILES][Y_TILES];
 		DungeonGenerator d = new DungeonGenerator();
 		tiles = d.generateBooleanMap(X_TILES, Y_TILES, 4);
-		Room startingRoom = d.tree.getLefternMostRoom();
-		this.startingX = startingRoom.cx;
-		this.startingY = startingRoom.cy;
+		
+		roomList = d.tree.getRoomList();
+		currentRoom = d.tree.getLefternMostRoom();
+		this.startingX = currentRoom.cx;
+		this.startingY = currentRoom.cy;
 
 		for(int x = 0; x < X_TILES; x++) {
 			tiles[x][0] = 0;
@@ -169,11 +176,31 @@ public class Darkness extends Map {
 				}
 			}
 		}
+		if(this.currentRoom != null) {
+			this.currentRoom.draw(g, xoffset, yoffset);
+		}
 		super.draw(g, xoffset, yoffset);
 	}
 
-	@Override
-	public void update(float deltaTime) {
+	private void setActiveRoom(Player p) {
+		if(currentRoom == null) {
+			for(Room r : this.roomList) {
+				if(r.hasPlayer(p)) {
+					this.currentRoom = r;
+					break;
+				}
+			}
+		} else {
+			if(currentRoom.hasPlayer(p)) {
+
+			} else {
+				currentRoom = null;
+			}
+		}
+	}
+	
+	public void update(float deltaTime, Player p) {
+		setActiveRoom(p);
 		for(Iterator<Enemy> i = enemyList.iterator(); i.hasNext();) {
 			Enemy e = i.next();
 			e.update(deltaTime, this);

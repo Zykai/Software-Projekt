@@ -136,7 +136,7 @@ public class Main extends JPanel {
  
 	public void updateGame(float deltaTime){
 		player.update(deltaTime, map);
-		map.update(deltaTime);
+		map.update(deltaTime, player);
 	}
  
 	public void paint(Graphics g) {

@@ -52,7 +52,7 @@ public class TestMap extends Map {
 	}
 
 	@Override
-	public void update(float deltaTime) {
+	public void update(float deltaTime, Player p) {
 		for(Iterator<Enemy> i = enemyList.iterator(); i.hasNext();) {
 			Enemy e = i.next();
 			e.update(deltaTime, this);

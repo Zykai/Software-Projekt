@@ -14,11 +14,6 @@ public class RoomBox {
 		this.cy = y + height / 2;
 		room = new Room(this);
 	}
-	
-	public void draw(Graphics g) {
-		//g.drawRect(x, y, width, height);
-		room.draw(g);
-	}
 
 	public void fillGrid(int[][] grid) {
 		room.fillGrid(grid);
