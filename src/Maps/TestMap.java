@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import javax.imageio.ImageIO;
 
 import Enemies.Enemy;
+import Enemies.Imp;
 import Player.Player;
 import Constants.Constants;
 
@@ -24,7 +25,7 @@ public class TestMap extends Map {
 		this.xSize = Constants.SCREEN_X;
 		this.ySize = Constants.SCREEN_Y;
 		mapColor = new Color(0.5f, 0.5f, 0.5f);
-		enemyList.add(new Enemy());
+		enemyList.add(new Imp(0,0));
 	
 		try {
 			img = ImageIO.read(new File("res/test_dungeon.jpg"));

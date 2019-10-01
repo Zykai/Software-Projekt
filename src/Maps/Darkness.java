@@ -176,6 +176,9 @@ public class Darkness extends Map {
 				}
 			}
 		}
+		for(Room r : this.roomList) {
+			r.draw(g, xoffset, yoffset);
+		}
 		if(this.currentRoom != null) {
 			this.currentRoom.draw(g, xoffset, yoffset);
 		}
@@ -201,10 +204,13 @@ public class Darkness extends Map {
 	
 	public void update(float deltaTime, Player p) {
 		setActiveRoom(p);
-		for(Iterator<Enemy> i = enemyList.iterator(); i.hasNext();) {
-			Enemy e = i.next();
-			e.update(deltaTime, this);
+		if(this.currentRoom != null) {
+			for(Iterator<Enemy> i = this.currentRoom.enemies.iterator(); i.hasNext();) {
+				Enemy e = i.next();
+				e.update(deltaTime, this);
+			}
 		}
+		
 	}
 	
 	@Override

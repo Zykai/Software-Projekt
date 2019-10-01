@@ -1,8 +1,14 @@
 package Entity;
 
+import Enemies.Enemy;
+import Enemies.Imp;
 import Maps.Map;
 
 public abstract class Entity {
+	
+	public static final int IDLE = 0;
+	public static final int MOVING = 1;
+	
 	private int hp;
 	protected float movespeed = 0.6f;
 	
@@ -13,32 +19,55 @@ public abstract class Entity {
 	protected double xgoal;
 	protected double ygoal;
 	protected double prevDistance;
-	protected boolean moving;
 	
 	protected int direction;
 	
+	// Animations
+	protected Animation currentAnimation;
+	protected double currentAnimationDuration;
+	
+	protected int state;
+	
+	public Entity() {
+		this.currentAnimationDuration = 0.0;
+		this.currentAnimation = getIdle();
+	}
+	
 	public void update(float deltaTime, Map map){
-		if(moving) {
+		this.currentAnimationDuration += deltaTime;
+		if(state == MOVING) {
+			this.currentAnimation = getMove();
 			double newX = xPosition + xdirection * deltaTime * movespeed;
 			double newY = yPosition + ydirection * deltaTime * movespeed;
-			if(map.isCorrectPosition(newX, newY, this.width)) {
+			int moves = 0;
+			if(map.isCorrectPosition(newX, yPosition, this.width, this.height)) {
 				xPosition = newX;
-				yPosition = newY;
-			} else {
-				moving = false;
-				return;
+				moves++;
 			}
+			if(map.isCorrectPosition(xPosition, newY, this.width, this.height)) {
+				yPosition = newY;
+				moves++;
+			} 
+			if(moves == 0){
+				state = IDLE;
+				this.currentAnimation = this.getIdle();
+				return;
+			} 
 			// Distanz mit Satz des Pythagoras, Vermeiden von Wurzeln für bessere Performance
 			double distance = (xgoal - xPosition) * (xgoal - xPosition) + (ygoal - yPosition) * (ygoal - yPosition);
 			// Erster Teil: Erreichen des Ziels, Zweiter Teil behebt einen Fehler, wenn man sich auf den aktuellen Punkt bewegt
 			if(prevDistance < distance || Double.isNaN(distance)) {
-				moving = false;
-				xPosition = xgoal;
-				yPosition = ygoal;
+				state = IDLE;
+				this.currentAnimation = this.getIdle();
+				return;
 			}
 			prevDistance = distance;
 		}
 	}
+	
+	protected abstract Animation getMove();
+
+	protected abstract Animation getIdle();
 	
 	public void moveTo(int x, int y){
 		x -= width / 2;
@@ -48,7 +77,7 @@ public abstract class Entity {
 		prevDistance = Math.sqrt(xdif* xdif + ydif * ydif);
 		xdirection = xdif / prevDistance;
 		ydirection = ydif / prevDistance;
-		moving = true;
+		state = MOVING;
 		xgoal = x;
 		ygoal = y;
 		// Quadrieren, um späteres Wurzelziehen beim Distanz-berechnen zu vermeiden
@@ -64,7 +93,7 @@ public abstract class Entity {
 		prevDistance = Math.sqrt(xdif* xdif + ydif * ydif);
 		xdirection = xdif / prevDistance;
 		ydirection = ydif / prevDistance;
-		moving = true;
+		state = MOVING;
 		xgoal = this.xPosition + xdif;
 		ygoal = this.yPosition + ydif;
 		// Quadrieren, um späteres Wurzelziehen beim Distanz-berechnen zu vermeiden

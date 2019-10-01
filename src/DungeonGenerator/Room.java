@@ -7,6 +7,12 @@ import Constants.Constants;
 import Enemies.Enemy;
 import Enemies.EnemyGenInformation;
 import Enemies.EnemyGenerator;
+import Enemies.Ghoul;
+import Enemies.Imp;
+import Enemies.Phantom;
+import Enemies.Reaper;
+import Enemies.Slug;
+import Enemies.Undead;
 import Maps.Map;
 import Player.Player;
 
@@ -39,7 +45,7 @@ public class Room {
 			for(int i = 0; i < info.count; i++) {
 				int enemyX = cx + Constants.random(-halfWidth * 3 / 4, halfWidth * 3 / 4);
 				int enemyY = cy + Constants.random(-halfHeight * 3 / 4, halfHeight * 3 / 4	);
-				enemies.add(new Enemy(enemyX, enemyY, info.type));
+				enemies.add(g.fromType(info.type, enemyX * Map.TILE_SIZE, enemyY * Map.TILE_SIZE));
 			}
 		}
 	}

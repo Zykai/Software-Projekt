@@ -4,47 +4,51 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
+import Constants.Constants;
 import Entity.Entity;
 import Maps.Map;
 import Player.Player;
 
-public class Enemy extends Entity{
+public abstract class Enemy extends Entity{
 	
 	private Color enemyColor;
+	protected int originalX, originalY;
 	
-	public Enemy() {
-		movespeed = 0.35f;
-		enemyColor = new Color(10, 255, 255);
-	}
+	protected double timer;
+	protected double timerEnd;
 	
 	public Enemy(int xPos, int yPos) {
+		super();
+		timer = 0;
+		timerEnd = Constants.random(0, 5000);
 		movespeed = 0.35f;
 		enemyColor = new Color(10, 100, 50);
 		this.xPosition = xPos;
+		this.originalX = xPos;
 		this.yPosition = yPos;
+		this.originalY = yPos;
 	}
 	
-	public Enemy(int xPos, int yPos, int type) {
-		movespeed = 0.35f;
-		enemyColor = new Color(type * 30, type * 30, 0);
-		this.xPosition = xPos;
-		this.yPosition = yPos;
-	}
-
 	@Override
 	public void update(float deltaTime, Map map) {
-		super.update(deltaTime, map);
-		if(!moving) {
-			Random rand = new Random();
-			int newx = rand.nextInt(300) + 350;
-			int newy = rand.nextInt(250) + 250;
-			this.moveTo(newx, newy);
-			
+		super.update(deltaTime, map);	
+		if(state != Enemy.MOVING) {
+			timer += deltaTime;
+		}
+		if(timer > timerEnd && state == Enemy.IDLE) {
+			timer = 0;
+			timerEnd = Constants.random(2000, 5000);
+			int newx = originalX + Constants.random(-200, 200);
+			int newy = originalY + Constants.random(-200, 200);
+			this.moveTo(newx, newy);			
 		}
 	}
 	
 	public void draw(Graphics g, int xoffset, int yoffset) {
-		g.setColor(enemyColor);
-		g.fillOval((int)xPosition * Map.TILE_SIZE + xoffset, (int) yPosition * Map.TILE_SIZE + yoffset, 40, 40);
+		if(direction < 0) {
+			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), (int)xPosition + xoffset, (int) yPosition + yoffset, (int)this.width, (int)this.height, null);	
+		} else {
+			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), (int) (xPosition + xoffset + this.width), (int) yPosition + yoffset, (int)-this.width, (int)this.height, null);
+		}
 	}
 }

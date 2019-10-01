@@ -6,13 +6,12 @@ public class EnemyGenerator {
 	
 	private double currentCapacity;
 	
-	public final int RAT = 0;
-	public final int WASP = 1;
-	public final int MANDRAKE = 2;
-	public final int SATYR = 3;
-	public final int BANDIT = 4;
-	public final int SHADE = 5;
-	public final int SAMURAI = 6;
+	public static final int GHOUL = 0;
+	public static final int IMP = 1;
+	public static final int UNDEAD = 2;
+	public static final int SLUG = 3;
+	public static final int REAPER = 4;
+	public static final int PHANTOM = 5;
 	
 	
 	public EnemyGenerator(int capacity) {
@@ -21,20 +20,18 @@ public class EnemyGenerator {
 	
 	private double getCapacity(int type) {
 		switch(type) {
-		case RAT:
+		case GHOUL:
 			return 0.5;
-		case WASP:
+		case IMP:
 			return 0.5;
-		case MANDRAKE:
+		case UNDEAD:
 			return 1;
-		case SATYR:
+		case SLUG:
 			return 1;
-		case BANDIT:
+		case REAPER:
 			return 2;
-		case SHADE:
+		case PHANTOM:
 			return 2.5;
-		case SAMURAI:
-			return 3;
 		default:
 			System.out.println("Illegal enemy type");
 			System.exit(0);
@@ -44,19 +41,17 @@ public class EnemyGenerator {
 	
 	private int getEnemyCount(int type) {
 		switch(type) {
-		case RAT:
+		case GHOUL:
 			return 3 + Constants.random(0, 10);
-		case WASP:
+		case IMP:
 			return 4 + Constants.random(0, 5);
-		case MANDRAKE:
+		case UNDEAD:
 			return 3 + Constants.random(0, 4);
-		case SATYR:
+		case SLUG:
 			return 2 + Constants.random(0, 2);
-		case BANDIT:
+		case REAPER:
 			return 2 + Constants.random(0, 3);
-		case SHADE:
-			return 1 + Constants.random(0, 2);
-		case SAMURAI:
+		case PHANTOM:
 			return (int) (1 + Math.sqrt(Constants.random(0, 4)));
 		default:
 			System.out.println("Illegal enemy type");
@@ -67,30 +62,49 @@ public class EnemyGenerator {
 	
 	public EnemyGenInformation getNext() {
 		// if enemy generation is used up
-		if(currentCapacity < getCapacity(SAMURAI)) {
+		if(currentCapacity < getCapacity(PHANTOM)) {
 			return null;
 		}
 		
 		int random = Constants.random(1, 100);
 		int enemyType;
-		if(random <= 16) {
-			enemyType = RAT;
-		} else if(random <= 32) {
-			enemyType = WASP;
+		if(random <= 24) {
+			enemyType = GHOUL;
 		} else if(random <= 48) {
-			enemyType = MANDRAKE;
-		} else if(random <= 64) {
-			enemyType = SATYR;
-		} else if(random <= 80) {
-			enemyType = BANDIT;
+			enemyType = IMP;
+		} else if(random <= 60) {
+			enemyType = UNDEAD;
+		} else if(random <= 70) {
+			enemyType = SLUG;
 		} else if(random <= 90) {
-			enemyType = SHADE;
+			enemyType = REAPER;
 		} else {
-			enemyType = SAMURAI;
+			enemyType = PHANTOM;
 		}
 		double enemyCapacity = this.getCapacity(enemyType);
 		int enemyCount = this.getEnemyCount(enemyType);
 		this.currentCapacity -= enemyCount * enemyCapacity;
 		return new EnemyGenInformation(enemyType, enemyCount);
+	}
+	
+	public Enemy fromType(int type, int x, int y) {
+		switch(type) {
+		case GHOUL:
+			return new Ghoul(x,y);
+		case IMP:
+			return new Imp(x,y);
+		case UNDEAD:
+			return new Undead(x,y);
+		case SLUG:
+			return new Slug(x,y);
+		case REAPER:
+			return new Reaper(x,y);
+		case PHANTOM:
+			return new Phantom(x,y);
+		default:
+			System.out.println("Illegal enemy type");
+			System.exit(0);
+			return null;
+		}
 	}
 }

@@ -12,11 +12,9 @@ public class Animation {
 
 	private Image[] frames;
 	private double totalDuration;
-	private double currentDuration;
 	
 	public Animation(String name, int nFrames, double totalDuration) {
 		this.totalDuration = totalDuration;
-		this.currentDuration = 0.0;
 		this.frames = new Image[nFrames];
 		for(int i = 0; i < frames.length; i++) {
 			try {
@@ -29,19 +27,11 @@ public class Animation {
 		}
 	}
 	
-	public void advance(double d) {
-		this.currentDuration += d;
+	public boolean isFinished(double currentDuration) {
+		return this.totalDuration <= currentDuration;
 	}
 	
-	public boolean isFinished() {
-		return this.totalDuration <= this.currentDuration;
-	}
-	
-	public void reset() {
-		this.currentDuration = 0;
-	}
-	
-	public Image getCurrentImage() {
+	public Image getCurrentImage(double currentDuration) {
 		return this.frames[(int) ((currentDuration % totalDuration) / totalDuration * frames.length)];
 	}
 	

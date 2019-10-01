@@ -6,17 +6,17 @@ import java.util.ListIterator;
 
 import Constants.Constants;
 import Enemies.Enemy;
+import Enemies.Imp;
+import Entity.Animation;
 import Entity.Entity;
 import Maps.Map;;
 
-public class Player extends Entity{
+public abstract class Player extends Entity{
 
 	private int level;
 	private int hp; //warum in entity und nicht hier? Wenn wir das in Entity machen, sollte auch das Level rüber.
 	private Color playerColor;
 			
-	
-	
 	public Player(){
 		playerColor = new Color(1.0f, 0.5f, 0.2f);
 		xPosition = Constants.SCREEN_X / 2 + 100;
@@ -60,12 +60,12 @@ public class Player extends Entity{
 	}
 	
 	public void qAbility(int xMouse, int yMouse, Map map) {
-		map.getEnemyList().add(new Enemy(xMouse, yMouse));
+		map.getEnemyList().add(new Imp(xMouse, yMouse));
 	}
 	
 	public void wAbility(int xMouse, int yMouse, Map map) {
 		for(int i = 0; i < 10; i++) {
-			map.getEnemyList().add(new Enemy(xMouse, yMouse));
+			map.getEnemyList().add(new Imp(xMouse, yMouse));
 		}
 	}
 	
