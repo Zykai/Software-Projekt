@@ -8,13 +8,14 @@ public abstract class Entity {
 	
 	public static final int IDLE = 0;
 	public static final int MOVING = 1;
+	public static final int ATTACK = 2;
 	
 	private int hp;
 	protected float movespeed = 0.6f;
 	
 	protected double xPosition, yPosition;
 	protected double width, height;
-	// Variablen für die Bewegung
+	// Variablen fï¿½r die Bewegung
 	protected double xdirection, ydirection;
 	protected double xgoal;
 	protected double ygoal;
@@ -53,7 +54,7 @@ public abstract class Entity {
 				this.currentAnimation = this.getIdle();
 				return;
 			} 
-			// Distanz mit Satz des Pythagoras, Vermeiden von Wurzeln für bessere Performance
+			// Distanz mit Satz des Pythagoras, Vermeiden von Wurzeln fï¿½r bessere Performance
 			double distance = (xgoal - xPosition) * (xgoal - xPosition) + (ygoal - yPosition) * (ygoal - yPosition);
 			// Erster Teil: Erreichen des Ziels, Zweiter Teil behebt einen Fehler, wenn man sich auf den aktuellen Punkt bewegt
 			if(prevDistance < distance || Double.isNaN(distance)) {
@@ -69,18 +70,20 @@ public abstract class Entity {
 
 	protected abstract Animation getIdle();
 	
+	protected abstract Animation getAttack();
+
 	public void moveTo(int x, int y){
 		x -= width / 2;
 		y -= height / 2;
-		double xdif = x - xPosition;
-		double ydif = y - yPosition;
+		double xdif = x - getCenterX();
+		double ydif = y - getCenterY();
 		prevDistance = Math.sqrt(xdif* xdif + ydif * ydif);
 		xdirection = xdif / prevDistance;
 		ydirection = ydif / prevDistance;
 		state = MOVING;
 		xgoal = x;
 		ygoal = y;
-		// Quadrieren, um späteres Wurzelziehen beim Distanz-berechnen zu vermeiden
+		// Quadrieren, um spï¿½teres Wurzelziehen beim Distanz-berechnen zu vermeiden
 		prevDistance *= prevDistance;
 		if (xdirection > 0) {
 			this.direction = 1;
@@ -96,7 +99,7 @@ public abstract class Entity {
 		state = MOVING;
 		xgoal = this.xPosition + xdif;
 		ygoal = this.yPosition + ydif;
-		// Quadrieren, um späteres Wurzelziehen beim Distanz-berechnen zu vermeiden
+		// Quadrieren, um spï¿½teres Wurzelziehen beim Distanz-berechnen zu vermeiden
 		prevDistance *= prevDistance;
 		if (xdirection > 0) {
 			this.direction = 1;
@@ -113,6 +116,22 @@ public abstract class Entity {
 		return this.yPosition;
 	}
 	
+	public double getCenterX(){
+		return this.xPosition + this.width * 0.5;
+	}
+
+	public double getCenterY(){
+		return this.yPosition + this.height * 0.5;
+	}
+
+	public double getWidth() {
+		return this.width;
+	}
+	
+	public double getHeight() {
+		return this.height;
+	}
+
 	public void setX(double x) {
 		this.xPosition = x;
 	}

@@ -205,12 +205,25 @@ public class Darkness extends Map {
 	public void update(float deltaTime, Player p) {
 		setActiveRoom(p);
 		if(this.currentRoom != null) {
-			for(Iterator<Enemy> i = this.currentRoom.enemies.iterator(); i.hasNext();) {
-				Enemy e = i.next();
+			//Iterator<Enemy> iter = this.currentRoom.enemies.iterator();
+			ArrayList<Enemy> current = currentRoom.enemies;
+			for(int i = 0; i < current.size(); i++){
+				Enemy e = current.get(i);
 				e.update(deltaTime, this);
+				double xDistance = e.getX() - p.getX();
+				double yDistance = e.getY() - p.getY();
+				if(Math.sqrt(xDistance * xDistance + yDistance * yDistance)< e.visionRange) {
+					e.active = true;
+					this.activeEnemies.add(current.remove(i));
+					i--;
+				} else {
+					e.active = false;
+				}
 			}
 		}
-		
+		for(Enemy e : this.activeEnemies){
+			e.updateActive(deltaTime, this, p);
+		}
 	}
 	
 	@Override
@@ -238,8 +251,8 @@ public class Darkness extends Map {
 		if(!super.isCorrectPosition(x, y, width)) {
 			return false;
 		}
-		if(this.tiles[(int) (x-width/2) / Map.TILE_SIZE][(int) (y+height/2+Map.TILE_SIZE / 8) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+width/2) / Map.TILE_SIZE][(int) (y+height/2+Map.TILE_SIZE / 8) / Map.TILE_SIZE]==0 
-				|| this.tiles[(int) (x-width/2) / Map.TILE_SIZE][(int) (y+0.25*height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+width/2) / Map.TILE_SIZE][(int) (y+0.25*height) / Map.TILE_SIZE]==0 ) {
+		if(this.tiles[(int) (x+0.25*width) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 || this.tiles[(int) ((x+0.75*width)) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 
+				|| this.tiles[(int) (x+0.25*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+0.75*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 ) {
 			return false;
 		}
 		return true;

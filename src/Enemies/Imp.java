@@ -6,10 +6,12 @@ public class Imp extends Enemy {
 	
 	private static Animation IMP_IDLE;
 	private static Animation IMP_MOVE;
-	
+	private static Animation IMP_ATTACK;
+
 	static {
-		IMP_IDLE = new Animation("res/monster/Imp/sprites/imp-idle-0", 5, 600);
-		IMP_MOVE = new Animation("res/monster/Imp/sprites/imp-move-0", 5, 600);
+		IMP_IDLE = new Animation("res/monster/Imp/Individual Sprites/imp-idle-0", 5, 600);
+		IMP_MOVE = new Animation("res/monster/Imp/Individual Sprites/imp-move-0", 5, 600);
+		IMP_ATTACK = new Animation("res/monster/Imp/Individual Sprites/imp-attack-0", 10, 600);
 	}
 	
 	public Imp(int xPos, int yPos) {
@@ -26,5 +28,10 @@ public class Imp extends Enemy {
 	@Override
 	protected Animation getMove() {
 		return IMP_MOVE;
+	}
+
+	@Override
+	protected Animation getAttack() {
+		return IMP_ATTACK;
 	}
 }

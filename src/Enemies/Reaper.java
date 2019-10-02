@@ -6,10 +6,12 @@ public class Reaper extends Enemy {
 
 	private static Animation REAPER_MOVE;
 	private static Animation REAPER_IDLE; 
-	
+	private static Animation REAPER_ATTACK;
+
 	static {
-		REAPER_IDLE = new Animation("res/monster/Reaper/sprites/reaper-idle-00", 4, 600);
-		REAPER_MOVE = new Animation("res/monster/Reaper/sprites/reaper-move-00", 4, 600);
+		REAPER_IDLE = new Animation("res/monster/Reaper/Individual Sprites/reaper-idle-00", 4, 600);
+		REAPER_MOVE = new Animation("res/monster/Reaper/Individual Sprites/reaper-move-00", 4, 600);
+		REAPER_ATTACK = new Animation("res/monster/Reaper/Individual Sprites/reaper-attack-00", 5, 600);
 	}
 	
 	public Reaper(int xPos, int yPos) {
@@ -26,6 +28,11 @@ public class Reaper extends Enemy {
 	@Override
 	protected Animation getIdle() {
 		return REAPER_IDLE;
+	}
+
+	@Override
+	protected Animation getAttack() {
+		return REAPER_ATTACK;
 	}
 
 }

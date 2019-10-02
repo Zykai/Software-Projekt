@@ -6,10 +6,12 @@ public class Ghoul extends Enemy {
 
 	private static Animation GHOUL_MOVE;
 	private static Animation GHOUL_IDLE; 
-	
+	private static Animation GHOUL_ATTACK; 
+
 	static {
-		GHOUL_IDLE = new Animation("res/monster/Ghoul/sprites/ghoul-idle-0", 4, 600);
-		GHOUL_MOVE = new Animation("res/monster/Ghoul/sprites/ghoul-run-0", 6, 600);
+		GHOUL_IDLE = new Animation("res/monster/Ghoul/Individual Sprites/ghoul-idle-0", 4, 600);
+		GHOUL_MOVE = new Animation("res/monster/Ghoul/Individual Sprites/ghoul-run-0", 6, 600);
+		GHOUL_ATTACK = new Animation("res/monster/Ghoul/Individual Sprites/ghoul-attack-0", 5, 600);
 	}
 	
 	public Ghoul(int xPos, int yPos) {
@@ -26,6 +28,11 @@ public class Ghoul extends Enemy {
 	@Override
 	protected Animation getIdle() {
 		return GHOUL_IDLE;
+	}
+
+	@Override
+	protected Animation getAttack() {
+		return GHOUL_ATTACK;
 	}
 
 }

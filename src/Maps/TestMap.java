@@ -25,7 +25,7 @@ public class TestMap extends Map {
 		this.xSize = Constants.SCREEN_X;
 		this.ySize = Constants.SCREEN_Y;
 		mapColor = new Color(0.5f, 0.5f, 0.5f);
-		enemyList.add(new Imp(0,0));
+		activeEnemies.add(new Imp(0,0));
 	
 		try {
 			img = ImageIO.read(new File("res/test_dungeon.jpg"));
@@ -54,7 +54,7 @@ public class TestMap extends Map {
 
 	@Override
 	public void update(float deltaTime, Player p) {
-		for(Iterator<Enemy> i = enemyList.iterator(); i.hasNext();) {
+		for(Iterator<Enemy> i = activeEnemies.iterator(); i.hasNext();) {
 			Enemy e = i.next();
 			e.update(deltaTime, this);
 		}

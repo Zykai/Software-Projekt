@@ -140,14 +140,14 @@ public class Main extends JPanel {
 	}
  
 	public void paint(Graphics g) {
-		int xoffset = (int)(-player.getX()+Constants.SCREEN_X / 2);
-		int yoffset = (int)(-player.getY()+Constants.SCREEN_Y / 2);
+		int xoffset = (int)(-player.getX()+Constants.SCREEN_X / 2 - player.getWidth() / 2);
+		int yoffset = (int)(-player.getY()+Constants.SCREEN_Y / 2 - player.getHeight() / 2);
 		// TODO: g.translate
 		
 		float fps = (float) (1000.0/deltaTime);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
 		map.draw(g, xoffset, yoffset);
-		player.draw(g);
+		player.draw(g, xoffset, yoffset);
 		g.setColor(new Color(0.0f, 1.0f, 1.0f));
 		g.drawString(String.format("%.2f", fps),30, 30);
 
@@ -171,7 +171,7 @@ public class Main extends JPanel {
 		frame.validate();
 		while(true){
 			try {
-				Thread.sleep(6);
+				Thread.sleep(7);
 			}
 			catch (Exception e) {
 			}

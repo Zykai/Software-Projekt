@@ -21,7 +21,7 @@ public class Animation {
 				frames[i] = ImageIO.read(new File(name + i + ".png"));
 			}
 			catch (IOException e) {
-				System.out.println(e.getMessage());
+				System.out.println(e.getMessage() + "(" + name + i + ".png)");
 				System.exit(0);
 			}
 		}

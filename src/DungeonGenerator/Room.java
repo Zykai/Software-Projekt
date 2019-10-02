@@ -42,17 +42,17 @@ public class Room {
 		EnemyGenerator g = new EnemyGenerator(this.numberEnemies);
 		EnemyGenInformation info;
 		while((info = g.getNext()) != null) {
+			int enemyX = cx + Constants.random(-halfWidth * 3 / 4, halfWidth * 3 / 4);
+			int enemyY = cy + Constants.random(-halfHeight * 3 / 4, halfHeight * 2 / 3);
 			for(int i = 0; i < info.count; i++) {
-				int enemyX = cx + Constants.random(-halfWidth * 3 / 4, halfWidth * 3 / 4);
-				int enemyY = cy + Constants.random(-halfHeight * 3 / 4, halfHeight * 3 / 4	);
 				enemies.add(g.fromType(info.type, enemyX * Map.TILE_SIZE, enemyY * Map.TILE_SIZE));
 			}
 		}
 	}
 	
 	public void draw(Graphics g, int xoffset, int yoffset) {
-		for(Enemy e : enemies) {
-			e.draw(g, xoffset, yoffset);
+		for(int i = 0; i < enemies.size(); i++){
+			enemies.get(i).draw(g, xoffset, yoffset);
 		}
 	}
 

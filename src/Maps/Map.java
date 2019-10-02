@@ -12,24 +12,23 @@ public abstract class Map {
 
 	public static int TILE_SIZE = 32;
 	
-	protected LinkedList<Enemy> enemyList;
+	protected LinkedList<Enemy> activeEnemies;
 	protected int xSize, ySize;
 	protected boolean[][] solidGrid;
 	
 	public Map(){
-		enemyList = new LinkedList<Enemy>();
+		activeEnemies = new LinkedList<Enemy>();
 	}
 	public void draw(Graphics g, int xoffset, int yoffset) {
-		for(Iterator<Enemy> i = enemyList.iterator(); i.hasNext();) {
-			Enemy e = i.next();
-			e.draw(g, xoffset, yoffset);
+		for(int i = 0; i < activeEnemies.size(); i++){
+			activeEnemies.get(i).draw(g, xoffset, yoffset);
 		}
 	}
 	
 	public abstract void update(float deltaTime, Player p);
 	
 	public LinkedList<Enemy> getEnemyList(){
-		return this.enemyList;
+		return this.activeEnemies;
 	}
 	
 	public abstract double getStartingX();

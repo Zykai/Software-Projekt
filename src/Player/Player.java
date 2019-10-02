@@ -7,14 +7,13 @@ import java.util.ListIterator;
 import Constants.Constants;
 import Enemies.Enemy;
 import Enemies.Imp;
-import Entity.Animation;
 import Entity.Entity;
 import Maps.Map;;
 
 public abstract class Player extends Entity{
 
 	private int level;
-	private int hp; //warum in entity und nicht hier? Wenn wir das in Entity machen, sollte auch das Level rüber.
+	private int hp; //warum in entity und nicht hier? Wenn wir das in Entity machen, sollte auch das Level rï¿½ber.
 	private Color playerColor;
 			
 	public Player(){
@@ -32,8 +31,10 @@ public abstract class Player extends Entity{
 		g.fillOval((int)(Constants.SCREEN_X/2-width/2), (int)(Constants.SCREEN_Y/2-height/2), (int)width, (int)height);
 	}
 
-
-
+	public void draw(Graphics g, int xoffset, int yoffset){
+		g.setColor(getPlayerColor());
+		g.fillRect((int) this.xPosition + xoffset, (int) this.yPosition + yoffset, (int)this.width, (int)this.height);
+	}
 	
 	public int getHp() {
 		return hp;

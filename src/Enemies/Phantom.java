@@ -6,10 +6,12 @@ public class Phantom extends Enemy {
 
 	private static Animation PHANTOM_MOVE;
 	private static Animation PHANTOM_IDLE; 
-	
+	private static Animation PHANTOM_ATTACK;
+
 	static {
-		PHANTOM_IDLE = new Animation("res/monster/Phantom Knight/sprites/phantom-knight-idle-0", 4, 600);
-		PHANTOM_MOVE = new Animation("res/monster/Phantom Knight/sprites/phantom-knight-run-0", 6, 600);
+		PHANTOM_IDLE = new Animation("res/monster/Phantom Knight/Individual Sprites/phantom-knight-idle-0", 4, 600);
+		PHANTOM_MOVE = new Animation("res/monster/Phantom Knight/Individual Sprites/phantom-knight-run-0", 6, 600);
+		PHANTOM_ATTACK = new Animation("res/monster/Phantom Knight/Individual Sprites/phantom-knight-attack1-0", 7, 600);
 	}
 	
 	public Phantom(int xPos, int yPos) {
@@ -26,6 +28,11 @@ public class Phantom extends Enemy {
 	@Override
 	protected Animation getIdle() {
 		return PHANTOM_IDLE;
+	}
+
+	@Override
+	protected Animation getAttack() {
+		return PHANTOM_ATTACK;
 	}
 
 }
