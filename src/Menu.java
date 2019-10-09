@@ -18,13 +18,14 @@ import javax.swing.JPanel;
 
 public class Menu extends JPanel{
 	private Main main;
-	
+	private Creator creator;
 	
 	private JLabel optionsL;
 	private JFrame frame;
 	private JPanel startScreenP;
 	private JPanel playScreenP;
 	private JPanel optionScreenP;
+	private JPanel creatorScreenP;
 	private JButton savesB;
 	private JButton playB;
 	private JButton optionsB;
@@ -32,10 +33,10 @@ public class Menu extends JPanel{
 	private JButton newGameB;
 	private JButton backB;
 	private JButton exitB;
+	private JButton createB;
 	private Image playButton, playButtonB;
 	
-	public Menu(final JFrame frame, final Main main){
-		
+	public Menu(final JFrame frame, final Main main) {		
 		/*
 		BufferedImage img = null;
 		try {
@@ -49,19 +50,20 @@ public class Menu extends JPanel{
 		
 		
 		this.main = main;
-		optionsL = new JLabel("coming soon");
-		
 		final Menu self = this;
 		startScreenP = new JPanel();
 		playScreenP = new JPanel();
 		optionScreenP = new JPanel();
+		creatorScreenP = new JPanel();
+		
 		playB = new JButton(/*new ImageIcon(playButton)*/"Play Game"); 
 		optionsB = new JButton("Options");
 		newGameB = new JButton("Create new Game");
 		savesB = new JButton("Load Game");
 		backB = new JButton("Back to menu");
+		optionsL = new JLabel("coming soon");
 		exitB = new JButton("Exit Game");
-		
+		createB = new JButton("Create Character");
 		//playB.setIcon((Icon) startButton);
 		
 		add(startScreenP);
@@ -71,6 +73,7 @@ public class Menu extends JPanel{
 		//Startscreen
 		startScreenP.setLayout(new GridLayout());
 		startScreenP.add(playB);
+		startScreenP.add(createB);
 		startScreenP.add(optionsB);
 		startScreenP.add(exitB);
 		
@@ -91,12 +94,21 @@ public class Menu extends JPanel{
 			}
 		});
 		
-		optionsB.addActionListener(new ActionListener() {
+		createB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.remove(self);
-				frame.add(optionScreenP);
+				frame.add(new Creator(frame, main, self));
 				frame.validate();
+			}
+		});
+		
+		optionsB.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				remove(startScreenP);
+				add(optionScreenP);
+				validate();
 			}
 		});
 		
@@ -110,10 +122,10 @@ public class Menu extends JPanel{
 		backB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.remove(self);
-				System.out.println("asd");
-				frame.add(self);
-				frame.validate();
+				remove(optionScreenP);
+				//System.out.println("asd");
+				add(startScreenP);			
+				validate();
 			}
 		});
 	}

@@ -165,9 +165,8 @@ public class Main extends JPanel {
 		frame.setVisible(true);
 		long time = System.currentTimeMillis();
 		//frame.remove(main);
-		
 		frame.add(new Menu(frame, main));
-		//frame.add(main);
+		
 		frame.validate();
 		while(true){
 			try {
