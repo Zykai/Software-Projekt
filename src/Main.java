@@ -38,6 +38,7 @@ import DungeonGenerator.RoomTree;
 import Enemies.Enemy;
 
 import java.awt.Font;
+import java.awt.Frame;
  
 // https://docs.oracle.com/javase/tutorial/2d/geometry/primitives.html
  
@@ -124,9 +125,30 @@ public class Main extends JPanel {
 		      player.rAbility(xMouse, yMouse, map);
 		    }
 		});
+		createKeyBinding("esc", new AbstractAction() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		      player.qAbility(xMouse, yMouse, map);
+		    }
+		});
+		 this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), KeyEvent.VK_ESCAPE + "Pressed");
+	     this.getActionMap().put(KeyEvent.VK_ESCAPE + "Pressed", escapeAction() );
 	    
+	     
 	}
-	
+    private javax.swing.Action escapeAction() {
+        return new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //was passieren soll wenn escape gedrückt wird
+            	/**
+            	Frame.remove(Menu.playScreenP);
+				//System.out.println("asd");
+				Frame.add(Menu.startScreenP);			
+				validate(); **/
+            	}
+        };
+    }
 	private void createKeyBinding(String button, AbstractAction action) {
 		InputMap iMap = this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
 	    ActionMap aMap = this.getActionMap();

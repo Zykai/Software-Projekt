@@ -22,8 +22,8 @@ public class Menu extends JPanel{
 	
 	private JLabel optionsL;
 	private JFrame frame;
-	private JPanel startScreenP;
-	private JPanel playScreenP;
+	public static JPanel startScreenP;
+	public static JPanel playScreenP;
 	private JPanel optionScreenP;
 	private JPanel creatorScreenP;
 	private JButton savesB;

@@ -11,10 +11,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import Player.Player;
 
 public class Creator extends JPanel{
 	private Main main;
@@ -23,9 +26,12 @@ public class Creator extends JPanel{
 	private JFrame frame;
 	private JPanel panel;
 	private JButton backM;
-	private JButton standart;
 	private JButton play;
-	
+	private JLabel hero;
+	private Image hero1;
+	private BufferedImage hero1B;
+	private JPanel stats;
+	private JLabel hp, level, speed, attack;
 	public Creator(final JFrame frame, final Main main, final Menu menu) {
 		
 		this.main = main;
@@ -33,12 +39,33 @@ public class Creator extends JPanel{
 		final Creator self = this;
 		panel = new JPanel();
 		backM = new JButton("Back to Menu");
-		standart = new JButton("Standartcharakter");
+		stats = new JPanel();
 		play = new JButton("Confirm character and play");
 		add(panel);
 		panel.setLayout(new BorderLayout());
-		panel.add(backM, BorderLayout.PAGE_START);
-		panel.add(play, BorderLayout.PAGE_END);
+		panel.add(backM, BorderLayout.NORTH);
+		panel.add(play, BorderLayout.SOUTH);
+		panel.add(stats, BorderLayout.EAST);
+		
+		hp = new JLabel("HP: " + Integer.toString(Player.getHp()));
+		level = new JLabel("Level: " + Integer.toString(Player.getLevel()));
+		speed = new JLabel("tbd");
+		attack = new JLabel("tbd");
+		stats.setLayout(new GridLayout(5,1));
+		stats.add(new JLabel("Stats:"));
+		stats.add(hp);
+		stats.add(level);
+		stats.add(speed);
+		stats.add(attack);
+		try {
+			hero1B = ImageIO.read(new File("res/hero/adventurer-idle-03.png"));
+			hero1 = hero1B.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		hero = new JLabel(new ImageIcon(hero1));
+		panel.add(hero, BorderLayout.CENTER);
 		
 		frame.setVisible(true);
 		
