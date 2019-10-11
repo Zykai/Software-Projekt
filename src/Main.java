@@ -11,6 +11,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.AbstractAction;
@@ -76,10 +78,17 @@ public class Main extends JPanel {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
+				if(player.inventory.isVisible()){
+					player.inventory.startDrag(e.getX(), e.getY());
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				player.moveDif(e.getX()-Constants.SCREEN_X/2, e.getY()-Constants.SCREEN_Y/2);	
+				if(player.inventory.isVisible()){
+					player.inventory.endDrag(e.getX(), e.getY());
+				} else {
+					player.moveDif(e.getX()-Constants.SCREEN_X/2, e.getY()-Constants.SCREEN_Y/2);	
+				}
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -91,7 +100,9 @@ public class Main extends JPanel {
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				
+				if(player.inventory.isVisible()){
+					player.inventory.continueDrag(e.getX(), e.getY());
+				}
 			}
 			@Override
 			public void mouseMoved(MouseEvent e) {
@@ -100,7 +111,12 @@ public class Main extends JPanel {
 			}
 			
 		});
-		
+		this.addMouseWheelListener(new MouseWheelListener(){
+			@Override
+			public void mouseWheelMoved(MouseWheelEvent e) {
+				player.inventory.scroll(e.getUnitsToScroll());
+			}
+		});
 		createKeyBinding("Q", new AbstractAction() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
@@ -129,6 +145,12 @@ public class Main extends JPanel {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
 		      player.qAbility(xMouse, yMouse, map);
+		    }
+		});
+		createKeyBinding("I", new AbstractAction() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		      player.inventory.setInventory();
 		    }
 		});
 		 this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), KeyEvent.VK_ESCAPE + "Pressed");

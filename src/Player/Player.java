@@ -1,4 +1,5 @@
 package Player;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedList;
@@ -8,6 +9,7 @@ import Constants.Constants;
 import Enemies.Enemy;
 import Enemies.Imp;
 import Entity.Entity;
+import Inventory.Inventory;
 import Maps.Map;;
 
 public abstract class Player extends Entity{
@@ -15,20 +17,22 @@ public abstract class Player extends Entity{
 	private static int level;
 	private static int hp; //warum in entity und nicht hier? Wenn wir das in Entity machen, sollte auch das Level r�ber.
 	private Color playerColor;
-			
+	public Inventory inventory;		
+	
+
 	public Player(){
 		playerColor = new Color(1.0f, 0.5f, 0.2f);
 		xPosition = Constants.SCREEN_X / 2 + 100;
 		yPosition = Constants.SCREEN_Y / 2 + 200;
 		height = 30;
 		width = 30;
+		inventory = new Inventory();
 	}
 	
 
 	
 	public void draw(Graphics g){
-		g.setColor(getPlayerColor());
-		g.fillOval((int)(Constants.SCREEN_X/2-width/2), (int)(Constants.SCREEN_Y/2-height/2), (int)width, (int)height);
+		inventory.draw(g);
 	}
 
 	public void draw(Graphics g, int xoffset, int yoffset){
