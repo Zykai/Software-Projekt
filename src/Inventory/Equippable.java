@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import Constants.Constants;
 import Inventory.Inventory.ItemType;
+import Player.Player;
 
 public class Equippable extends Item {
 
@@ -17,6 +18,15 @@ public class Equippable extends Item {
 
     public Rarity rarity;
     public Weight weight;
+
+    public int hpBonus;
+	public int armorBonus;
+	public int attackBonus;
+    public int abilityBonus;
+    public int lifeStealBonus;
+	public int coolDownReductionBonus;
+	public double attackSpeedBonus;
+	public float movespeedBonus;
 
     static {
         armorImages = new Image[4][3][4];
@@ -53,6 +63,30 @@ public class Equippable extends Item {
         ArmorType armorType = Equippable.ARMORTYPES[Constants.random(0, ARMORTYPES.length-1)];
         this.image = getArmorImage(this.rarity, this.weight, armorType);
         this.type = ItemType.fromArmorType(armorType);
+    }
+
+    @Override
+    public void equip(Player p){
+        p.maxHP += this.hpBonus;
+        p.armor += this.armorBonus;
+        p.attackDamage += this.attackBonus;
+        p.abilityPower += this.abilityBonus;
+        p.lifeSteal += this.lifeStealBonus;
+        p.coolDownReduction += this.coolDownReductionBonus;
+        p.attackSpeed += this.attackSpeedBonus;
+        p.movespeed += this.movespeedBonus;
+    }
+
+    @Override
+    public void deEquip(Player p){
+        p.maxHP -= this.hpBonus;
+        p.armor -= this.armorBonus;
+        p.attackDamage -= this.attackBonus;
+        p.abilityPower -= this.abilityBonus;
+        p.lifeSteal -= this.lifeStealBonus;
+        p.coolDownReduction -= this.coolDownReductionBonus;
+        p.attackSpeed -= this.attackSpeedBonus;
+        p.movespeed -= this.movespeedBonus;
     }
 
 }

@@ -3,12 +3,12 @@ package Inventory;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.imageio.ImageIO;
 
 import Inventory.Equippable.ArmorType;
+import Player.Player;
 
 public class Inventory {
 
@@ -177,12 +177,14 @@ public class Inventory {
         dragY = y - YOFFSET - dragOffsetY;
     }
 
-    public void endDrag(int x, int y){
+    public void endDrag(int x, int y, Player p){
+        boolean toActive = false;
         Slot goalSlot = null;
         for(int i = 0; i < activeSlots.length; i++){
             Slot active = activeSlots[i];
             if(active.isClicked(x - XOFFSET, y - YOFFSET)){
                 goalSlot = active;
+                toActive = true;
             }
         }
         for(int i = 0; i < storageSlots.length; i++){
@@ -192,9 +194,22 @@ public class Inventory {
             }
         }
         if(goalSlot.isCompatible(dragged.item) && dragged.isCompatible(goalSlot.item)){
+            if(draggedFromActive){
+                dragged.item.deEquip(p);
+                if(goalSlot.item != null){
+                    goalSlot.item.equip(p);
+                }
+            }
+            if(toActive){
+                if(goalSlot.item != null){
+                    goalSlot.item.deEquip(p);
+                }
+                dragged.item.equip(p);
+            }
             Item temp = goalSlot.item;
             goalSlot.item = dragged.item;
             dragged.item = temp;
+            
         }
         dragged = null;
     }

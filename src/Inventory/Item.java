@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Inventory.Inventory.ItemType;
+import Player.Player;
 
 public class Item {
 
@@ -28,4 +29,8 @@ public class Item {
             System.exit(0);
         }
     }
+
+    public void equip(Player p){    }
+
+    public void deEquip(Player p){    }
 }

@@ -10,8 +10,15 @@ public abstract class Entity {
 	public static final int MOVING = 1;
 	public static final int ATTACK = 2;
 	
-	private int hp;
-	protected float movespeed = 0.6f;
+	public int currentHP;
+	public int maxHP;
+	public int armor;
+	public int attackDamage;
+	public int abilityPower;
+	public int lifeSteal;
+	public int coolDownReduction;
+	public double attackSpeed;
+	public float movespeed = 0.6f;
 	
 	protected double xPosition, yPosition;
 	protected double width, height;

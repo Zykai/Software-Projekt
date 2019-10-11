@@ -85,7 +85,7 @@ public class Main extends JPanel {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if(player.inventory.isVisible()){
-					player.inventory.endDrag(e.getX(), e.getY());
+					player.inventory.endDrag(e.getX(), e.getY(), player);
 				} else {
 					player.moveDif(e.getX()-Constants.SCREEN_X/2, e.getY()-Constants.SCREEN_Y/2);	
 				}
