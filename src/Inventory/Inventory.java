@@ -174,7 +174,7 @@ public class Inventory {
 	public void startDrag(int x, int y) {
         for(int i = 0; i < activeSlots.length; i++){
             Slot active = activeSlots[i];
-            if(active.isClicked(x - XOFFSET, y - YOFFSET)){
+            if(active.isClicked(x - XOFFSET, y - YOFFSET) && active.item != null){
                 dragged = active;
                 dragOffsetX = x - XOFFSET - active.x;
                 dragOffsetY = y - YOFFSET - active.y;
@@ -186,7 +186,7 @@ public class Inventory {
         }
         for(int i = 0; i < storageSlots.length; i++){
             Slot active = storageSlots[i];
-            if(active.isClicked(x - XOFFSET, y - YOFFSET - scroll)){
+            if(active.isClicked(x - XOFFSET, y - YOFFSET - scroll) && active.item != null){
                 dragged = active;
                 dragOffsetX = x - XOFFSET - active.x;
                 dragOffsetY = y - YOFFSET - active.y - scroll;
@@ -208,6 +208,9 @@ public class Inventory {
     public void endDrag(int x, int y, Player p){
         boolean toActive = false;
         Slot goalSlot = null;
+        if(dragged == null){
+            return;
+        }
         for(int i = 0; i < activeSlots.length; i++){
             Slot active = activeSlots[i];
             if(active.isClicked(x - XOFFSET, y - YOFFSET)){
