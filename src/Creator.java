@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Player.Hero;
 import Player.Player;
 
 public class Creator extends JPanel{
@@ -47,8 +48,9 @@ public class Creator extends JPanel{
 		panel.add(play, BorderLayout.SOUTH);
 		panel.add(stats, BorderLayout.EAST);
 		
-		hp = new JLabel("HP: " + Integer.toString(Player.getHp()));
-		level = new JLabel("Level: " + Integer.toString(Player.getLevel()));
+		Player p = new Hero();
+		hp = new JLabel("HP: " + Integer.toString(p.getHp()));
+		level = new JLabel("Level: " + Integer.toString(p.getLevel()));
 		speed = new JLabel("tbd");
 		attack = new JLabel("tbd");
 		stats.setLayout(new GridLayout(5,1));

@@ -32,6 +32,8 @@ public class Hero extends Player {
 		this.movespeed = 0.45f;
 		this.currentAnimation = PLAYER_IDLE[0];
 		this.currentAnimationDuration = 0.0;
+		this.currentXP = 6;
+		this.maxXP = 10;
 	}
 	
 	public void update(float deltaTime, Map map) {

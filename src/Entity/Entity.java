@@ -10,6 +10,9 @@ public abstract class Entity {
 	public static final int MOVING = 1;
 	public static final int ATTACK = 2;
 	
+	public int level;
+	public int currentXP;
+	public int maxXP;
 	public int currentHP;
 	public int maxHP;
 	public int armor;
@@ -115,6 +118,22 @@ public abstract class Entity {
 		}
 	}
 	
+	public int getHp() {
+		return currentHP;
+	}
+
+	public void setHp(int hp) {
+		this.currentHP = hp;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
 	public double getX() {
 		return this.xPosition;
 	}

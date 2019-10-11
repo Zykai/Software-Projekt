@@ -14,8 +14,6 @@ import Maps.Map;;
 
 public abstract class Player extends Entity{
 
-	private static int level;
-	private static int hp; //warum in entity und nicht hier? Wenn wir das in Entity machen, sollte auch das Level r�ber.
 	private Color playerColor;
 	public Inventory inventory;		
 	
@@ -32,28 +30,12 @@ public abstract class Player extends Entity{
 
 	
 	public void draw(Graphics g){
-		inventory.draw(g);
+		inventory.draw(g, this);
 	}
 
 	public void draw(Graphics g, int xoffset, int yoffset){
 		g.setColor(getPlayerColor());
 		g.fillRect((int) this.xPosition + xoffset, (int) this.yPosition + yoffset, (int)this.width, (int)this.height);
-	}
-	
-	public static int getHp() {
-		return hp;
-	}
-
-	public void setHp(int hp) {
-		this.hp = hp;
-	}
-
-	public static int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		Player.level = level;
 	}
 
 	public Color getPlayerColor() {
