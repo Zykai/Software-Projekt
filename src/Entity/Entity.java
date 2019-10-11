@@ -10,8 +10,18 @@ public abstract class Entity {
 	public static final int MOVING = 1;
 	public static final int ATTACK = 2;
 	
-	private int hp;
-	protected float movespeed = 0.6f;
+	public int level;
+	public int currentXP;
+	public int maxXP;
+	public int currentHP;
+	public int maxHP;
+	public int armor;
+	public int attackDamage;
+	public int abilityPower;
+	public int lifeSteal;
+	public int coolDownReduction;
+	public double attackSpeed;
+	public float movespeed = 0.6f;
 	
 	protected double xPosition, yPosition;
 	protected double width, height;
@@ -108,6 +118,22 @@ public abstract class Entity {
 		}
 	}
 	
+	public int getHp() {
+		return currentHP;
+	}
+
+	public void setHp(int hp) {
+		this.currentHP = hp;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
 	public double getX() {
 		return this.xPosition;
 	}
