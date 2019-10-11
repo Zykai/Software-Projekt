@@ -10,11 +10,17 @@ import Inventory.Inventory.ItemType;
 
 public class Item {
 
-    public final ItemType type;
+    public static Rarity[] RARITIES = Rarity.values();
+
+    public enum Rarity{
+        common, rare, epic, legendary,
+    }
+
+    public ItemType type;
     public Image image;
 
     public Item() {
-        type = ItemType.Helmet;
+        type = ItemType.helmet;
         try {
             image = ImageIO.read(new File("res/dsui/item_helmet.png")).getScaledInstance(160, 160, Image.SCALE_DEFAULT);
         } catch (IOException e) {

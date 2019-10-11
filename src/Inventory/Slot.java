@@ -45,15 +45,18 @@ public class Slot {
             g.drawImage(item.image, x, y, null);
         } else {
             g.drawImage(menuSlots[type.value], x, y, null);
-
         }
     }
     
+    public void drawOnlySlot(Graphics g){
+        g.drawImage(menuSlots[type.value], x, y, null);
+    }
+
     public boolean isCompatible(Item i){
         if(i == null) {
             return true;
         }
-        return this.type == ItemType.All || i.type == this.type;
+        return this.type == ItemType.all || i.type == this.type;
     }
 
     public boolean isClicked(int x, int y){

@@ -106,6 +106,9 @@ public class Main extends JPanel {
 			}
 			@Override
 			public void mouseMoved(MouseEvent e) {
+				if(player.inventory.isVisible()){
+					player.inventory.hover(e.getX(), e.getY());
+				}
 				xMouse = (int) (player.getX() + e.getX()- Constants.SCREEN_X/2);
 				yMouse = (int) (player.getY() + e.getY()- Constants.SCREEN_Y/2);
 			}
