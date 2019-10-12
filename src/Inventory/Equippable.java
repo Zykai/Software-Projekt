@@ -182,7 +182,7 @@ public class Equippable extends Item {
             yoffset += 32;
         }
         if(hpBonus != 0){
-            g.drawString(getBonusString(hpBonus) + " Leben ❤️", hoverX+10, yoffset);
+            g.drawString(getBonusString(hpBonus) + " Leben ❤", hoverX+10, yoffset);
             yoffset += 32;
         }
         if(hpRegenBonus != 0){
@@ -190,11 +190,11 @@ public class Equippable extends Item {
             yoffset += 32;
         }
         if(armorBonus != 0){
-            g.drawString(getBonusString(armorBonus) + " Rüstung 🛡️", hoverX+10, yoffset);
+            g.drawString(getBonusString(armorBonus) + " Rüstung 🛡", hoverX+10, yoffset);
             yoffset += 32;
         }
         if(attackBonus != 0){
-            g.drawString(getBonusString(attackBonus) + " Angriffsschaden ⚔️", hoverX+10, yoffset);
+            g.drawString(getBonusString(attackBonus) + " Angriffsschaden ⚔", hoverX+10, yoffset);
             yoffset += 32;
         }
         if(abilityBonus != 0){
@@ -202,7 +202,7 @@ public class Equippable extends Item {
             yoffset += 32;
         }
         if(critChance != 0){
-            g.drawString(getBonusString(critChance) + "% Chance kritischer Treffer ⚠️", hoverX+10, yoffset);
+            g.drawString(getBonusString(critChance) + "% Chance kritischer Treffer ⚠", hoverX+10, yoffset);
             yoffset += 32;
         }
         if(lifeStealBonus != 0){
@@ -214,7 +214,7 @@ public class Equippable extends Item {
             yoffset += 32;
         }
         if(attackSpeedBonus != 0){
-            g.drawString(getBonusString((int)attackSpeedBonus) + " Angriffsgeschwindigkeit 🗡️", hoverX+10, yoffset);
+            g.drawString(getBonusString((int)attackSpeedBonus) + " Angriffsgeschwindigkeit 🗡", hoverX+10, yoffset);
             yoffset += 32;
         }
         if(movespeedBonus != 0){
