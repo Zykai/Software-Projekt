@@ -12,6 +12,9 @@ public abstract class Entity {
 	
 	public int level;
 	public int currentXP;
+	public int xpBoost;
+	public int critChance;
+	public int hpRegen;
 	public int maxXP;
 	public int currentHP;
 	public int maxHP;

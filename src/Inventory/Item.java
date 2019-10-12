@@ -69,7 +69,7 @@ public class Item {
 
 	public void draw(Graphics g, int hoverX, int hoverY){
         g.setColor(Item.hoverColor);
-        g.fillRect(hoverX, hoverY, 400, 60 + getRows() * 32);
+        g.fillRect(hoverX, hoverY, 430, 60 + getRows() * 32);
         g.setFont(Inventory.cursive);
         g.setColor(getColor());
         g.drawString(getName(), hoverX + 10, hoverY + 30);
