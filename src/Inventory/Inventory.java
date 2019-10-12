@@ -95,7 +95,9 @@ public class Inventory {
         for(int y = 0; y < 14; y++){
             for(int x = 0; x < 3; x++){
                 storageSlots[i] = new Slot(850+x*160, 50+y*160, ItemType.all);
-                storageSlots[i].item = new Equippable();
+                if(y < 8){
+                    storageSlots[i].item = new Equippable();
+                }
                 i++;
             }
         }
@@ -118,22 +120,24 @@ public class Inventory {
 
         g.setColor(textColor);
         g.setFont(bigFont);
-        g.drawString("Stats:", 150, 70);
+        g.drawString("Stats 📝", 150, 70);
         g.setFont(font);
-        g.drawString("Level: " + p.level, 40, 120);
-        g.fillRect(160, 95, 320, 26);
+        g.drawString("Level 🌡️: " + p.level, 40, 120);
+        g.fillRect(220, 95, 266, 26);
         g.setColor(xpColor);
-        g.fillRect(164, 99, 312 * p.currentXP / p.maxXP, 18);
+        g.fillRect(224, 99, 258 * p.currentXP / p.maxXP, 18);
         g.setColor(textColor);
-        g.drawString("Leben: " + p.currentHP + " / " + p.maxHP, 40, 160);
-        g.drawString("Rüstung: " + p.armor, 40, 200);
-        g.drawString("Angriffschaden: " + p.attackDamage, 40, 240);
-        g.drawString("Fähigkeitsstärke: " + p.abilityPower, 40, 280);
-        g.drawString("Lebensraub: " + p.lifeSteal, 40, 320);
-        g.drawString("Abklingzeitverringerung: " + p.coolDownReduction + "%", 40, 360);
-        g.drawString("Angriffsgeschwindigkeit: " + p.attackSpeed, 40, 400);
-        g.drawString("Bewegungsgeschwindigkeit: " + p.movespeed, 40, 440);
-
+        g.drawString("Leben ❤️: " + p.currentHP + " / " + p.maxHP, 40, 160);
+        g.drawString("Lebensregeneration ➕: " + p.hpRegen + "/s", 40, 200);
+        g.drawString("Rüstung 🛡️: " + p.armor, 40, 240);
+        g.drawString("Angriffschaden ⚔️: " + p.attackDamage, 40, 280);
+        g.drawString("Fähigkeitsstärke 🌠: " + p.abilityPower, 40, 320);
+        g.drawString("Chance kritischer Treffer ⚠️: " + p.critChance + "%", 40, 360);
+        g.drawString("Lebensraub 🦇: " + p.lifeSteal, 40, 400);
+        g.drawString("Abklingzeitverringerung ⌛: " + p.coolDownReduction + "%", 40, 440);
+        g.drawString("Angriffsgeschwindigkeit 🗡️: " + p.attackSpeed, 40, 480);
+        g.drawString("Bewegungsgeschwindigkeit 🏃: " + p.movespeed, 40, 520);
+        g.drawString("Erfahrungsbonus ☀: " + p.xpBoost + "%", 40, 560);
         for(int i = 0; i < activeSlots.length; i++){
             activeSlots[i].draw(g);
         }

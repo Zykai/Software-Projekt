@@ -10,7 +10,7 @@ import Enemies.Enemy;
 import Enemies.Imp;
 import Entity.Entity;
 import Inventory.Inventory;
-import Maps.Map;;
+import Maps.Map;
 
 public abstract class Player extends Entity{
 
