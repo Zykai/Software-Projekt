@@ -21,8 +21,6 @@ import Player.Hero;
 import Player.Player;
 
 public class Creator extends JPanel{
-	private Main main;
-	private Menu menu;
 	
 	private JFrame frame;
 	private JPanel panel;
@@ -33,10 +31,8 @@ public class Creator extends JPanel{
 	private BufferedImage hero1B;
 	private JPanel stats;
 	private JLabel hp, level, speed, attack;
-	public Creator(final JFrame frame, final Main main, final Menu menu) {
+	public Creator() {
 		
-		this.main = main;
-		this.menu = menu;
 		final Creator self = this;
 		panel = new JPanel();
 		backM = new JButton("Back to Menu");
@@ -69,23 +65,20 @@ public class Creator extends JPanel{
 		hero = new JLabel(new ImageIcon(hero1));
 		panel.add(hero, BorderLayout.CENTER);
 		
-		frame.setVisible(true);
 		
 		backM.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.remove(self);
-				frame.add(self.menu);
-				frame.validate();
+				FrameManager.currentScreen = FrameManager.Screen.Menu;
+				FrameManager.run();
 			}
 		});
 		
 		play.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.remove(self);
-				frame.add(self.main);
-				frame.validate();
+				FrameManager.currentScreen = FrameManager.Screen.Game;
+				FrameManager.run();
 			}
 		});
 	}

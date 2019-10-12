@@ -15,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
 public class Menu extends JPanel{
 	private Main main;
 	private Creator creator;
@@ -88,18 +87,16 @@ public class Menu extends JPanel{
 		playB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.remove(self);
-				frame.add(self.main);
-				frame.validate();
+				FrameManager.currentScreen = FrameManager.Screen.Game;
+				FrameManager.run();
 			}
 		});
 		
 		createB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.remove(self);
-				frame.add(new Creator(frame, main, self));
-				frame.validate();
+				FrameManager.currentScreen = FrameManager.Screen.Creator;
+				FrameManager.run();
 			}
 		});
 		
@@ -108,7 +105,7 @@ public class Menu extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				remove(startScreenP);
 				add(optionScreenP);
-				validate();
+				FrameManager.frame.validate();
 			}
 		});
 		
@@ -124,8 +121,8 @@ public class Menu extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				remove(optionScreenP);
 				//System.out.println("asd");
-				add(startScreenP);			
-				validate();
+				add(startScreenP);	
+				FrameManager.frame.validate();
 			}
 		});
 	}
