@@ -103,9 +103,8 @@ public class Menu extends JPanel{
 		optionsB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				remove(startScreenP);
-				add(optionScreenP);
-				FrameManager.frame.validate();
+				FrameManager.currentScreen = FrameManager.Screen.Options;
+				FrameManager.run();
 			}
 		});
 		
@@ -119,10 +118,8 @@ public class Menu extends JPanel{
 		backB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				remove(optionScreenP);
-				//System.out.println("asd");
-				add(startScreenP);	
-				FrameManager.frame.validate();
+				FrameManager.currentScreen = FrameManager.Screen.Menu;
+				FrameManager.run();
 			}
 		});
 	}

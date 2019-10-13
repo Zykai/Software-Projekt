@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Graphics;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -11,7 +13,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,10 +28,11 @@ public class Creator extends JPanel{
 	private JButton backM;
 	private JButton play;
 	private JLabel hero;
-	private Image hero1;
-	private BufferedImage hero1B;
+	private Image hero1, back;
+	private BufferedImage hero1B, backB;
 	private JPanel stats;
 	private JLabel hp, level, speed, attack;
+	
 	public Creator() {
 		
 		final Creator self = this;
@@ -44,6 +46,15 @@ public class Creator extends JPanel{
 		panel.add(play, BorderLayout.SOUTH);
 		panel.add(stats, BorderLayout.EAST);
 		
+		setOpaque(false);
+		
+		 try {
+	            backB = ImageIO.read(new File("res/background/menu.png"));
+	            back = backB.getScaledInstance(Main.WIDTH, Main.HEIGHT, Image.SCALE_SMOOTH);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		 
 		Player p = new Hero();
 		hp = new JLabel("HP: " + Integer.toString(p.getHp()));
 		level = new JLabel("Level: " + Integer.toString(p.getLevel()));
@@ -82,4 +93,9 @@ public class Creator extends JPanel{
 			}
 		});
 	}
+	 @Override
+	 protected void paintComponent(Graphics g) {
+	     super.paintComponent(g); // paint the background image and scale it to fill the entire space
+	     g.drawImage(back, 0, 0, null);
+	 }
 }

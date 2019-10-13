@@ -7,7 +7,7 @@ public class FrameManager {
     public static JFrame frame;
 
     enum Screen {
-        Menu, Creator, Game,
+        Menu, Creator, Game, Options,
     }
 
     public static Screen currentScreen = Screen.Menu;
@@ -32,6 +32,10 @@ public class FrameManager {
             current = new Creator();
             frame.add(current);
             break;
+        case Options:
+        	current = new Options();
+        	frame.add(current);
+        	break;
         case Game:
             new Thread(new Runnable() {
                 public void run() {
