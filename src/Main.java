@@ -146,12 +146,6 @@ public class Main extends JPanel {
 				player.rAbility(xMouse, yMouse, map);
 			}
 		});
-		createKeyBinding("esc", new AbstractAction() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				player.qAbility(xMouse, yMouse, map);
-			}
-		});
 		createKeyBinding("I", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
