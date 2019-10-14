@@ -1,5 +1,6 @@
 package DungeonGenerator;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ public class RoomTree {
 	
 	public RoomTree left, right;
 	public RoomBox leaf;
-	
+	private static Color ROOM_COLOR = new Color(128,128,128);
 	
 	public RoomTree(RoomBox c) {
 		leaf = c;
@@ -25,6 +26,25 @@ public class RoomTree {
 		}
 	}
 
+	public boolean draw(Graphics g){
+		g.setColor(ROOM_COLOR);
+		if(this.left != null){
+			boolean l = this.left.draw(g);
+			boolean r = this.right.draw(g);
+			if(l && r){
+				if(left.leaf.width == right.leaf.width){
+					g.fillRect(left.leaf.cx-1, left.leaf.cy, 3, right.leaf.cy - left.leaf.cy);
+				} else {
+					g.fillRect(left.leaf.cx, left.leaf.cy-1, right.leaf.cx- left.leaf.cx, 3);
+				}
+				return true;
+			}
+			return false;
+		} else {
+			return this.leaf.draw(g);
+		}
+	}
+	
 	public void fillGrid(int[][] grid) {
 		if(left == null && right == null) {
 			leaf.fillGrid(grid);
