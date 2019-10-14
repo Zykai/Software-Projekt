@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.BorderFactory;
 import Constants.Constants;
 
 public class Options extends JPanel{
@@ -38,6 +39,8 @@ public class Options extends JPanel{
 		add(panelBg);
 		panelBg.add(panel);
 		panel.add(tbd);
+		
+		//Hintergrund
 		try {
 			bgIB = ImageIO.read(new File("res/background/menu.png"));
 	   		bgI = bgIB.getScaledInstance(Constants.SCREEN_X, Constants.SCREEN_Y, Image.SCALE_SMOOTH);
@@ -45,10 +48,13 @@ public class Options extends JPanel{
 				e.printStackTrace();
 			}
 		panelBg.setOpaque(false);
-		BUTTON_X = 370 /2;
+		
+		//back Button
+		BUTTON_X = 370/2;
 		BUTTON_Y = 130/2;
 		backM = new JButton();
 		backM.setOpaque(true);
+		backM.setBorder(BorderFactory.createEmptyBorder());
 		backM.setBounds((Constants.SCREEN_X - BUTTON_X) / 2, (Constants.SCREEN_Y - BUTTON_Y)/ 2, BUTTON_X, BUTTON_Y);
 		try {
 			backBI = ImageIO.read(new File("res/exit.png"));
@@ -66,6 +72,7 @@ public class Options extends JPanel{
         });
 		panel.add(backM);
 		panel.add(tbd);
+		FrameManager.frame.validate();
 	}
 	public void paint(Graphics g)
 	{
