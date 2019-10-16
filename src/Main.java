@@ -51,6 +51,8 @@ public class Main extends JPanel {
 	private Image image;
 	private Player player;
 	private Map map;
+	private Pause pause;
+	private boolean isPaused;
 
 	private int xMouse, yMouse;
 
@@ -66,6 +68,7 @@ public class Main extends JPanel {
 		image = img.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
 		player = new Hero();
 		map = new Darkness();
+		pause = new Pause();
 		player.setX(map.getStartingX());
 		player.setY(map.getStartingY());
 
@@ -152,6 +155,13 @@ public class Main extends JPanel {
 				player.inventory.setInventory();
 			}
 		});
+		
+		createKeyBinding("P", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				isPaused = !isPaused;
+			}
+		});
 		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false),
 				KeyEvent.VK_ESCAPE + "Pressed");
 		this.getActionMap().put(KeyEvent.VK_ESCAPE + "Pressed", escapeAction());
@@ -209,7 +219,9 @@ public class Main extends JPanel {
 		player.draw(g, xoffset, yoffset);
 		g.setColor(new Color(0.0f, 1.0f, 1.0f));
 		g.drawString(String.format("%.2f", fps), 30, 30);
-
+		if(isPaused){
+			pause.draw(g);
+		}
 		Toolkit.getDefaultToolkit().sync();
 	}
 
