@@ -53,6 +53,7 @@ public abstract class Enemy extends Entity{
 		}
 	}
 
+	// Looks if enemies is in range for attack, if yes, attack, otherwise move closer
 	public void updateActive(float deltaTime, Map map, Player player){
 		super.update(deltaTime, map);
 		if(this.state == Enemy.IDLE){
