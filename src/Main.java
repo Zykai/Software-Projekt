@@ -34,6 +34,7 @@ import java.io.*;
 import javax.imageio.*;
 
 import Player.Hero;
+import Player.Mage;
 import Player.Player;
 import Constants.Constants;
 import DungeonGenerator.RoomTree;
@@ -64,7 +65,8 @@ public class Main extends JPanel {
 			System.out.println(e.getMessage());
 		}
 		image = img.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
-		player = new Hero();
+		//player = getCharacter();
+		player = new Mage();
 		map = new Darkness();
 		player.setX(map.getStartingX());
 		player.setY(map.getStartingY());
@@ -233,6 +235,14 @@ public class Main extends JPanel {
 		FrameManager.currentScreen = FrameManager.Screen.Menu;
 		FrameManager.run();
 	}
+	/*public Player getCharacter()
+	{
+		return Creator.getPlayer();
+	}
+	public void setCharacter(Player p)
+	{
+		player = p;
+	}*/
 }
  
 

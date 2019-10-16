@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Player.Hero;
+
 public class Menu extends JPanel{
 	private Main main;
 	private Creator creator;
