@@ -15,7 +15,6 @@ import javax.imageio.ImageIO;
 import Constants.Constants;
 import DungeonGenerator.DungeonGenerator;
 import DungeonGenerator.Room;
-import DungeonGenerator.RoomTree;
 import Enemies.Enemy;
 import Player.Player;
 
@@ -39,11 +38,8 @@ public class Darkness extends Map {
 	
 	private double startingX, startingY;
 	
-	private int playerX, playerY;
-	
 	private Room currentRoom;
 	private ArrayList<Room> roomList;
-	private RoomTree roomTree;
 	
 	private Image randomSpace() {
 		if (rand.nextInt(5)<3) {
@@ -131,10 +127,9 @@ public class Darkness extends Map {
 		imageGrid = new Image[X_TILES][Y_TILES];
 		DungeonGenerator d = new DungeonGenerator();
 		tiles = d.generateBooleanMap(X_TILES, Y_TILES, 4);
-		roomTree = d.tree;
+		
 		roomList = d.tree.getRoomList();
 		currentRoom = d.tree.getLefternMostRoom();
-		currentRoom.visited = true;
 		this.startingX = currentRoom.cx;
 		this.startingY = currentRoom.cy;
 
@@ -187,12 +182,6 @@ public class Darkness extends Map {
 		if(this.currentRoom != null) {
 			this.currentRoom.draw(g, xoffset, yoffset);
 		}
-		// Draw Minimap
-		g.translate(1200, 0);
-		roomTree.draw(g);
-		g.setColor(Color.RED);
-		g.fillOval(playerX, playerY, 10, 10);
-		g.translate(-1200, 0);
 		super.draw(g, xoffset, yoffset);
 	}
 
@@ -201,7 +190,6 @@ public class Darkness extends Map {
 			for(Room r : this.roomList) {
 				if(r.hasPlayer(p)) {
 					this.currentRoom = r;
-					r.visited = true;
 					break;
 				}
 			}
@@ -215,8 +203,6 @@ public class Darkness extends Map {
 	}
 	
 	public void update(float deltaTime, Player p) {
-		this.playerX = (int)p.getX() / Map.TILE_SIZE;
-		this.playerY = (int)p.getY() / Map.TILE_SIZE;
 		setActiveRoom(p);
 		if(this.currentRoom != null) {
 			//Iterator<Enemy> iter = this.currentRoom.enemies.iterator();
