@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Constants.Constants;
+import Player.Mage;
 import Player.Hero;
 import Player.Player;
 import Inventory.Inventory;
@@ -29,16 +30,11 @@ public class Creator extends JPanel{
 	
 	private JFrame frame;
 	private JPanel panel, panelBg, top, mid, bottom, character, statsM, statsH;
-	private JButton exit, choseH, choseM;
-	private JLabel hero;
-	private Image hero1, backI, bgI; //bgI = background Image
-	private BufferedImage hero1B, backBI, bgIB;
-	private JLabel hp, level, speed, attack;
-	private int BUTTON_X, BUTTON_Y;
 	
 	public Creator() {
 		
 		final Creator self = this;
+
 		panelBg = new JPanel();
 		panel = new JPanel();
 		top = new JPanel();
@@ -52,10 +48,10 @@ public class Creator extends JPanel{
 		panelBg.add(panel);
 		top.setLayout(new FlowLayout());
 		mid.setLayout(new GridLayout(2,2));
-		bottom.setLayout(new GridLayout(2,1));
+		bottom.setLayout(new GridLayout(1,2));
 		panel.setLayout(new BorderLayout());
 		mid.add(character);
-		
+		/*
 		//Hintergrund
 		try {
 			bgIB = ImageIO.read(new File("res/background/char.png"));
@@ -63,12 +59,19 @@ public class Creator extends JPanel{
 		} catch (IOException e) {
 				e.printStackTrace();
 		}
-		panelBg.setOpaque(false);
+		panelBg.setOpaque(true);
+		*/
+		panel.setOpaque(false);
+		top.setOpaque(false);
+		mid.setOpaque(false);
+		bottom.setOpaque(false);
+		character.setOpaque(false);
+		statsM.setOpaque(false);
+		statsH.setOpaque(false);
 		
-		// held
-		Player p = new Hero();
-		hp = new JLabel("HP: " + Integer.toString(p.getHp()));
-		level = new JLabel("Level: " + Integer.toString(p.getLevel()));
+		//stats held
+		hp = new JLabel("HP: " + Integer.toString(h.getHp()));
+		level = new JLabel("Level: " + Integer.toString(h.getLevel()));
 		speed = new JLabel("tbd");
 		attack = new JLabel("tbd");
 		statsH.setLayout(new GridLayout(5,1));
@@ -77,7 +80,20 @@ public class Creator extends JPanel{
 		statsH.add(level);
 		statsH.add(speed);
 		statsH.add(attack);
+		mid.add(statsH);
+		statsH.setOpaque(true);
 		
+		//stats held
+		hp = new JLabel("HP: " + Integer.toString(h.getHp()));
+		level = new JLabel("Level: " + Integer.toString(h.getLevel()));
+		speed = new JLabel("tbd");
+		attack = new JLabel("tbd");
+		statsH.setLayout(new GridLayout(5,1));
+		statsH.add(new JLabel("Stats:"));
+		statsH.add(hp);
+		statsH.add(level);
+		statsH.add(speed);
+		statsH.add(attack);
 		//back Button
 		BUTTON_X = 370/2;
 		BUTTON_Y = 130/2;
@@ -90,18 +106,7 @@ public class Creator extends JPanel{
 	   		backI = backBI.getScaledInstance(BUTTON_X, BUTTON_Y, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
 				e.printStackTrace();
-			}
-		exit.setIcon(new ImageIcon(backI));
-		exit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	FrameManager.currentScreen = FrameManager.Screen.Menu;
-				FrameManager.run();
-            }
-        });
-		top.add(exit);
-		FrameManager.frame.validate();
-		
+		/*
 		//choose Hero chooseH
 		choseH = new JButton("Choose Hero");
 		choseH.setOpaque(false);
@@ -117,14 +122,12 @@ public class Creator extends JPanel{
 				FrameManager.currentScreen = FrameManager.Screen.Game;
 				FrameManager.run();
 			}
-		});
+		});*/
 		
 		
 		panel.setLayout(new BorderLayout());
 		panel.add(top, BorderLayout.NORTH);
 		panel.add(bottom, BorderLayout.SOUTH);
-		panel.add(mid, BorderLayout.EAST);
-		
 	}
 	public void paint(Graphics g)
 	{
@@ -132,7 +135,5 @@ public class Creator extends JPanel{
 		super.paint(g);
 		g.drawImage(bgI, 0, 0, null);
 	}
-	public void draw(Graphics g){
-		
 	}
 }
