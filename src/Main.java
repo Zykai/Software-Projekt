@@ -198,10 +198,12 @@ public class Main extends JPanel {
 	}
 	
 	public void updateGame(float deltaTime) {
-		// update Spielerposition, animationen
-		player.update(deltaTime, map);
-		// update enemies etc...
-		map.update(deltaTime, player);
+		if(!isPaused){
+			// update Spielerposition, animationen
+			player.update(deltaTime, map);
+			// update enemies etc...
+			map.update(deltaTime, player);
+		}
 	}
 
 	@Override

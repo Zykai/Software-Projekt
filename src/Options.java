@@ -48,12 +48,12 @@ public class Options extends JPanel{
 				e.printStackTrace();
 			}
 		panelBg.setOpaque(false);
-		
+		panel.setOpaque(false);
 		//back Button
 		BUTTON_X = 370/2;
 		BUTTON_Y = 130/2;
 		backM = new JButton();
-		backM.setOpaque(true);
+		backM.setOpaque(false);
 		backM.setBorder(BorderFactory.createEmptyBorder());
 		backM.setBounds((Constants.SCREEN_X - BUTTON_X) / 2, (Constants.SCREEN_Y - BUTTON_Y)/ 2, BUTTON_X, BUTTON_Y);
 		try {
@@ -74,10 +74,10 @@ public class Options extends JPanel{
 		panel.add(tbd);
 		FrameManager.frame.validate();
 	}
-	public void paint(Graphics g)
+	public void paintComponent(Graphics g)
 	{
 		   
-		super.paint(g);
+		super.paintComponent(g);
 		g.drawImage(bgI, 0, 0, null);
 	}
 	
