@@ -1,5 +1,7 @@
 package Entity;
 
+import java.awt.Graphics;
+
 import Enemies.Enemy;
 import Enemies.Imp;
 import Maps.Map;
@@ -168,5 +170,12 @@ public abstract class Entity {
 	
 	public void setY(double y) {
 		this.yPosition = y;
+	}
+	public void draw(Graphics g, int xoffset, int yoffset){
+		if(this.direction>0) {
+			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration),(int) this.xPosition + xoffset, (int) this.yPosition + yoffset, (int)this.width, (int)this.height, null);	
+		} else {
+			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), xoffset + (int) this.xPosition + (int)this.width, (int)this.yPosition + yoffset, (int)-this.width, (int)this.height, null);
+		}
 	}
 }
