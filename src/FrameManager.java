@@ -18,11 +18,13 @@ public class FrameManager {
         // new Thread(new Runnable(){
         // @Override
         // public void run() {
+    	//lösche alten Screen
         if (current != null) {
             System.out.println("Deleted old window");
             frame.remove(current);
             frame.validate();
         }
+        //aktualisiere neuen Screen
         switch (currentScreen) {
         case Menu:
             current = new Menu(frame, new Main());

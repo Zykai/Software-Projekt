@@ -130,7 +130,7 @@ public class Darkness extends Map {
 		
 		imageGrid = new Image[X_TILES][Y_TILES];
 		DungeonGenerator d = new DungeonGenerator();
-		tiles = d.generateBooleanMap(X_TILES, Y_TILES, 4);
+		tiles = d.generateBooleanMap(X_TILES, Y_TILES, 5);
 		roomTree = d.tree;
 		roomList = d.tree.getRoomList();
 		currentRoom = d.tree.getLefternMostRoom();
@@ -196,6 +196,7 @@ public class Darkness extends Map {
 		super.draw(g, xoffset, yoffset);
 	}
 
+	// Checks in which room the player currently is
 	private void setActiveRoom(Player p) {
 		if(currentRoom == null) {
 			for(Room r : this.roomList) {
@@ -218,6 +219,7 @@ public class Darkness extends Map {
 		this.playerX = (int)p.getX() / Map.TILE_SIZE;
 		this.playerY = (int)p.getY() / Map.TILE_SIZE;
 		setActiveRoom(p);
+		// Adds enemies in vision range to active enemies
 		if(this.currentRoom != null) {
 			//Iterator<Enemy> iter = this.currentRoom.enemies.iterator();
 			ArrayList<Enemy> current = currentRoom.enemies;
@@ -261,12 +263,13 @@ public class Darkness extends Map {
 		return true;
 	}
 	
+	// Collission detection with wall
 	public boolean isCorrectPosition(double x, double y, double width, double height) {
 		if(!super.isCorrectPosition(x, y, width)) {
 			return false;
 		}
-		if(this.tiles[(int) (x+0.25*width) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 || this.tiles[(int) ((x+0.75*width)) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 
-				|| this.tiles[(int) (x+0.25*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+0.75*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 ) {
+		if(this.tiles[(int) (x+0.5*width) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+0.25*width) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 || this.tiles[(int) ((x+0.75*width)) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 
+				|| this.tiles[(int) (x+0.5*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+0.25*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+0.75*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 ) {
 			return false;
 		}
 		return true;

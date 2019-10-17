@@ -20,11 +20,8 @@ public class RoomBox {
 	}
 
 	public boolean draw(Graphics g) {
-		if(room.visited) {
-			g.fillRect(room.x, room.y, room.width, room.height);
-			return true;
-		}
-		return false;
+		g.fillRect(room.x, room.y, room.width, room.height);
+		return true;
 	}
 	
 }

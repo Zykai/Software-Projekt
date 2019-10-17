@@ -196,9 +196,11 @@ public class Main extends JPanel {
 		iMap.put(KeyStroke.getKeyStroke(button), button + "action");
 		aMap.put(button + "action", action);
 	}
-
+	
 	public void updateGame(float deltaTime) {
+		// update Spielerposition, animationen
 		player.update(deltaTime, map);
+		// update enemies etc...
 		map.update(deltaTime, player);
 	}
 

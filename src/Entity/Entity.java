@@ -47,6 +47,7 @@ public abstract class Entity {
 		this.currentAnimation = getIdle();
 	}
 	
+	// Update position and animation state
 	public void update(float deltaTime, Map map){
 		this.currentAnimationDuration += deltaTime;
 		if(state == MOVING) {

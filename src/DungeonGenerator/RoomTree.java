@@ -31,15 +31,12 @@ public class RoomTree {
 		if(this.left != null){
 			boolean l = this.left.draw(g);
 			boolean r = this.right.draw(g);
-			if(l && r){
-				if(left.leaf.width == right.leaf.width){
-					g.fillRect(left.leaf.cx-1, left.leaf.cy, 3, right.leaf.cy - left.leaf.cy);
-				} else {
-					g.fillRect(left.leaf.cx, left.leaf.cy-1, right.leaf.cx- left.leaf.cx, 3);
-				}
-				return true;
+			if(left.leaf.width == right.leaf.width){
+				g.fillRect(left.leaf.cx-1, left.leaf.cy, 3, right.leaf.cy - left.leaf.cy);
+			} else {
+				g.fillRect(left.leaf.cx, left.leaf.cy-1, right.leaf.cx- left.leaf.cx, 3);
 			}
-			return false;
+			return true;
 		} else {
 			return this.leaf.draw(g);
 		}
