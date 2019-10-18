@@ -1,5 +1,3 @@
-import java.awt.Color;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -7,7 +5,7 @@ public class FrameManager {
     public static JFrame frame;
 
     enum Screen {
-        Menu, Creator, Game, Options,
+        Menu, Creator, Game, Options, Saves
     }
 
     public static Screen currentScreen = Screen.Menu;
@@ -36,6 +34,10 @@ public class FrameManager {
             break;
         case Options:
         	current = new Options();
+        	frame.add(current);
+        	break;
+        case Saves:
+        	current = new Saves();
         	frame.add(current);
         	break;
         case Game:

@@ -1,5 +1,6 @@
 package Entity;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import Enemies.Enemy;
@@ -177,5 +178,12 @@ public abstract class Entity {
 		} else {
 			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), xoffset + (int) this.xPosition + (int)this.width, (int)this.yPosition + yoffset, (int)-this.width, (int)this.height, null);
 		}
+	}
+	
+	int x = (int)xPosition;
+	int y = (int)yPosition;
+	public void drawHealth(Graphics g, int x, int y) {
+		g.setColor(Color.red);
+		g.drawRect(x, y, 100, 20);
 	}
 }

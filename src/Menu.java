@@ -19,8 +19,8 @@ public class Menu extends JPanel{
 	
 	public static JPanel startScreenP;
 	private JButton playB, optionsB, exitB, createB;
-	private Image backgroundI, exitI, optionsI, playI; //bgI = background Image
-	private BufferedImage backgroundIB, exitBI, optionsBI, playBI; // bgIB = background Image Buffered
+	private Image backgroundI, exitI, optionsI, playI;
+	private BufferedImage backgroundIB, exitBI, optionsBI, playBI;
 	private int EXIT_BUTTON_X, EXIT_BUTTON_Y, PLAY_BUTTON_X, PLAY_BUTTON_Y, OPTIONS_BUTTON_X, OPTIONS_BUTTON_Y;
 	
 	public Menu(final JFrame frame, final Main main) {		
@@ -56,7 +56,6 @@ public class Menu extends JPanel{
 				e.printStackTrace();
 		}
 		playB.setIcon(new ImageIcon(playI));
-		
 		playB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -64,7 +63,6 @@ public class Menu extends JPanel{
 				FrameManager.run();
 			}
 		});
-		
 		
 		createB.addActionListener(new ActionListener() {
 			@Override
@@ -116,8 +114,8 @@ public class Menu extends JPanel{
 				System.exit(0);
 			}
 		});
+		
 		//Startscreen
-		startScreenP.setLayout(new GridLayout());
 		startScreenP.add(playB);
 		startScreenP.add(createB);
 		startScreenP.add(optionsB);
