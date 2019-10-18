@@ -1,7 +1,9 @@
 package Player;
 
 import java.awt.Graphics;
+import java.util.LinkedList;
 
+import Enemies.Enemy;
 import Entity.Animation;
 import Maps.Map;
 
@@ -30,6 +32,8 @@ public class Hero extends Player {
 		this.height = 100;
 		this.width = 80;
 		this.movespeed = 0.45f;
+		this.attackDamage = 15;
+		this.critChance = 20;
 		this.currentAnimation = PLAYER_IDLE[0];
 		this.currentAnimationDuration = 0.0;
 		this.currentXP = 6;
@@ -43,6 +47,13 @@ public class Hero extends Player {
 				this.currentAnimationDuration = 0.0;
 				this.currentAnimation = getIdle();
 				this.state = Hero.IDLE;
+				LinkedList<Enemy> enemies = map.getEnemyList();
+				for(int i = 0; i < enemies.size(); i++){
+					Enemy e = enemies.get(i);
+					if(this.hitEntity(e)) {
+						this.applyDamage(e, 1.0);
+					}
+				}
 			}
 		}
 	}
@@ -77,8 +88,38 @@ public class Hero extends Player {
 	protected Animation getAttack(){
 		return PLAYER_ATTACK[attackIndex++ % 3];
 	}
+
+	@Override
+	protected Animation getDie(){
+		return null;
+	}
+
+	@Override
+	public double getHitX(){
+		return xPosition+15;
+	}
+
+	@Override
+	public double getHitY(){
+		return yPosition + 15;
+	}
+
+	@Override
+	public double getHitWidth(){
+		return width-25;
+	}
+
+	@Override
+	public double getHitHeight(){
+		return height-15;
+	}
 	
 	public void draw(Graphics g, int xoffset, int yoffset) {
-		super.draw(g);
+		if(direction > 0) {
+			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), (int)xPosition + xoffset, (int) yPosition + yoffset, (int)this.width, (int)this.height, null);	
+		} else {
+			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), (int) (xPosition + xoffset + this.width), (int) yPosition + yoffset, (int)-this.width, (int)this.height, null);
+		}
+		super.draw(g, xoffset, yoffset);
 	}
 }

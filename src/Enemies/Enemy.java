@@ -12,7 +12,6 @@ import Player.Player;
 
 public abstract class Enemy extends Entity{
 	
-	private Color enemyColor;
 	protected int originalX, originalY;
 	
 	public double visionRange;
@@ -21,17 +20,16 @@ public abstract class Enemy extends Entity{
 	protected double timerEnd;
 	
 	public boolean active = false;
-	
-	private static Color backgroundColor = new Color(0.2f, 0.22f, 0.35f, 0.5f);
-	
+		
 	public Enemy(int xPos, int yPos) {
 		super();
+		this.maxHP = 10;
+		this.currentHP = 10;
 		visionRange = 300;
 		this.attackRange = 100;
 		timer = 0;
 		timerEnd = Constants.random(0, 5000);
 		movespeed = 0.35f;
-		enemyColor = new Color(10, 100, 50);
 		this.xPosition = xPos;
 		this.originalX = xPos;
 		this.yPosition = yPos;
@@ -75,11 +73,15 @@ public abstract class Enemy extends Entity{
 				this.state = Enemy.IDLE;
 				this.currentAnimationDuration = 0;
 				this.currentAnimation = getIdle();
+				if(this.hitEntity(player)){
+					this.applyDamage(player, 1.0);
+				}
 			}
 		}
 	}
 	
 	public void draw(Graphics g, int xoffset, int yoffset) {
+		super.draw(g, xoffset, yoffset);
 		if(direction < 0) {
 			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), (int)xPosition + xoffset, (int) yPosition + yoffset, (int)this.width, (int)this.height, null);	
 		} else {
