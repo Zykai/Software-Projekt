@@ -3,8 +3,7 @@ package Entity;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import Enemies.Enemy;
-import Enemies.Imp;
+import Constants.Constants;
 import Maps.Map;
 
 public abstract class Entity {
@@ -89,6 +88,8 @@ public abstract class Entity {
 	
 	protected abstract Animation getAttack();
 
+	protected abstract Animation getDie();
+
 	public void moveTo(int x, int y){
 		x -= width / 2;
 		y -= height / 2;
@@ -125,6 +126,57 @@ public abstract class Entity {
 		}
 	}
 	
+	public void applyDamage(Entity e, double mul){
+		int damage = (int) (this.attackDamage * mul * (Constants.random(0,100) > this.critChance ? 1.5 : 1.0));
+		e.currentHP -= damage;
+	}
+
+	private boolean interSectPoint(Entity e, double x, double y){
+		double ex = e.getHitX();
+		double ey = e.getHitY();
+		double ew = e.getHitWidth();
+		double eh = e.getHitHeight();
+		if(ex < x && x < ex + ew &&  y > ey && y < ey + eh){
+			return true;
+		}
+		return false;
+	}
+
+	public boolean intersectEntity(Entity e){
+		double ex = this.getHitX();
+		double ey = this.getHitY();
+		double ew = this.getHitWidth();
+		double eh = this.getHitHeight();
+		return this.interSectPoint(e, ex, ey) || this.interSectPoint(e, ex+ew, ey) || this.interSectPoint(e, ex, ey+eh) || this.interSectPoint(e, ex+ew, ey+eh);
+	}
+
+	public boolean hitEntity(Entity e){
+		if(this.intersectEntity(e) || e.intersectEntity(this)){
+			// Check if facing towards the other entity
+			if(this.direction > 0){
+				return this.getHitX() + this.getHitWidth() / 2 <= e.getHitX() + e.getHitWidth() / 2;
+			} else {
+				return this.getHitX() + this.getHitWidth() / 2 >= e.getHitX() + e.getHitWidth() / 2;	
+			}
+		} 
+		return false;
+	}
+
+	public void setDead(){
+		this.currentAnimation = getDie();
+		this.currentAnimationDuration = 0;
+		this.state = Entity.IDLE;
+	}
+
+	public boolean updateDead(float deltaTime){
+		if(this.currentAnimation.isFinished(this.currentAnimationDuration)){
+			return true;
+		} else {
+			this.currentAnimationDuration += deltaTime;
+			return false;
+		}
+	}
+
 	public int getHp() {
 		return currentHP;
 	}
@@ -172,12 +224,25 @@ public abstract class Entity {
 	public void setY(double y) {
 		this.yPosition = y;
 	}
+	
 	public void draw(Graphics g, int xoffset, int yoffset){
-		if(this.direction>0) {
-			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration),(int) this.xPosition + xoffset, (int) this.yPosition + yoffset, (int)this.width, (int)this.height, null);	
-		} else {
-			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), xoffset + (int) this.xPosition + (int)this.width, (int)this.yPosition + yoffset, (int)-this.width, (int)this.height, null);
-		}
+		g.drawRect((int)(this.getHitX() + xoffset), (int)(this.getHitY() + yoffset),(int) this.getHitWidth(), (int)this.getHitHeight());
+	}
+
+	public double getHitX(){
+		return xPosition;
+	}
+
+	public double getHitY(){
+		return yPosition;
+	}
+
+	public double getHitWidth(){
+		return width;
+	}
+
+	public double getHitHeight(){
+		return height;
 	}
 	
 	int x = (int)xPosition;

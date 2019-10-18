@@ -61,7 +61,14 @@ public class Main extends JPanel {
 		super();
 		setBackground(Color.BLUE);
 		BufferedImage img = null;
-		player = new Mage();
+		try {
+			img = ImageIO.read(new File("res/held.png"));
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		image = img.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+		//player = getCharacter();
+		player = new Hero();
 		map = new Darkness();
 		pause = new Pause();
 		player.setX(map.getStartingX());

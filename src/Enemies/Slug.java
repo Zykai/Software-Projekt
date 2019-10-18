@@ -7,6 +7,7 @@ public class Slug extends Enemy {
 	private static Animation SLUG_MOVE;
 	private static Animation SLUG_IDLE; 
 	private static Animation SLUG_ATTACK[]; 
+	private static Animation SLUG_DIE;
 	
 	static {
 		SLUG_IDLE = new Animation("res/monster/Slug/Individual Sprites/slug-idle-0", 4, 600);
@@ -15,6 +16,7 @@ public class Slug extends Enemy {
 		SLUG_ATTACK[0] = new Animation("res/monster/Slug/Individual Sprites/slug-attack1-0", 6, 600);
 		// Second attack is missing some frames due to inconsistent naming
 		SLUG_ATTACK[1] = new Animation("res/monster/Slug/Individual Sprites/slug-attack2-0", 10, 600);
+		SLUG_DIE = new Animation("res/monster/Slug/Individual Sprites/slug-die-0", 6, 650);
 	}
 	
 	public Slug(int xPos, int yPos) {
@@ -36,6 +38,20 @@ public class Slug extends Enemy {
 	@Override
 	protected Animation getAttack() {
 		return SLUG_ATTACK[(int)Math.round(Math.random())];
+	}
+
+	@Override
+	protected Animation getDie() {
+		return SLUG_DIE;
+	}
+
+	@Override
+	public double getHitX(){
+		if(this.direction>0){
+			return xPosition;
+		} else {
+			return xPosition+10;
+		}
 	}
 
 }
