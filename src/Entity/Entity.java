@@ -172,10 +172,27 @@ public abstract class Entity {
 		this.yPosition = y;
 	}
 	public void draw(Graphics g, int xoffset, int yoffset){
-		if(this.direction>0) {
-			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration),(int) this.xPosition + xoffset, (int) this.yPosition + yoffset, (int)this.width, (int)this.height, null);	
-		} else {
-			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), xoffset + (int) this.xPosition + (int)this.width, (int)this.yPosition + yoffset, (int)-this.width, (int)this.height, null);
-		}
+		g.drawRect((int)(this.getHitX() + xoffset), (int)(this.getHitY() + yoffset),(int) this.getHitWidth(), (int)this.getHitHeight());
+		// if(this.direction>0) {
+		// 	g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration),(int) this.xPosition + xoffset, (int) this.yPosition + yoffset, (int)this.width, (int)this.height, null);	
+		// } else {
+		// 	g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), xoffset + (int) this.xPosition + (int)this.width, (int)this.yPosition + yoffset, (int)-this.width, (int)this.height, null);
+		// }
+	}
+
+	public double getHitX(){
+		return xPosition;
+	}
+
+	public double getHitY(){
+		return yPosition;
+	}
+
+	public double getHitWidth(){
+		return width;
+	}
+
+	public double getHitHeight(){
+		return height;
 	}
 }

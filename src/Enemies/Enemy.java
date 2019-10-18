@@ -80,6 +80,7 @@ public abstract class Enemy extends Entity{
 	}
 	
 	public void draw(Graphics g, int xoffset, int yoffset) {
+		super.draw(g, xoffset, yoffset);
 		if(direction < 0) {
 			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), (int)xPosition + xoffset, (int) yPosition + yoffset, (int)this.width, (int)this.height, null);	
 		} else {

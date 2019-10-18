@@ -79,11 +79,33 @@ public class Mage extends Player {
 	}
 	
 	public void draw(Graphics g, int xoffset, int yoffset) {
-		if(this.direction>0) {
-			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration),(int) this.xPosition + xoffset, (int) this.yPosition + yoffset, (int)this.width, (int)this.height, null);	
+		if(direction < 0) {
+			//g.fillRect((int) (xPosition + xoffset), (int) yPosition + yoffset, (int)this.width, (int)this.height);
+			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), (int)(xPosition + xoffset), (int) yPosition + yoffset, (int)this.width, (int)this.height, null);	
 		} else {
-			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), xoffset + (int) this.xPosition + (int)this.width, (int)this.yPosition + yoffset, (int)-this.width, (int)this.height, null);
+			//g.fillRect((int) (xPosition + xoffset), (int) yPosition + yoffset, (int)this.width, (int)this.height);
+			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), (int) (xPosition + xoffset + this.width * 1.5), (int) yPosition + yoffset, (int)-this.width, (int)this.height, null);
 		}
-		super.draw(g);
+		super.draw(g, xoffset, yoffset);
+	}
+
+	@Override
+	public double getHitX(){
+		return xPosition + 30;
+	}
+
+	@Override
+	public double getHitY(){
+		return yPosition + 30;
+	}
+
+	@Override
+	public double getHitWidth(){
+		return width - 20;
+	}
+
+	@Override
+	public double getHitHeight(){
+		return height - 30;
 	}
 }

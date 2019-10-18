@@ -35,4 +35,24 @@ public class Phantom extends Enemy {
 		return PHANTOM_ATTACK;
 	}
 
+	@Override
+	public double getHitX(){
+		return xPosition+5;
+	}
+
+	@Override
+	public double getHitY(){
+		return yPosition + 40;
+	}
+
+	@Override
+	public double getHitWidth(){
+		return width - 30;
+	}
+
+	@Override
+	public double getHitHeight(){
+		return height - 40;
+	}
+
 }

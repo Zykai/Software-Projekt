@@ -35,4 +35,18 @@ public class Ghoul extends Enemy {
 		return GHOUL_ATTACK;
 	}
 
+	@Override
+	public double getHitX(){
+		if(this.direction>0){
+			return xPosition;
+		} else {
+			return xPosition+30;
+		}
+	}
+
+	@Override
+	public double getHitWidth(){
+		return width - 30;
+	}
+
 }

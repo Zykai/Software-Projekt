@@ -36,4 +36,28 @@ public class Undead extends Enemy {
 		return UNDEAD_ATTACK;
 	}
 
+	@Override
+	public double getHitX(){
+		if(this.direction>0){
+			return xPosition;
+		} else {
+			return xPosition+30;
+		}
+	}
+
+	@Override
+	public double getHitY(){
+		return yPosition + 10;
+	}
+
+	@Override
+	public double getHitWidth(){
+		return width - 40;
+	}
+
+	@Override
+	public double getHitHeight(){
+		return height;
+	}
+
 }

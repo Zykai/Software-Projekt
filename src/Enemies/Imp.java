@@ -34,4 +34,25 @@ public class Imp extends Enemy {
 	protected Animation getAttack() {
 		return IMP_ATTACK;
 	}
+
+	@Override
+	public double getHitX(){
+		return xPosition+5;
+	}
+
+	@Override
+	public double getHitY(){
+		return yPosition+5;
+	}
+
+	@Override
+	public double getHitWidth(){
+		return width-10;
+	}
+
+	@Override
+	public double getHitHeight(){
+		return height-10;
+	}
+
 }

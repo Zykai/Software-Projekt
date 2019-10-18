@@ -79,6 +79,11 @@ public class Hero extends Player {
 	}
 	
 	public void draw(Graphics g, int xoffset, int yoffset) {
+		if(direction > 0) {
+			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), (int)xPosition + xoffset, (int) yPosition + yoffset, (int)this.width, (int)this.height, null);	
+		} else {
+			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), (int) (xPosition + xoffset + this.width), (int) yPosition + yoffset, (int)-this.width, (int)this.height, null);
+		}
 		super.draw(g);
 	}
 }

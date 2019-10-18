@@ -35,4 +35,24 @@ public class Reaper extends Enemy {
 		return REAPER_ATTACK;
 	}
 
+	@Override
+	public double getHitX(){
+		return xPosition+10;
+	}
+
+	@Override
+	public double getHitY(){
+		return yPosition + 15;
+	}
+
+	@Override
+	public double getHitWidth(){
+		return width-15;
+	}
+
+	@Override
+	public double getHitHeight(){
+		return height-40;
+	}
+
 }

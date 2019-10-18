@@ -38,4 +38,13 @@ public class Slug extends Enemy {
 		return SLUG_ATTACK[(int)Math.round(Math.random())];
 	}
 
+	@Override
+	public double getHitX(){
+		if(this.direction>0){
+			return xPosition;
+		} else {
+			return xPosition+10;
+		}
+	}
+
 }
