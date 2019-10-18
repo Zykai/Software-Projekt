@@ -59,14 +59,7 @@ public class Main extends JPanel {
 
 	public Main() {
 		super();
-		setBackground(Color.BLUE);
-		BufferedImage img = null;
-		try {
-			img = ImageIO.read(new File("res/held.png"));
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-		image = img.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+		setBackground(Color.BLUE);		
 		//player = getCharacter();
 		player = new Hero();
 		map = new Darkness();
@@ -233,7 +226,7 @@ public class Main extends JPanel {
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		Main main = new Main();
+		//Main main = new Main();
 		// frame.add(main);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(20, 20, Constants.SCREEN_X, Constants.SCREEN_Y);
