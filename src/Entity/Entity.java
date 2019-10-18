@@ -1,5 +1,6 @@
 package Entity;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import Constants.Constants;
@@ -242,5 +243,12 @@ public abstract class Entity {
 
 	public double getHitHeight(){
 		return height;
+	}
+	
+	int x = (int)xPosition;
+	int y = (int)yPosition;
+	public void drawHealth(Graphics g, int x, int y) {
+		g.setColor(Color.red);
+		g.drawRect(x, y, 100, 20);
 	}
 }
