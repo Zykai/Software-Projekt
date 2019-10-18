@@ -68,7 +68,7 @@ public class Main extends JPanel {
 		}
 		image = img.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
 		//player = getCharacter();
-		player = new Mage();
+		player = new Hero();
 		map = new Darkness();
 		pause = new Pause();
 		player.setX(map.getStartingX());

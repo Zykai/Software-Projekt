@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -187,6 +186,10 @@ public class Darkness extends Map {
 		if(this.currentRoom != null) {
 			this.currentRoom.draw(g, xoffset, yoffset);
 		}
+		for(int i = 0; i < this.dyingEnemies.size(); i++){
+			Enemy current = this.dyingEnemies.get(i);
+			current.draw(g, xoffset, yoffset);
+		}
 		// Draw Minimap
 		g.translate(1200, 0);
 		roomTree.draw(g);
@@ -237,8 +240,24 @@ public class Darkness extends Map {
 				}
 			}
 		}
-		for(Enemy e : this.activeEnemies){
-			e.updateActive(deltaTime, this, p);
+
+		for(int i = 0; i < this.activeEnemies.size(); i++){
+			Enemy current = this.activeEnemies.get(i);
+			if (current.currentHP <= 0) {
+				this.activeEnemies.remove(current);
+				current.setDead();
+				this.dyingEnemies.add(current);
+				i--;
+		    } else {
+				current.updateActive(deltaTime, this, p);
+			}
+		}
+		for(int i = 0; i < this.dyingEnemies.size(); i++){
+			Enemy current = this.dyingEnemies.get(i);
+			if (current.updateDead(deltaTime)) {
+				this.dyingEnemies.remove(current);
+				i--;
+		    }
 		}
 	}
 	

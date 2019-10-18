@@ -35,6 +35,7 @@ public abstract class Player extends Entity{
 
 	public void draw(Graphics g, int xoffset, int yoffset){
 		super.draw(g, xoffset, yoffset);
+		inventory.draw(g, this);
 	}
 
 	public Color getPlayerColor() {

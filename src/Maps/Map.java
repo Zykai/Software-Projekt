@@ -1,8 +1,6 @@
 package Maps;
 
 import java.awt.Graphics;
-import java.awt.List;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 import Enemies.Enemy;
@@ -13,11 +11,13 @@ public abstract class Map {
 	public static int TILE_SIZE = 32;
 	
 	protected LinkedList<Enemy> activeEnemies;
+	protected LinkedList<Enemy> dyingEnemies;
 	protected int xSize, ySize;
 	protected boolean[][] solidGrid;
 	
 	public Map(){
 		activeEnemies = new LinkedList<Enemy>();
+		dyingEnemies = new LinkedList<Enemy>();
 	}
 	public void draw(Graphics g, int xoffset, int yoffset) {
 		for(int i = 0; i < activeEnemies.size(); i++){

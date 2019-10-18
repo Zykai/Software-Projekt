@@ -7,11 +7,13 @@ public class Undead extends Enemy {
 	private static Animation UNDEAD_IDLE;
 	private static Animation UNDEAD_MOVE; 
 	private static Animation UNDEAD_ATTACK; 
-	
+	private static Animation UNDEAD_DIE; 
+
 	static {
 		UNDEAD_IDLE = new Animation("res/monster/Undead Warrior/Individual Sprites/undead-warrior-idle-0", 4, 600);
 		UNDEAD_MOVE = new Animation("res/monster/Undead Warrior/Individual Sprites/undead-warrior-run-0", 6, 600);
 		UNDEAD_ATTACK = new Animation("res/monster/Undead Warrior/Individual Sprites/undead-warrior-attack-0", 5, 600);
+		UNDEAD_DIE = new Animation("res/monster/Undead Warrior/Individual Sprites/undead-warrior-die-0", 7, 700);
 	}
 	
 	public Undead(int xPos, int yPos) {
@@ -34,6 +36,11 @@ public class Undead extends Enemy {
 	@Override
 	protected Animation getAttack() {
 		return UNDEAD_ATTACK;
+	}
+
+	@Override
+	protected Animation getDie() {
+		return UNDEAD_DIE;
 	}
 
 	@Override
