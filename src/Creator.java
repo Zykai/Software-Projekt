@@ -29,15 +29,15 @@ import Inventory.Inventory;
 public class Creator extends JPanel{
 	
 	private JFrame frame;
-	private JPanel panel, panelBg, top, mid, bottom, character, statsM, statsH;
-	private JButton exit, choseH, choseM, heroImg, mageImg;
-	private JLabel hero, mage;
+	private JPanel panel, panelBg, top, mid, bottom, statsM, statsH;
+	private JButton exit, heroImg, mageImg;
 	private Image heroI, mageI, backI, bgI; //bgI = background Image
 	private BufferedImage heroBI, mageBI, backBI, bgIB;
-	private JLabel hp, level, speed, attack;
+	private JLabel hpH, hpM, levelH, levelM, speedH, speedM, attackH, attackM, info;
 	private int BUTTON_X, BUTTON_Y;
 	private Player player;
 	private Player h, m;
+	private  int character;
 	
 	public Creator() {
 		
@@ -50,7 +50,6 @@ public class Creator extends JPanel{
 		top = new JPanel();
 		mid = new JPanel();
 		bottom = new JPanel();
-		character = new JPanel();
 		exit = new JButton();
 		statsM = new JPanel();
 		statsH = new JPanel();
@@ -60,8 +59,7 @@ public class Creator extends JPanel{
 		mid.setLayout(new GridLayout(2,2));
 		bottom.setLayout(new GridLayout(1,2));
 		panel.setLayout(new BorderLayout());
-		mid.add(character);
-		/*
+		
 		//Hintergrund
 		try {
 			bgIB = ImageIO.read(new File("res/background/char.png"));
@@ -70,44 +68,39 @@ public class Creator extends JPanel{
 				e.printStackTrace();
 		}
 		panelBg.setOpaque(true);
-		*/
+		
 		panel.setOpaque(false);
 		top.setOpaque(false);
 		mid.setOpaque(false);
 		bottom.setOpaque(false);
-		character.setOpaque(false);
 		statsM.setOpaque(false);
 		statsH.setOpaque(false);
 		
 		//stats held
-		hp = new JLabel("HP: " + Integer.toString(h.getHp()));
-		level = new JLabel("Level: " + Integer.toString(h.getLevel()));
-		speed = new JLabel("tbd");
-		attack = new JLabel("tbd");
+		hpH = new JLabel("HP: " + Integer.toString(h.getHp()));
+		levelH = new JLabel("Level: " + Integer.toString(h.getLevel()));
+		speedH = new JLabel("tbd");
+		attackH = new JLabel("tbd");
 		statsH.setLayout(new GridLayout(5,1));
 		statsH.add(new JLabel("Stats:"));
-		statsH.add(hp);
-		statsH.add(level);
-		statsH.add(speed);
-		statsH.add(attack);
-		mid.add(statsH);
+		statsH.add(hpH);
+		statsH.add(levelH);
+		statsH.add(speedH);
+		statsH.add(attackH);
 		statsH.setOpaque(true);
 		
-		//stats held
-		hp = new JLabel("HP: " + Integer.toString(h.getHp()));
-		level = new JLabel("Level: " + Integer.toString(h.getLevel()));
-		speed = new JLabel("tbd");
-		attack = new JLabel("tbd");
-		statsH.setLayout(new GridLayout(5,1));
-		statsH.add(new JLabel("Stats:"));
-		statsH.add(hp);
-		statsH.add(level);
-		statsH.add(speed);
-		statsH.add(attack);
-		mid.add(statsH);
+		//stats mage
+		hpM = new JLabel("HP: " + Integer.toString(m.getHp()));
+		levelM = new JLabel("Level: " + Integer.toString(m.getLevel()));
+		speedM = new JLabel("tbd");
+		attackM = new JLabel("tbd");
+		statsM.setLayout(new GridLayout(5,1));
+		statsM.add(new JLabel("Stats:"));
+		statsM.add(hpM);
+		statsM.add(levelM);
+		statsM.add(speedM);
+		statsM.add(attackM);
 		statsH.setOpaque(true);
-		
-		
 		
 		//back Button
 		BUTTON_X = 370/2;
@@ -150,13 +143,11 @@ public class Creator extends JPanel{
 		heroImg.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setPlayer(h);
+				setCharacter(1);
 				FrameManager.currentScreen = FrameManager.Screen.Game;
 				FrameManager.run();
 			}
 		});
-		mid.add(heroImg);
-		mid.add(statsH);
 		//bild mage
 			mageImg = new JButton();
 			mageImg.setOpaque(false);
@@ -174,47 +165,21 @@ public class Creator extends JPanel{
 			mageImg.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					setCharacter(2);
 					FrameManager.currentScreen = FrameManager.Screen.Game;
 					FrameManager.run();
 				}
 			});
+			
+			mid.add(heroImg);
+			
 			mid.add(mageImg);
-		/*
-		//choose Hero chooseH
-		choseH = new JButton("Choose Hero");
-		choseH.setOpaque(false);
-		choseH.setContentAreaFilled(false);
-		choseH.setBorderPainted(false);
-		choseH.setBorder(BorderFactory.createEmptyBorder());
-		choseH.setBounds((Constants.SCREEN_X - BUTTON_X) / 2, (Constants.SCREEN_Y - BUTTON_Y)/ 2, BUTTON_X, BUTTON_Y);
-		bottom.add(choseH);
-		chosenPlayer = 0;
-		FrameManager.frame.validate();
-		choseH.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				FrameManager.currentScreen = FrameManager.Screen.Game;
-				FrameManager.run();
-			}
-		});
+			mid.add(statsH);
+			mid.add(statsM);
 		
-		//choose Mage chooseM
-		choseM = new JButton("Choose Mage");
-		choseM.setOpaque(false);
-		choseM.setContentAreaFilled(true);
-		choseM.setBorderPainted(false);
-		choseM.setOpaque(false);
-		choseM.setBounds((Constants.SCREEN_X - BUTTON_X) / 2, (Constants.SCREEN_Y - BUTTON_Y)/ 2, BUTTON_X, BUTTON_Y);
-		bottom.add(choseM);
-		chosenPlayer = 1;
-		FrameManager.frame.validate();
-		choseM.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				FrameManager.currentScreen = FrameManager.Screen.Game;
-				FrameManager.run();
-				}
-			}); */
+		//anweisungen
+		info = new JLabel(" Please Click on the Character you would like to play with");
+		
 		bottom.setOpaque(false);
 		
 		panel.setLayout(new BorderLayout());
@@ -223,18 +188,23 @@ public class Creator extends JPanel{
 		panel.add(mid, BorderLayout.CENTER);
 		updateUI();
 	}
-	public void paint(Graphics g)
+	public void paintComponent(Graphics g)
 	{
-		   
-		super.paint(g);
+		super.paintComponent(g);
 		g.drawImage(bgI, 0, 0, null);
 	}
-	public Player getPlayer()
+	public void draw(Graphics g)
 	{
-		return player;
+		g.setColor(Inventory.textColor);
+		g.setFont(Inventory.font);
+		g.drawString("Please click on the character you would like to play with", 40, 500);
 	}
-	public void setPlayer(Player p)
+	public int getCharacter()
 	{
-		player = p;
+		return character;
+	}
+	public void setCharacter(int n)
+	{
+		character = n;
 	}
 }
