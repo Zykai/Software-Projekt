@@ -1,47 +1,31 @@
 import java.awt.Color;
-import java.awt.Container;
-import java.awt.Desktop.Action;
-import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.awt.image.BufferedImage;
 
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 //from   w ww  .j  a v a  2  s  .c  o m
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+import Constants.Constants;
 import Maps.Darkness;
 import Maps.Map;
-import Maps.TestMap;
-
-import java.awt.image.*;
-import java.io.*;
-import javax.imageio.*;
-
 import Player.Hero;
 import Player.Mage;
 import Player.Player;
-import Constants.Constants;
-import DungeonGenerator.RoomTree;
-import Enemies.Enemy;
-
-import java.awt.Font;
-import java.awt.Frame;
 
 // https://docs.oracle.com/javase/tutorial/2d/geometry/primitives.html
 
@@ -52,22 +36,18 @@ public class Main extends JPanel {
 	private Image image;
 	private Player player;
 	private Map map;
+	private Pause pause;
+	private boolean isPaused;
 
 	private int xMouse, yMouse;
 
 	public Main() {
 		super();
-		setBackground(Color.BLUE);
-		BufferedImage img = null;
-		try {
-			img = ImageIO.read(new File("res/held.png"));
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-		image = img.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+		setBackground(Color.BLUE);		
 		//player = getCharacter();
 		player = new Mage();
 		map = new Darkness();
+		pause = new Pause();
 		player.setX(map.getStartingX());
 		player.setY(map.getStartingY());
 
@@ -88,7 +68,7 @@ public class Main extends JPanel {
 				if (player.inventory.isVisible()) {
 					player.inventory.endDrag(e.getX(), e.getY(), player);
 				} else {
-					player.moveDif(e.getX() - Constants.SCREEN_X / 2, e.getY() - Constants.SCREEN_Y / 2);
+					player.moveDif(e.getX() - Constants.SCREEN_X / 2, e.getY() - Constants.SCREEN_Y / 2, true);
 				}
 			}
 
@@ -113,8 +93,8 @@ public class Main extends JPanel {
 				if (player.inventory.isVisible()) {
 					player.inventory.hover(e.getX(), e.getY());
 				}
-				xMouse = (int) (player.getX() + e.getX() - Constants.SCREEN_X / 2);
-				yMouse = (int) (player.getY() + e.getY() - Constants.SCREEN_Y / 2);
+				xMouse = (int) (player.getX() + e.getX() - Constants.SCREEN_X / 2 + player.getWidth()/2);
+				yMouse = (int) (player.getY() + e.getY() - Constants.SCREEN_Y / 2 + player.getHeight()/2);
 			}
 
 		});
@@ -148,16 +128,17 @@ public class Main extends JPanel {
 				player.rAbility(xMouse, yMouse, map);
 			}
 		});
-		createKeyBinding("esc", new AbstractAction() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				player.qAbility(xMouse, yMouse, map);
-			}
-		});
 		createKeyBinding("I", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				player.inventory.setInventory();
+			}
+		});
+		
+		createKeyBinding("P", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				isPaused = !isPaused;
 			}
 		});
 		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false),
@@ -192,10 +173,14 @@ public class Main extends JPanel {
 		iMap.put(KeyStroke.getKeyStroke(button), button + "action");
 		aMap.put(button + "action", action);
 	}
-
+	
 	public void updateGame(float deltaTime) {
-		player.update(deltaTime, map);
-		map.update(deltaTime, player);
+		if(!isPaused){
+			// update Spielerposition, animationen
+			player.update(deltaTime, map);
+			// update enemies etc...
+			map.update(deltaTime, player);
+		}
 	}
 
 	@Override
@@ -217,13 +202,15 @@ public class Main extends JPanel {
 		player.draw(g, xoffset, yoffset);
 		g.setColor(new Color(0.0f, 1.0f, 1.0f));
 		g.drawString(String.format("%.2f", fps), 30, 30);
-
+		if(isPaused){
+			pause.draw(g);
+		}
 		Toolkit.getDefaultToolkit().sync();
 	}
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		Main main = new Main();
+		//Main main = new Main();
 		// frame.add(main);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(20, 20, Constants.SCREEN_X, Constants.SCREEN_Y);

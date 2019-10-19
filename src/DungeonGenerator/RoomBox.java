@@ -18,5 +18,10 @@ public class RoomBox {
 	public void fillGrid(int[][] grid) {
 		room.fillGrid(grid);
 	}
+
+	public boolean draw(Graphics g) {
+		g.fillRect(room.x, room.y, room.width, room.height);
+		return true;
+	}
 	
 }

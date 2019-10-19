@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -15,6 +14,7 @@ import javax.imageio.ImageIO;
 import Constants.Constants;
 import DungeonGenerator.DungeonGenerator;
 import DungeonGenerator.Room;
+import DungeonGenerator.RoomTree;
 import Enemies.Enemy;
 import Player.Player;
 
@@ -38,8 +38,11 @@ public class Darkness extends Map {
 	
 	private double startingX, startingY;
 	
+	private int playerX, playerY;
+	
 	private Room currentRoom;
 	private ArrayList<Room> roomList;
+	private RoomTree roomTree;
 	
 	private Image randomSpace() {
 		if (rand.nextInt(5)<3) {
@@ -126,10 +129,11 @@ public class Darkness extends Map {
 		
 		imageGrid = new Image[X_TILES][Y_TILES];
 		DungeonGenerator d = new DungeonGenerator();
-		tiles = d.generateBooleanMap(X_TILES, Y_TILES, 4);
-		
+		tiles = d.generateBooleanMap(X_TILES, Y_TILES, 5);
+		roomTree = d.tree;
 		roomList = d.tree.getRoomList();
 		currentRoom = d.tree.getLefternMostRoom();
+		currentRoom.visited = true;
 		this.startingX = currentRoom.cx;
 		this.startingY = currentRoom.cy;
 
@@ -182,14 +186,26 @@ public class Darkness extends Map {
 		if(this.currentRoom != null) {
 			this.currentRoom.draw(g, xoffset, yoffset);
 		}
+		for(int i = 0; i < this.dyingEnemies.size(); i++){
+			Enemy current = this.dyingEnemies.get(i);
+			current.draw(g, xoffset, yoffset);
+		}
+		// Draw Minimap
+		g.translate(1200, 0);
+		roomTree.draw(g);
+		g.setColor(Color.RED);
+		g.fillOval(playerX, playerY, 10, 10);
+		g.translate(-1200, 0);
 		super.draw(g, xoffset, yoffset);
 	}
 
+	// Checks in which room the player currently is
 	private void setActiveRoom(Player p) {
 		if(currentRoom == null) {
 			for(Room r : this.roomList) {
 				if(r.hasPlayer(p)) {
 					this.currentRoom = r;
+					r.visited = true;
 					break;
 				}
 			}
@@ -203,7 +219,10 @@ public class Darkness extends Map {
 	}
 	
 	public void update(float deltaTime, Player p) {
+		this.playerX = (int)p.getX() / Map.TILE_SIZE;
+		this.playerY = (int)p.getY() / Map.TILE_SIZE;
 		setActiveRoom(p);
+		// Adds enemies in vision range to active enemies
 		if(this.currentRoom != null) {
 			//Iterator<Enemy> iter = this.currentRoom.enemies.iterator();
 			ArrayList<Enemy> current = currentRoom.enemies;
@@ -221,8 +240,24 @@ public class Darkness extends Map {
 				}
 			}
 		}
-		for(Enemy e : this.activeEnemies){
-			e.updateActive(deltaTime, this, p);
+
+		for(int i = 0; i < this.activeEnemies.size(); i++){
+			Enemy current = this.activeEnemies.get(i);
+			if (current.currentHP <= 0) {
+				this.activeEnemies.remove(current);
+				current.setDead();
+				this.dyingEnemies.add(current);
+				i--;
+		    } else {
+				current.updateActive(deltaTime, this, p);
+			}
+		}
+		for(int i = 0; i < this.dyingEnemies.size(); i++){
+			Enemy current = this.dyingEnemies.get(i);
+			if (current.updateDead(deltaTime)) {
+				this.dyingEnemies.remove(current);
+				i--;
+		    }
 		}
 	}
 	
@@ -247,12 +282,13 @@ public class Darkness extends Map {
 		return true;
 	}
 	
+	// Collission detection with wall
 	public boolean isCorrectPosition(double x, double y, double width, double height) {
 		if(!super.isCorrectPosition(x, y, width)) {
 			return false;
 		}
-		if(this.tiles[(int) (x+0.25*width) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 || this.tiles[(int) ((x+0.75*width)) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 
-				|| this.tiles[(int) (x+0.25*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+0.75*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 ) {
+		if(this.tiles[(int) (x+0.5*width) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+0.25*width) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 || this.tiles[(int) ((x+0.75*width)) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 
+				|| this.tiles[(int) (x+0.5*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+0.25*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+0.75*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 ) {
 			return false;
 		}
 		return true;

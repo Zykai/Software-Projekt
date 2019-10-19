@@ -22,6 +22,7 @@ public class Room {
 	public ArrayList<Enemy> enemies;
 	
 	private int numberEnemies;
+	public boolean visited;
 	
 	public static int DENSITY = 35;
 	
@@ -48,6 +49,7 @@ public class Room {
 				enemies.add(g.fromType(info.type, enemyX * Map.TILE_SIZE, enemyY * Map.TILE_SIZE));
 			}
 		}
+		visited = false;
 	}
 	
 	public void draw(Graphics g, int xoffset, int yoffset) {

@@ -1,5 +1,3 @@
-import java.awt.Color;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -7,7 +5,7 @@ public class FrameManager {
     public static JFrame frame;
 
     enum Screen {
-        Menu, Creator, Game, Options,
+        Menu, Creator, Game, Options, Saves
     }
 
     public static Screen currentScreen = Screen.Menu;
@@ -18,11 +16,13 @@ public class FrameManager {
         // new Thread(new Runnable(){
         // @Override
         // public void run() {
+    	//lösche alten Screen
         if (current != null) {
             System.out.println("Deleted old window");
             frame.remove(current);
             frame.validate();
         }
+        //aktualisiere neuen Screen
         switch (currentScreen) {
         case Menu:
             current = new Menu(frame, new Main());
@@ -34,6 +34,10 @@ public class FrameManager {
             break;
         case Options:
         	current = new Options();
+        	frame.add(current);
+        	break;
+        case Saves:
+        	current = new Saves();
         	frame.add(current);
         	break;
         case Game:

@@ -117,7 +117,7 @@ public class Creator extends JPanel{
 		exit.setBorder(BorderFactory.createEmptyBorder());
 		exit.setBounds((Constants.SCREEN_X - BUTTON_X) / 2, (Constants.SCREEN_Y - BUTTON_Y)/ 2, BUTTON_X, BUTTON_Y);
 		try {
-			backBI = ImageIO.read(new File("res/exit.png"));
+			backBI = ImageIO.read(new File("res/buttons/exit.png"));
 	   		backI = backBI.getScaledInstance(BUTTON_X, BUTTON_Y, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
 				e.printStackTrace();
