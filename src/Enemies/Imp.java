@@ -20,6 +20,7 @@ public class Imp extends Enemy {
 		super(xPos, yPos);
 		this.height = 70;
 		this.width = 70;
+		floating = true;
 	}
 
 	@Override
