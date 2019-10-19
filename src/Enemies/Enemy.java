@@ -56,7 +56,7 @@ public abstract class Enemy extends Entity{
 		super.update(deltaTime, map);
 		if(this.state == Enemy.IDLE){
 			if(Constants.getDistance(this.getCenterX(), this.getCenterY(), player.getCenterX(), player.getCenterY()) > this.attackRange * this.attackRange || ((player.getCenterX() > this.getCenterX() ^ this.direction == 1) && Math.abs(player.getCenterX()-this.getCenterX()) > 20)){
-				this.moveDif((int)(player.getCenterX()-this.getCenterX()), (int)(player.getCenterY() - this.getCenterY()));
+				this.moveDif((int)(player.getCenterX()-this.getCenterX()), (int)(player.getCenterY() - this.getCenterY()), true);
 			} else {
 				this.state = Enemy.ATTACK;
 				this.currentAnimationDuration = 0;
@@ -65,7 +65,7 @@ public abstract class Enemy extends Entity{
 		}
 		if(this.state == Enemy.MOVING){
 			if(Constants.getDistance(this.xgoal, this.ygoal, player.getCenterX(), player.getCenterY()) > this.attackRange * this.attackRange){
-				this.moveDif((int)(player.getCenterX()-this.getCenterX()), (int)(player.getCenterY() - this.getCenterY()));
+				this.moveDif((int)(player.getCenterX()-this.getCenterX()), (int)(player.getCenterY() - this.getCenterY()),true);
 			}
 		}
 		if (this.state == Enemy.ATTACK){

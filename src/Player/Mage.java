@@ -49,7 +49,10 @@ public class Mage extends Player {
 	public void update(float deltaTime, Map map) {
 		super.update(deltaTime, map);
 		for(int i = 0; i < this.projectiles.size(); i++){
-			this.projectiles.get(i).update(deltaTime, map);
+			if(this.projectiles.get(i).updateProjectile(deltaTime, map)){
+				this.projectiles.remove(i);
+				i--;
+			}
 		}
 		if(this.state == Mage.ATTACK) {
 			if(this.currentAnimation.isFinished(this.currentAnimationDuration)) {
@@ -65,7 +68,9 @@ public class Mage extends Player {
 			for(int j = 0; j < enemies.size(); j++){
 				Enemy currentEnemy = enemies.get(j);
 				if(current.hitEntity(currentEnemy)){
-					this.applyDamage(currentEnemy, 1.2);
+					if(current.canDamage(currentEnemy)){
+						this.applyDamage(currentEnemy, 1.2);
+					}
 				}
 			}
 		}

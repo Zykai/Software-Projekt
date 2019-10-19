@@ -20,6 +20,7 @@ public class Reaper extends Enemy {
 		super(xPos, yPos);
 		this.height = 130;
 		this.width = 110;
+		floating = true;
 	}
 
 	@Override

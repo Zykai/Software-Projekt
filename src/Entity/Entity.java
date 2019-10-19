@@ -35,6 +35,7 @@ public abstract class Entity {
 	protected double xgoal;
 	protected double ygoal;
 	protected double prevDistance;
+	private boolean stop;
 	
 	protected int direction;
 	
@@ -44,7 +45,10 @@ public abstract class Entity {
 	
 	protected int state;
 	
+	protected boolean floating;
+
 	public Entity() {
+		floating = false;
 		this.currentAnimationDuration = 0.0;
 		this.currentAnimation = getIdle();
 	}
@@ -57,11 +61,11 @@ public abstract class Entity {
 			double newX = xPosition + xdirection * deltaTime * movespeed;
 			double newY = yPosition + ydirection * deltaTime * movespeed;
 			int moves = 0;
-			if(map.isCorrectPosition(newX, yPosition, this.width, this.height)) {
+			if(map.isCorrectPosition(newX, yPosition, this.width, this.height) || floating) {
 				xPosition = newX;
 				moves++;
 			}
-			if(map.isCorrectPosition(xPosition, newY, this.width, this.height)) {
+			if(map.isCorrectPosition(xPosition, newY, this.width, this.height) || floating) {
 				yPosition = newY;
 				moves++;
 			} 
@@ -73,7 +77,7 @@ public abstract class Entity {
 			// Distanz mit Satz des Pythagoras, Vermeiden von Wurzeln f�r bessere Performance
 			double distance = (xgoal - xPosition) * (xgoal - xPosition) + (ygoal - yPosition) * (ygoal - yPosition);
 			// Erster Teil: Erreichen des Ziels, Zweiter Teil behebt einen Fehler, wenn man sich auf den aktuellen Punkt bewegt
-			if(prevDistance < distance || Double.isNaN(distance)) {
+			if((prevDistance < distance || Double.isNaN(distance)) && stop) {
 				state = IDLE;
 				this.currentAnimation = this.getIdle();
 				return;
@@ -108,9 +112,10 @@ public abstract class Entity {
 		} else {
 			this.direction = -1;
 		}
+		stop = true;
 	}
 	
-	public void moveDif(int xdif, int ydif){
+	public void moveDif(int xdif, int ydif, boolean stop){
 		prevDistance = Math.sqrt(xdif* xdif + ydif * ydif);
 		xdirection = xdif / prevDistance;
 		ydirection = ydif / prevDistance;
@@ -124,13 +129,25 @@ public abstract class Entity {
 		} else {
 			this.direction = -1;
 		}
+		this.stop = stop;
 	}
 	
 	public void applyDamage(Entity e, double mul){
-		int damage = (int) (this.attackDamage * mul * (Constants.random(0,100) > this.critChance ? 1.5 : 1.0));
+		// Calculate damage
+		double pureDamage = (this.attackDamage * mul * (Constants.random(0,100) > this.critChance ? 1.5 : 1.0));
+		int damage = (int) pureDamage * 100 / (100 + this.armor);
+		// Apply lifesteal
+		int heal = this.lifeSteal * damage / 100;
+		this.heal(heal);
+		// Apply damage
 		e.currentHP -= damage;
 	}
 
+	public void heal(int amount){
+		this.currentHP += amount;
+		this.currentHP = Math.min(this.currentHP, this.maxHP);
+	}
+	
 	private boolean interSectPoint(Entity e, double x, double y){
 		double ex = e.getHitX();
 		double ey = e.getHitY();

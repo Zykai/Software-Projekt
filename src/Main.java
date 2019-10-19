@@ -45,7 +45,7 @@ public class Main extends JPanel {
 		super();
 		setBackground(Color.BLUE);		
 		//player = getCharacter();
-		player = new Hero();
+		player = new Mage();
 		map = new Darkness();
 		pause = new Pause();
 		player.setX(map.getStartingX());
@@ -68,7 +68,7 @@ public class Main extends JPanel {
 				if (player.inventory.isVisible()) {
 					player.inventory.endDrag(e.getX(), e.getY(), player);
 				} else {
-					player.moveDif(e.getX() - Constants.SCREEN_X / 2, e.getY() - Constants.SCREEN_Y / 2);
+					player.moveDif(e.getX() - Constants.SCREEN_X / 2, e.getY() - Constants.SCREEN_Y / 2, true);
 				}
 			}
 
