@@ -61,6 +61,7 @@ public class Hero extends Player {
 	@Override
 	public void qAbility(int xMouse, int yMouse, Map map) {
 		if(this.state != Hero.ATTACK) {
+			this.direction = xMouse < this.getHitCenterX() ? -1 : 1;
 			this.state = Hero.ATTACK;
 			this.currentAnimationDuration = 0.0;
 			this.currentAnimation = this.getAttack();

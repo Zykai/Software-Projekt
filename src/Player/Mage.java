@@ -1,6 +1,7 @@
 package Player;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import Enemies.Enemy;
@@ -19,12 +20,16 @@ public class Mage extends Player {
 		PLAYER_IDLE[1] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-hurt-0", 3, 1000);
 		PLAYER_RUN = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-move-0", 6, 750);
 		PLAYER_ATTACK = new Animation[3];
-		PLAYER_ATTACK[0] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-attack-0", 5, 500);
-		PLAYER_ATTACK[1] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-summon-0", 6, 500);
-		PLAYER_ATTACK[2] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-summon-0", 6, 500);
+		PLAYER_ATTACK[0] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-attack-0", 5, 100);
+		PLAYER_ATTACK[1] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-summon-0", 6, 100);
+		PLAYER_ATTACK[2] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-summon-0", 6, 100);
 	}
 
+	private ArrayList<MageProjectile> projectiles;
 	private int attackIndex;
+
+	private int projectileXDir;
+	private int projectileYDir;
 
 	public Mage() {
 		super();
@@ -38,21 +43,29 @@ public class Mage extends Player {
 		this.currentAnimationDuration = 0.0;
 		this.currentXP = 6;
 		this.maxXP = 10;
+		projectiles = new ArrayList<MageProjectile>();
 	}
 	
 	public void update(float deltaTime, Map map) {
 		super.update(deltaTime, map);
+		for(int i = 0; i < this.projectiles.size(); i++){
+			this.projectiles.get(i).update(deltaTime, map);
+		}
 		if(this.state == Mage.ATTACK) {
 			if(this.currentAnimation.isFinished(this.currentAnimationDuration)) {
+				projectiles.add(new MageProjectile(this.getHitCenterX(), this.getHitCenterY(), projectileXDir, projectileYDir));
 				this.currentAnimationDuration = 0.0;
 				this.currentAnimation = getIdle();
 				this.state = Mage.IDLE;
-				LinkedList<Enemy> enemies = map.getEnemyList();
-				for(int i = 0; i < enemies.size(); i++){
-					Enemy e = enemies.get(i);
-					if(this.hitEntity(e)){
-						this.applyDamage(e, 1.0);
-					}
+			}
+		}
+		LinkedList<Enemy> enemies = map.getEnemyList();
+		for(int i = 0; i < projectiles.size(); i++){
+			MageProjectile current = projectiles.get(i);
+			for(int j = 0; j < enemies.size(); j++){
+				Enemy currentEnemy = enemies.get(j);
+				if(current.hitEntity(currentEnemy)){
+					this.applyDamage(currentEnemy, 1.2);
 				}
 			}
 		}
@@ -61,6 +74,9 @@ public class Mage extends Player {
 	@Override
 	public void qAbility(int xMouse, int yMouse, Map map) {
 		if(this.state != Mage.ATTACK) {
+			projectileXDir = xMouse;
+			projectileYDir = yMouse;
+			this.direction = xMouse < this.getHitCenterX() ? -1 : 1;
 			this.state = Mage.ATTACK;
 			this.currentAnimationDuration = 0.0;
 			this.currentAnimation = this.getAttack();
@@ -99,6 +115,9 @@ public class Mage extends Player {
 			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), (int)(xPosition + xoffset), (int) yPosition + yoffset, (int)this.width, (int)this.height, null);	
 		} else {
 			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), (int) (xPosition + xoffset + this.width * 1.5), (int) yPosition + yoffset, (int)-this.width, (int)this.height, null);
+		}
+		for(int i = 0; i < this.projectiles.size(); i++){
+			projectiles.get(i).draw(g, xoffset, yoffset);
 		}
 		super.draw(g, xoffset, yoffset);
 	}

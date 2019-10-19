@@ -244,6 +244,14 @@ public abstract class Entity {
 	public double getHitHeight(){
 		return height;
 	}
+
+	public double getHitCenterX(){
+		return this.getHitX() + this.getHitWidth() / 2;
+	}
+
+	public double getHitCenterY(){
+		return this.getHitY() + this.getHitHeight() / 2;
+	}
 	
 	int x = (int)xPosition;
 	int y = (int)yPosition;
