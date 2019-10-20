@@ -45,18 +45,7 @@ public class Main extends JPanel {
 	public Main() {
 		super();
 		setCreator(new Creator());
-		setBackground(Color.BLUE);		
-		switch(getCreator().getCharacter())
-		{
-		case 0:
-			
-		case 1:
-			player = new Hero();
-			break;
-		case 2:
-			player = new Mage();
-		default:
-		}
+		setBackground(Color.BLUE);			
 		if(Constants.PLAYER == null){
 			player = new Mage();
 		} else {
