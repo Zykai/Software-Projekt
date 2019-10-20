@@ -43,6 +43,7 @@ public class Menu extends JPanel{
 		createB.setHorizontalTextPosition(JButton.CENTER);
 		createB.setVerticalTextPosition(JButton.CENTER);
 		createB.setOpaque(false);
+		createB.setContentAreaFilled(false);
 		createB.setBorder(BorderFactory.createEmptyBorder());
 		createB.setBounds((Constants.SCREEN_X - Constants.BUTTON_X) / 2, (Constants.SCREEN_Y - Constants.BUTTON_Y)/ 2, Constants.BUTTON_X, Constants.BUTTON_Y);
 		try {
@@ -67,6 +68,7 @@ public class Menu extends JPanel{
 		playB.setHorizontalTextPosition(JButton.CENTER);
 		playB.setVerticalTextPosition(JButton.CENTER);
 		playB.setOpaque(false);
+		playB.setContentAreaFilled(false);
 		playB.setBorder(BorderFactory.createEmptyBorder());
 
 		playB.setBounds((Constants.SCREEN_X - Constants.BUTTON_X) / 2, (Constants.SCREEN_Y - Constants.BUTTON_Y)/ 2,Constants.BUTTON_X, Constants.BUTTON_Y);
@@ -92,7 +94,7 @@ public class Menu extends JPanel{
 		optionsB.setHorizontalTextPosition(JButton.CENTER);
 		optionsB.setVerticalTextPosition(JButton.CENTER);
 		optionsB.setOpaque(false);
-		optionsB.setBorder(BorderFactory.createEmptyBorder());
+		optionsB.setContentAreaFilled(false);		optionsB.setBorder(BorderFactory.createEmptyBorder());
 		optionsB.setBounds((Constants.SCREEN_X - Constants.BUTTON_X) / 2, (Constants.SCREEN_Y - Constants.BUTTON_Y)/ 2,Constants.BUTTON_X, Constants.BUTTON_Y);
 		try {
 			createBI = ImageIO.read(new File("res/menu/MENU_kickCard.png"));
@@ -116,6 +118,7 @@ public class Menu extends JPanel{
 		exitB.setHorizontalTextPosition(JButton.CENTER);
 		exitB.setVerticalTextPosition(JButton.CENTER);
 		exitB.setOpaque(false);
+		exitB.setContentAreaFilled(false);
 		exitB.setBorder(BorderFactory.createEmptyBorder());
 		exitB.setBounds((Constants.SCREEN_X - Constants.BUTTON_X) / 2, (Constants.SCREEN_Y - Constants.BUTTON_Y)/ 2,Constants.BUTTON_X, Constants.BUTTON_Y);
 		try {

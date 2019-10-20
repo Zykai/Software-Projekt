@@ -23,6 +23,7 @@ import javax.swing.KeyStroke;
 import Constants.Constants;
 import Maps.Darkness;
 import Maps.Map;
+import Player.Hero;
 import Player.Mage;
 import Player.Player;
 
