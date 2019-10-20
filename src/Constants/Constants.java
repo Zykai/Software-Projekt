@@ -2,6 +2,8 @@ package Constants;
 
 import java.util.Random;
 
+import Player.Player;
+
 public class Constants {
 
 	public static Random rand = new Random();
@@ -10,6 +12,9 @@ public class Constants {
 	public static int BUTTON_X = 857/2;
 	public static int BUTTON_Y = 150/2;
 	
+	public static String safeName = "Default";
+	public static Player PLAYER = null;
+
 	public static int random(int min, int max) {
 		return rand.nextInt(max-min+1) + min;
 	}

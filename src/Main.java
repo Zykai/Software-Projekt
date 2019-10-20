@@ -45,17 +45,11 @@ public class Main extends JPanel {
 	public Main() {
 		super();
 		setCreator(new Creator());
-		setBackground(Color.BLUE);		
-		switch(getCreator().getCharacter())
-		{
-		case 0:
-			
-		case 1:
-			player = new Hero();
-			break;
-		case 2:
+		setBackground(Color.BLUE);			
+		if(Constants.PLAYER == null){
 			player = new Mage();
-		default:
+		} else {
+			player = Constants.PLAYER;
 		}
 		map = new Darkness();
 		pause = new Pause();
@@ -73,11 +67,11 @@ public class Main extends JPanel {
 						System.exit(0);
 					}
 					if(e.getX() >= 560 && e.getX() <= 760 && e.getY() >= 320 && e.getY() <= 370){//pause back to menu
+						Constants.PLAYER = null;
 						FrameManager.currentScreen = FrameManager.Screen.Menu;
 						FrameManager.run();
 					}
-				}
-					
+				}		
 			}
 
 			@Override
@@ -168,7 +162,7 @@ public class Main extends JPanel {
 		createKeyBinding("K", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				player.inventory.saveInventory("test");
+				player.inventory.saveInventory(Constants.safeName);
 			}
 		});
 		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false),

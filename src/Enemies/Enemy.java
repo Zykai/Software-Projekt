@@ -20,6 +20,7 @@ public abstract class Enemy extends Entity{
 		
 	public Enemy(int xPos, int yPos) {
 		super();
+		this.hpRegen = 1;
 		this.maxHP = 40;
 		this.currentHP = 40;
 		visionRange = 300;
@@ -32,6 +33,8 @@ public abstract class Enemy extends Entity{
 		this.originalX = xPos;
 		this.yPosition = yPos;
 		this.originalY = yPos;
+		this.attackSpeed = 1.4;
+		this.updateAttackSpeed();
 	}
 	
 	@Override

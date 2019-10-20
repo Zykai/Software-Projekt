@@ -4,8 +4,10 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import Constants.Constants;
 import Enemies.Enemy;
 import Entity.Animation;
+import Entity.Entity;
 import Maps.Map;
 
 public class Mage extends Player {
@@ -19,10 +21,9 @@ public class Mage extends Player {
 		PLAYER_IDLE[0] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-idle-0", 4, 1000);
 		PLAYER_IDLE[1] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-hurt-0", 3, 1000);
 		PLAYER_RUN = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-move-0", 6, 750);
-		PLAYER_ATTACK = new Animation[3];
+		PLAYER_ATTACK = new Animation[2];
 		PLAYER_ATTACK[0] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-attack-0", 5, 100);
 		PLAYER_ATTACK[1] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-summon-0", 6, 100);
-		PLAYER_ATTACK[2] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-summon-0", 6, 100);
 	}
 
 	private ArrayList<MageProjectile> projectiles;
@@ -37,13 +38,17 @@ public class Mage extends Player {
 		this.height = 100;
 		this.width = 80;
 		this.movespeed = 45f;
-		this.attackDamage = 10;
+		this.hpRegen = 1;
+		this.attackDamage = 0;
+		this.abilityPower = 10;
 		this.critChance = 5;
 		this.currentAnimation = PLAYER_IDLE[0];
 		this.currentAnimationDuration = 0.0;
 		this.currentXP = 6;
 		this.maxXP = 10;
 		projectiles = new ArrayList<MageProjectile>();
+		this.attackSpeed = 3.0;
+		this.updateAttackSpeed();
 	}
 	
 	public void update(float deltaTime, Map map) {
@@ -67,7 +72,7 @@ public class Mage extends Player {
 			MageProjectile current = projectiles.get(i);
 			for(int j = 0; j < enemies.size(); j++){
 				Enemy currentEnemy = enemies.get(j);
-				if(current.hitEntity(currentEnemy)){
+				if(current.hitEntityPoint(currentEnemy)){
 					if(current.canDamage(currentEnemy)){
 						this.applyDamage(currentEnemy, 1.2);
 					}
@@ -75,7 +80,20 @@ public class Mage extends Player {
 			}
 		}
 	}
+
+	public void updateAttackSpeed(){
+		PLAYER_ATTACK[0].setDuration(1000 / this.attackSpeed);
+		PLAYER_ATTACK[1].setDuration(1000 / this.attackSpeed);
+	}
 	
+	public void applyDamage(Entity e, double mul){
+		double pureDamage = ((this.attackDamage / 2 + this.abilityPower) * mul * (Constants.random(0,100) > this.critChance ? 1.5 : 1.0));
+		int damage = (int) pureDamage * 100 / (100 + this.armor);
+		int heal = this.lifeSteal * damage / 100;
+		this.heal(heal);
+		e.currentHP -= damage;
+	}
+
 	@Override
 	public void qAbility(int xMouse, int yMouse, Map map) {
 		if(this.state != Mage.ATTACK) {
@@ -107,7 +125,7 @@ public class Mage extends Player {
 
 	@Override
 	protected Animation getAttack(){
-		return PLAYER_ATTACK[attackIndex++ % 3];
+		return PLAYER_ATTACK[attackIndex++ % 2];
 	}
 
 	@Override

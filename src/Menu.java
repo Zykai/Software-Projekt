@@ -1,17 +1,20 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -20,6 +23,7 @@ import Constants.Constants;
 public class Menu extends JPanel{
 	
 	public static JPanel startScreenP;
+	private JComboBox<Object> saveFiles;
 	private JButton playB, optionsB, exitB, createB;
 	private Image backgroundI, exitI, optionsI, playI, createI;
 	private BufferedImage backgroundIB, exitBI, optionsBI, playBI, createBI;
@@ -34,7 +38,7 @@ public class Menu extends JPanel{
 				e.printStackTrace();
 		}
 		startScreenP.setOpaque(false);
-		
+		startScreenP.setLayout(new BoxLayout(startScreenP, BoxLayout.Y_AXIS));
 		//Create Button
 		
 		createB = new JButton("Create Character");
@@ -43,6 +47,7 @@ public class Menu extends JPanel{
 		createB.setHorizontalTextPosition(JButton.CENTER);
 		createB.setVerticalTextPosition(JButton.CENTER);
 		createB.setOpaque(false);
+		createB.setContentAreaFilled(false);
 		createB.setBorder(BorderFactory.createEmptyBorder());
 		createB.setBounds((Constants.SCREEN_X - Constants.BUTTON_X) / 2, (Constants.SCREEN_Y - Constants.BUTTON_Y)/ 2, Constants.BUTTON_X, Constants.BUTTON_Y);
 		try {
@@ -67,6 +72,7 @@ public class Menu extends JPanel{
 		playB.setHorizontalTextPosition(JButton.CENTER);
 		playB.setVerticalTextPosition(JButton.CENTER);
 		playB.setOpaque(false);
+		playB.setContentAreaFilled(false);
 		playB.setBorder(BorderFactory.createEmptyBorder());
 
 		playB.setBounds((Constants.SCREEN_X - Constants.BUTTON_X) / 2, (Constants.SCREEN_Y - Constants.BUTTON_Y)/ 2,Constants.BUTTON_X, Constants.BUTTON_Y);
@@ -92,7 +98,7 @@ public class Menu extends JPanel{
 		optionsB.setHorizontalTextPosition(JButton.CENTER);
 		optionsB.setVerticalTextPosition(JButton.CENTER);
 		optionsB.setOpaque(false);
-		optionsB.setBorder(BorderFactory.createEmptyBorder());
+		optionsB.setContentAreaFilled(false);		optionsB.setBorder(BorderFactory.createEmptyBorder());
 		optionsB.setBounds((Constants.SCREEN_X - Constants.BUTTON_X) / 2, (Constants.SCREEN_Y - Constants.BUTTON_Y)/ 2,Constants.BUTTON_X, Constants.BUTTON_Y);
 		try {
 			createBI = ImageIO.read(new File("res/menu/MENU_kickCard.png"));
@@ -116,6 +122,7 @@ public class Menu extends JPanel{
 		exitB.setHorizontalTextPosition(JButton.CENTER);
 		exitB.setVerticalTextPosition(JButton.CENTER);
 		exitB.setOpaque(false);
+		exitB.setContentAreaFilled(false);
 		exitB.setBorder(BorderFactory.createEmptyBorder());
 		exitB.setBounds((Constants.SCREEN_X - Constants.BUTTON_X) / 2, (Constants.SCREEN_Y - Constants.BUTTON_Y)/ 2,Constants.BUTTON_X, Constants.BUTTON_Y);
 		try {
@@ -131,9 +138,26 @@ public class Menu extends JPanel{
 			System.exit(0);
 			}
 		});
-		
+
+		ArrayList<String> saves = new ArrayList<>();
+		File saveFolder = new File("saves");
+		for(File f : saveFolder.listFiles()){
+			if(f.isDirectory()){
+				saves.add(f.getName());
+			}
+		}
+		saveFiles = new JComboBox<Object>(saves.toArray());
+		saveFiles.setEditable(true);
+		saveFiles.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Constants.safeName = saveFiles.getSelectedItem().toString();
+			}
+			
+		});
 		//Startscreen
 		add(startScreenP);
+		startScreenP.add(saveFiles);
 		startScreenP.add(playB);
 		startScreenP.add(createB);
 		startScreenP.add(optionsB);

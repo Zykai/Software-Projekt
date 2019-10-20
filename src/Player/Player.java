@@ -17,7 +17,6 @@ public abstract class Player extends Entity{
 	private Color playerColor;
 	public Inventory inventory;		
 	
-
 	public Player(){
 		playerColor = new Color(1.0f, 0.5f, 0.2f);
 		xPosition = Constants.SCREEN_X / 2 + 100;
@@ -26,10 +25,10 @@ public abstract class Player extends Entity{
 		width = 30;
 		this.currentHP = 60;
 		this.maxHP = 100;
-		inventory = new Inventory("test", this);
+		inventory = new Inventory(Constants.safeName, this);
+		this.attackSpeed = 1.5;
+		this.updateAttackSpeed();
 	}
-	
-
 	
 	public void draw(Graphics g){
 		inventory.draw(g, this);

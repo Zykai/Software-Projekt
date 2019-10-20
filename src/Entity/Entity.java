@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import Constants.Constants;
+import Enemies.Enemy;
 import Maps.Map;
 
 public abstract class Entity {
@@ -47,14 +48,22 @@ public abstract class Entity {
 	
 	protected boolean floating;
 
+	private int hpRegenTimer;
+
 	public Entity() {
 		floating = false;
 		this.currentAnimationDuration = 0.0;
 		this.currentAnimation = getIdle();
+		this.attackSpeed = 1.0;
 	}
 	
 	// Update position and animation state
 	public void update(float deltaTime, Map map){
+		hpRegenTimer += deltaTime;
+		if(hpRegenTimer > 1000){
+			this.heal(this.hpRegen);
+			this.hpRegenTimer = 0;
+		}
 		this.currentAnimationDuration += deltaTime;
 		if(state == MOVING) {
 			this.currentAnimation = getMove();
@@ -148,6 +157,10 @@ public abstract class Entity {
 		this.currentHP = Math.min(this.currentHP, this.maxHP);
 	}
 	
+	public void updateAttackSpeed(){
+		this.getAttack().setDuration(1000 / this.attackSpeed);
+	}
+
 	private boolean interSectPoint(Entity e, double x, double y){
 		double ex = e.getHitX();
 		double ey = e.getHitY();
@@ -171,12 +184,16 @@ public abstract class Entity {
 		if(this.intersectEntity(e) || e.intersectEntity(this)){
 			// Check if facing towards the other entity
 			if(this.direction > 0){
-				return this.getHitX() + this.getHitWidth() / 2 <= e.getHitX() + e.getHitWidth() / 2;
+				return this.getHitCenterX() - e.getHitWidth() / 4 <= e.getHitCenterX();
 			} else {
-				return this.getHitX() + this.getHitWidth() / 2 >= e.getHitX() + e.getHitWidth() / 2;	
+				return this.getHitCenterX() + e.getHitWidth() / 4 >= e.getHitCenterX();	
 			}
 		} 
 		return false;
+	}
+
+	public boolean hitEntityPoint(Enemy e) {
+		return interSectPoint(e, this.xPosition, this.yPosition);
 	}
 
 	public void setDead(){

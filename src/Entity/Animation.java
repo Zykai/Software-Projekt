@@ -35,4 +35,8 @@ public class Animation {
 		return this.frames[(int) ((currentDuration % totalDuration) / totalDuration * frames.length)];
 	}
 	
+	public void setDuration(double dur){
+		this.totalDuration = dur;
+	}
+
 }

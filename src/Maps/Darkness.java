@@ -267,7 +267,7 @@ public class Darkness extends Map {
 			if (current.updateDead(deltaTime)) {
 				this.dyingEnemies.remove(current);
 				i--;
-				if(Constants.random(0, 100) < 33){
+				if(Constants.random(0, 100) < 15){
 					this.dropItems.add(new DropItem(current.getHitCenterX(), current.getHitCenterY()));
 				}
 		    }

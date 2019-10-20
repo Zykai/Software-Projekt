@@ -143,7 +143,7 @@ public class Creator extends JPanel{
 		heroImg.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setCharacter(1);
+				Constants.PLAYER = new Hero();
 				FrameManager.currentScreen = FrameManager.Screen.Game;
 				FrameManager.run();
 			}
@@ -165,7 +165,7 @@ public class Creator extends JPanel{
 			mageImg.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					setCharacter(2);
+					Constants.PLAYER = new Mage();
 					FrameManager.currentScreen = FrameManager.Screen.Game;
 					FrameManager.run();
 				}
