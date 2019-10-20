@@ -1,7 +1,8 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class FrameManager {
+
+class FrameManager {
     public static JFrame frame;
 
     enum Screen {

@@ -33,5 +33,6 @@ hs_err_pid*
 /bin/
 /res/monster/
 /res/dsui/
+/res/menu/
 /saves/
 .vscode/launch.json

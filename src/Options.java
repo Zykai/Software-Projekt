@@ -1,4 +1,7 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,16 +23,15 @@ public class Options extends JPanel{
 	private Image bgI, backI; //bgI = background Image
 	private BufferedImage bgIB, backBI; // bgIB = background Image Buffered
 	private JLabel tbd;
-	private int BACK_BUTTON_X, BACK_BUTTON_Y;
-	private JButton backM;
+	private JButton backB, changeSize;
 	
 	public Options() {
-		panel = new JPanel();
 		panelBg = new JPanel();
-		tbd = new JLabel("coming soon");
+		panel = new JPanel();
+		
 		add(panelBg);
+		panel.setLayout(new GridLayout(2,1));
 		panelBg.add(panel);
-		panel.add(tbd);
 		
 		//Hintergrund
 		try {
@@ -39,31 +41,32 @@ public class Options extends JPanel{
 				e.printStackTrace();
 			}
 		panelBg.setOpaque(false);
-		panel.setOpaque(false);
+		panel.setOpaque(false);		
 		
-		//back Button
-		BACK_BUTTON_X = 370/2;
-		BACK_BUTTON_Y = 130/2;
-		backM = new JButton();
-		backM.setOpaque(false);
-		backM.setBorder(BorderFactory.createEmptyBorder());
-		backM.setBounds((Constants.SCREEN_X - BACK_BUTTON_X) / 2, (Constants.SCREEN_Y - BACK_BUTTON_Y)/ 2, BACK_BUTTON_X, BACK_BUTTON_Y);
+		//options Button
+		backB = new JButton("Back to Menu");
+		backB.setFont(new Font("SERIF", Font.PLAIN, 25));
+		backB.setForeground(Color.WHITE);
+		backB.setHorizontalTextPosition(JButton.CENTER);
+		backB.setVerticalTextPosition(JButton.CENTER);
+		backB.setOpaque(false);
+		backB.setBorder(BorderFactory.createEmptyBorder());
+		backB.setBounds((Constants.SCREEN_X - Constants.BUTTON_X) / 2, (Constants.SCREEN_Y - Constants.BUTTON_Y)/ 2,Constants.BUTTON_X, Constants.BUTTON_Y);
 		try {
-			backBI = ImageIO.read(new File("res/buttons/exit.png"));
-	   		backI = backBI.getScaledInstance(BACK_BUTTON_X, BACK_BUTTON_Y, Image.SCALE_SMOOTH);
+			backBI = ImageIO.read(new File("res/menu/MENU_kickCard.png"));
+			backI = backBI.getScaledInstance(Constants.BUTTON_X, Constants.BUTTON_Y, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
-				e.printStackTrace();
-			}
-		backM.setIcon(new ImageIcon(backI));
-		backM.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	FrameManager.currentScreen = FrameManager.Screen.Menu;
+			e.printStackTrace();
+		}
+		backB.setIcon(new ImageIcon(backI));
+		backB.addActionListener(new ActionListener() {
+		@Override
+			public void actionPerformed(ActionEvent e) {
+				FrameManager.currentScreen = FrameManager.Screen.Menu;
 				FrameManager.run();
-            }
-        });
-		panel.add(backM);
-		panel.add(tbd);
+			}
+		});
+		panel.add(backB);
 		FrameManager.frame.validate();
 	}
 	public void paintComponent(Graphics g)

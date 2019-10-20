@@ -32,6 +32,7 @@ public class Main extends JPanel {
 
 	private int frameNumber = 1;
 	public float deltaTime;
+	private Creator creator;
 	private Image image;
 	private Player player;
 	private Map map;
@@ -42,9 +43,19 @@ public class Main extends JPanel {
 
 	public Main() {
 		super();
+		setCreator(new Creator());
 		setBackground(Color.BLUE);		
-		//player = getCharacter();
-		player = new Mage();
+		switch(getCreator().getCharacter())
+		{
+		case 0:
+			
+		case 1:
+			player = new Hero();
+			break;
+		case 2:
+			player = new Mage();
+		default:
+		}
 		map = new Darkness();
 		pause = new Pause();
 		player.setX(map.getStartingX());
@@ -240,7 +251,14 @@ public class Main extends JPanel {
 		FrameManager.currentScreen = FrameManager.Screen.Menu;
 		FrameManager.run();
 	}
-	/*public Player getCharacter()
+	
+	
+	public void main() {
+	}
+	{
+		setCreator(new Creator());
+	}
+		/*public Player getCharacter()
 	{
 		return Creator.getPlayer();
 	}
@@ -248,6 +266,14 @@ public class Main extends JPanel {
 	{
 		player = p;
 	}*/
+
+	public Creator getCreator() {
+		return creator;
+	}
+
+	public void setCreator(Creator creator) {
+		this.creator = creator;
+	}
 }
  
 

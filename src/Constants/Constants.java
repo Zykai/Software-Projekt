@@ -7,6 +7,8 @@ public class Constants {
 	public static Random rand = new Random();
 	public static int SCREEN_X = 1920;
 	public static int SCREEN_Y = 1080;
+	public static int BUTTON_X = 857/2;
+	public static int BUTTON_Y = 150/2;
 	
 	public static int random(int min, int max) {
 		return rand.nextInt(max-min+1) + min;
