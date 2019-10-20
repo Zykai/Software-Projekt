@@ -95,9 +95,6 @@ public class Inventory {
         for(int y = 0; y < 14; y++){
             for(int x = 0; x < 3; x++){
                 storageSlots[i] = new Slot(850+x*160, 50+y*160, ItemType.all);
-                if(y < 8){
-                    storageSlots[i].item = new Equippable();
-                }
                 i++;
             }
         }
@@ -155,12 +152,14 @@ public class Inventory {
         if(dragged != null && draggedFromActive){
             dragged.drawOnlySlot(g);
         }
+
+        g.setClip(null);
+
         if(dragged != null){
             g.drawImage(dragged.item.image, dragX, dragY, null);
         }
-
+        
         g.translate(-XOFFSET, -YOFFSET);
-        g.setClip(null);
 
         if(hover != null){
             hover.item.draw(g, hoverX+10, hoverY + 50);
@@ -173,6 +172,16 @@ public class Inventory {
 
     public boolean isVisible(){
         return this.isVisible;
+    }
+
+    public boolean addItem(Item item){
+        for(int i = 0; i < this.storageSlots.length; i++){
+            if(this.storageSlots[i].item == null){
+                this.storageSlots[i].item = item;
+                return true;
+            }
+        }
+        return false;
     }
 
 	public void startDrag(int x, int y) {
@@ -229,6 +238,7 @@ public class Inventory {
             }
         }
         if(goalSlot == null){
+            dragged.item = null;
             dragged = null;
             return;
         }
