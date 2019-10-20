@@ -84,7 +84,7 @@ public class Menu extends JPanel{
 		playB.addActionListener(new ActionListener() {
 		@Override
 			public void actionPerformed(ActionEvent e) {
-				FrameManager.currentScreen = FrameManager.Screen.Game;
+				FrameManager.currentScreen = FrameManager.Screen.Saves;
 				FrameManager.run();
 			}
 		});
@@ -137,27 +137,10 @@ public class Menu extends JPanel{
 			}
 		});
 
-		ArrayList<String> saves = new ArrayList<>();
-		File saveFolder = new File("saves");
-		for(File f : saveFolder.listFiles()){
-			if(f.isDirectory()){
-				saves.add(f.getName());
-			}
-		}
-		saveFiles = new JComboBox<Object>(saves.toArray());
-		saveFiles.setEditable(true);
-		saveFiles.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Constants.safeName = saveFiles.getSelectedItem().toString();
-			}
-			
-		});
 		//Startscreen
 		startScreenP = new JPanel();
 		startScreenP.setOpaque(false);
 		add(startScreenP);
-		startScreenP.add(saveFiles);
 		startScreenP.add(playB);
 		startScreenP.add(createB);
 		startScreenP.add(optionsB);
