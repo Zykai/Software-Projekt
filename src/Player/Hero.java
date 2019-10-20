@@ -3,8 +3,10 @@ package Player;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+import Constants.Constants;
 import Enemies.Enemy;
 import Entity.Animation;
+import Entity.Entity;
 import Maps.Map;
 
 public class Hero extends Player {
@@ -33,11 +35,16 @@ public class Hero extends Player {
 		this.width = 80;
 		this.movespeed = 45f;
 		this.attackDamage = 15;
+		this.abilityPower = 0;
 		this.critChance = 20;
+		this.hpRegen = 2;
+		this.maxHP = 200;
+		this.currentHP = 100;
 		this.currentAnimation = PLAYER_IDLE[0];
 		this.currentAnimationDuration = 0.0;
 		this.currentXP = 6;
 		this.maxXP = 10;
+		this.lifeSteal = 10;
 		this.attackSpeed = 2.0;
 		this.updateAttackSpeed();
 	}
@@ -66,6 +73,14 @@ public class Hero extends Player {
 		}
 	}
 	
+	public void applyDamage(Entity e, double mul){
+		double pureDamage = ((this.attackDamage + this.abilityPower / 2) * mul * (Constants.random(0,100) > this.critChance ? 1.5 : 1.0));
+		int damage = (int) pureDamage * 100 / (100 + this.armor);
+		int heal = this.lifeSteal * damage / 100;
+		this.heal(heal);
+		e.currentHP -= damage;
+	}
+
 	@Override
 	public void qAbility(int xMouse, int yMouse, Map map) {
 		if(this.state != Hero.ATTACK) {

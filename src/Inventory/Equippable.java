@@ -307,7 +307,7 @@ public class Equippable extends Item {
     private static double[] getHeavyMultiplier(){
         double[] mulitplier = new double[11];
         mulitplier[AttributeType.xpBonus.ordinal()] = 1;
-        mulitplier[AttributeType.hpRegenBonus.ordinal()] = 1.03;
+        mulitplier[AttributeType.hpRegenBonus.ordinal()] = 0.2;
         mulitplier[AttributeType.critChance.ordinal()] = 1;
         mulitplier[AttributeType.hpBonus.ordinal()] = 1.15;
         mulitplier[AttributeType.armorBonus.ordinal()] = 1.60;
@@ -323,7 +323,7 @@ public class Equippable extends Item {
     private static double[] getNormalMultiplier(){
         double[] mulitplier = new double[11];
         mulitplier[AttributeType.xpBonus.ordinal()] = 1.05;
-        mulitplier[AttributeType.hpRegenBonus.ordinal()] = 1.05;
+        mulitplier[AttributeType.hpRegenBonus.ordinal()] = 0.15;
         mulitplier[AttributeType.critChance.ordinal()] = 1.015;
         mulitplier[AttributeType.hpBonus.ordinal()] = 1.08;
         mulitplier[AttributeType.armorBonus.ordinal()] = 1.3;
@@ -339,7 +339,7 @@ public class Equippable extends Item {
     private static double[] getLightMultiplier(){
         double[] mulitplier = new double[11];
         mulitplier[AttributeType.xpBonus.ordinal()] = 1.10;
-        mulitplier[AttributeType.hpRegenBonus.ordinal()] = 1.08;
+        mulitplier[AttributeType.hpRegenBonus.ordinal()] = 0.1;
         mulitplier[AttributeType.critChance.ordinal()] = 1.10;
         mulitplier[AttributeType.hpBonus.ordinal()] = 1.05;
         mulitplier[AttributeType.armorBonus.ordinal()] = 1;
