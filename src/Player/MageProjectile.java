@@ -1,8 +1,8 @@
 package Player;
 
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.geom.AffineTransform;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 import Entity.Animation;
@@ -69,7 +69,7 @@ public class MageProjectile extends Entity{
 		return null;
     }
     
-    public void draw(java.awt.Graphics g, int xoffset, int yoffset){
+    public void draw(Graphics g, int xoffset, int yoffset){
         Graphics2D g2d = (Graphics2D)g;
         AffineTransform trans = new AffineTransform();
         trans.translate(this.xPosition + xoffset+xdirection, this.yPosition + yoffset+ydirection);

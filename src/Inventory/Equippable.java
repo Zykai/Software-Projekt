@@ -2,7 +2,6 @@ package Inventory;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.List;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +19,7 @@ public class Equippable extends Item {
     public static Weight[] WEIGHTS = Weight.values();
     public static ArmorType[] ARMORTYPES = ArmorType.values();
     public static Image[][][] armorImages;
+    public static Image[][][] armorIcons;
     private static int[][] MULTIPLIER = new int[][]{getLightMultiplier(), getNormalMultiplier(), getHeavyMultiplier()};
 
 
@@ -116,6 +116,7 @@ public class Equippable extends Item {
         p.hpRegen -= this.hpRegenBonus;
         p.critChance -= this.critChance;
         p.maxHP -= this.hpBonus;
+        p.currentHP = Math.min(p.currentHP, p.maxHP);
         p.armor -= this.armorBonus;
         p.attackDamage -= this.attackBonus;
         p.abilityPower -= this.abilityBonus;

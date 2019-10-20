@@ -2,9 +2,11 @@ package DungeonGenerator;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.Image;
+import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedList;
+
+import javax.imageio.ImageIO;
 
 public class RoomTree {
 	
@@ -12,6 +14,17 @@ public class RoomTree {
 	public RoomBox leaf;
 	private static Color ROOM_COLOR = new Color(128,128,128);
 	
+	private static Image MINIMAP_BACKGROUND;
+
+	static{
+		try {
+            MINIMAP_BACKGROUND = ImageIO.read(new File("res/dsui/menu_itembox.png")).getSubimage(0, 21, 562, 658).getScaledInstance(250, 250, Image.SCALE_DEFAULT);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.exit(0);
+        }
+	}
+
 	public RoomTree(RoomBox c) {
 		leaf = c;
 	}
@@ -26,11 +39,10 @@ public class RoomTree {
 		}
 	}
 
-	public boolean draw(Graphics g){
-		g.setColor(ROOM_COLOR);
+	private boolean draw(Graphics g){
 		if(this.left != null){
-			boolean l = this.left.draw(g);
-			boolean r = this.right.draw(g);
+			this.left.draw(g);
+			this.right.draw(g);
 			if(left.leaf.width == right.leaf.width){
 				g.fillRect(left.leaf.cx-1, left.leaf.cy, 3, right.leaf.cy - left.leaf.cy);
 			} else {
@@ -40,6 +52,12 @@ public class RoomTree {
 		} else {
 			return this.leaf.draw(g);
 		}
+	}
+
+	public boolean drawMap(Graphics g){
+		g.drawImage(MINIMAP_BACKGROUND, -25, -25 ,null);
+		g.setColor(ROOM_COLOR);
+		return this.draw(g);
 	}
 	
 	public void fillGrid(int[][] grid) {

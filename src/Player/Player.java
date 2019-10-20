@@ -24,6 +24,8 @@ public abstract class Player extends Entity{
 		yPosition = Constants.SCREEN_Y / 2 + 200;
 		height = 30;
 		width = 30;
+		this.currentHP = 60;
+		this.maxHP = 100;
 		inventory = new Inventory();
 	}
 	
@@ -35,6 +37,12 @@ public abstract class Player extends Entity{
 
 	public void draw(Graphics g, int xoffset, int yoffset){
 		super.draw(g, xoffset, yoffset);
+		g.setColor(Color.BLACK);
+		int xPos = 800;
+		int yPos = 950;
+		g.fillRect(xPos, yPos, 400, 50);
+		g.setColor(Color.RED);
+		g.fillRect(xPos+10, yPos+10, (int)(380 * this.currentHP / this.maxHP), 30);
 		inventory.draw(g, this);
 	}
 
