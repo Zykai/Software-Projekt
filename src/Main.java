@@ -54,6 +54,19 @@ public class Main extends JPanel {
 		this.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(isPaused) {
+					if(e.getX() >= 560 && e.getX() <= 760 && e.getY() >= 180 && e.getY() <= 230){// Pause continue
+						isPaused = !isPaused;
+					}
+					if(e.getX() >= 560 && e.getX() <= 760 && e.getY() >= 250 && e.getY() <= 300){// pause exit game
+						System.exit(0);
+					}
+					if(e.getX() >= 560 && e.getX() <= 760 && e.getY() >= 320 && e.getY() <= 370){//pause back to menu
+						FrameManager.currentScreen = FrameManager.Screen.Menu;
+						FrameManager.run();
+					}
+				}
+					
 			}
 
 			@Override
