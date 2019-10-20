@@ -20,6 +20,7 @@ public abstract class Enemy extends Entity{
 		
 	public Enemy(int xPos, int yPos) {
 		super();
+		this.hpRegen = 1;
 		this.maxHP = 40;
 		this.currentHP = 40;
 		visionRange = 300;

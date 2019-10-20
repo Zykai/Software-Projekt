@@ -5,6 +5,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import Enemies.Enemy;
 import Entity.Animation;
 import Entity.Entity;
 import Maps.Map;

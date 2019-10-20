@@ -4,8 +4,10 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import Constants.Constants;
 import Enemies.Enemy;
 import Entity.Animation;
+import Entity.Entity;
 import Maps.Map;
 
 public class Mage extends Player {
@@ -36,7 +38,9 @@ public class Mage extends Player {
 		this.height = 100;
 		this.width = 80;
 		this.movespeed = 45f;
-		this.attackDamage = 10;
+		this.hpRegen = 1;
+		this.attackDamage = 0;
+		this.abilityPower = 10;
 		this.critChance = 5;
 		this.currentAnimation = PLAYER_IDLE[0];
 		this.currentAnimationDuration = 0.0;
@@ -68,7 +72,7 @@ public class Mage extends Player {
 			MageProjectile current = projectiles.get(i);
 			for(int j = 0; j < enemies.size(); j++){
 				Enemy currentEnemy = enemies.get(j);
-				if(current.hitEntity(currentEnemy)){
+				if(current.hitEntityPoint(currentEnemy)){
 					if(current.canDamage(currentEnemy)){
 						this.applyDamage(currentEnemy, 1.2);
 					}
@@ -82,6 +86,14 @@ public class Mage extends Player {
 		PLAYER_ATTACK[1].setDuration(1000 / this.attackSpeed);
 	}
 	
+	public void applyDamage(Entity e, double mul){
+		double pureDamage = ((this.attackDamage / 2 + this.abilityPower) * mul * (Constants.random(0,100) > this.critChance ? 1.5 : 1.0));
+		int damage = (int) pureDamage * 100 / (100 + this.armor);
+		int heal = this.lifeSteal * damage / 100;
+		this.heal(heal);
+		e.currentHP -= damage;
+	}
+
 	@Override
 	public void qAbility(int xMouse, int yMouse, Map map) {
 		if(this.state != Mage.ATTACK) {
