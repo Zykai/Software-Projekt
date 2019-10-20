@@ -25,7 +25,6 @@ public class Menu extends JPanel{
 	private BufferedImage backgroundIB, exitBI, optionsBI, playBI, createBI;
 	
 	public Menu(final JFrame frame, final Main main) {		
-		startScreenP = new JPanel();
 		//Hintergrund
 		try {
 			backgroundIB = ImageIO.read(new File("res/background/startscreen.png"));
@@ -33,8 +32,6 @@ public class Menu extends JPanel{
 		} catch (IOException e) {
 				e.printStackTrace();
 		}
-		startScreenP.setOpaque(false);
-		
 		//Create Button
 		
 		createB = new JButton("Create Character");
@@ -73,12 +70,12 @@ public class Menu extends JPanel{
 
 		playB.setBounds((Constants.SCREEN_X - Constants.BUTTON_X) / 2, (Constants.SCREEN_Y - Constants.BUTTON_Y)/ 2,Constants.BUTTON_X, Constants.BUTTON_Y);
 		try {
-			createBI = ImageIO.read(new File("res/menu/MENU_kickCard.png"));
-			createI = createBI.getScaledInstance(Constants.BUTTON_X, Constants.BUTTON_Y, Image.SCALE_SMOOTH);
+			playBI = ImageIO.read(new File("res/menu/MENU_kickCard.png"));
+			playI = playBI.getScaledInstance(Constants.BUTTON_X, Constants.BUTTON_Y, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
 				e.printStackTrace();
 		}
-		playB.setIcon(new ImageIcon(createI));
+		playB.setIcon(new ImageIcon(playI));
 		playB.addActionListener(new ActionListener() {
 		@Override
 			public void actionPerformed(ActionEvent e) {
@@ -97,8 +94,8 @@ public class Menu extends JPanel{
 		optionsB.setContentAreaFilled(false);		optionsB.setBorder(BorderFactory.createEmptyBorder());
 		optionsB.setBounds((Constants.SCREEN_X - Constants.BUTTON_X) / 2, (Constants.SCREEN_Y - Constants.BUTTON_Y)/ 2,Constants.BUTTON_X, Constants.BUTTON_Y);
 		try {
-			createBI = ImageIO.read(new File("res/menu/MENU_kickCard.png"));
-			createI = createBI.getScaledInstance(Constants.BUTTON_X, Constants.BUTTON_Y, Image.SCALE_SMOOTH);
+			optionsBI = ImageIO.read(new File("res/menu/MENU_kickCard.png"));
+			optionsI = optionsBI.getScaledInstance(Constants.BUTTON_X, Constants.BUTTON_Y, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
 				e.printStackTrace();
 		}
@@ -122,12 +119,12 @@ public class Menu extends JPanel{
 		exitB.setBorder(BorderFactory.createEmptyBorder());
 		exitB.setBounds((Constants.SCREEN_X - Constants.BUTTON_X) / 2, (Constants.SCREEN_Y - Constants.BUTTON_Y)/ 2,Constants.BUTTON_X, Constants.BUTTON_Y);
 		try {
-			createBI = ImageIO.read(new File("res/menu/MENU_kickCard.png"));
-			createI = createBI.getScaledInstance(Constants.BUTTON_X, Constants.BUTTON_Y, Image.SCALE_SMOOTH);
+			exitBI = ImageIO.read(new File("res/menu/MENU_kickCard.png"));
+			exitI = exitBI.getScaledInstance(Constants.BUTTON_X, Constants.BUTTON_Y, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		exitB.setIcon(new ImageIcon(createI));
+		exitB.setIcon(new ImageIcon(exitI));
 		exitB.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -136,6 +133,8 @@ public class Menu extends JPanel{
 		});
 		
 		//Startscreen
+		startScreenP = new JPanel();
+		startScreenP.setOpaque(false);
 		add(startScreenP);
 		startScreenP.add(playB);
 		startScreenP.add(createB);
@@ -143,7 +142,6 @@ public class Menu extends JPanel{
 		startScreenP.add(exitB);
 		
 		setVisible(true);
-		
 	}
 	public void paintComponent(Graphics g)
 	{
