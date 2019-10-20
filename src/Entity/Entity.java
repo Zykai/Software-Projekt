@@ -51,6 +51,7 @@ public abstract class Entity {
 		floating = false;
 		this.currentAnimationDuration = 0.0;
 		this.currentAnimation = getIdle();
+		this.attackSpeed = 1.0;
 	}
 	
 	// Update position and animation state
@@ -148,6 +149,10 @@ public abstract class Entity {
 		this.currentHP = Math.min(this.currentHP, this.maxHP);
 	}
 	
+	public void updateAttackSpeed(){
+		this.getAttack().setDuration(1000 / this.attackSpeed);
+	}
+
 	private boolean interSectPoint(Entity e, double x, double y){
 		double ex = e.getHitX();
 		double ey = e.getHitY();

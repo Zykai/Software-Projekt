@@ -32,6 +32,8 @@ public abstract class Enemy extends Entity{
 		this.originalX = xPos;
 		this.yPosition = yPos;
 		this.originalY = yPos;
+		this.attackSpeed = 1.4;
+		this.updateAttackSpeed();
 	}
 	
 	@Override

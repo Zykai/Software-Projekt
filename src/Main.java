@@ -82,8 +82,7 @@ public class Main extends JPanel {
 						FrameManager.currentScreen = FrameManager.Screen.Menu;
 						FrameManager.run();
 					}
-				}
-					
+				}		
 			}
 
 			@Override
