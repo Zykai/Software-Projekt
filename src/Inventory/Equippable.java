@@ -116,6 +116,7 @@ public class Equippable extends Item {
         p.hpRegen -= this.hpRegenBonus;
         p.critChance -= this.critChance;
         p.maxHP -= this.hpBonus;
+        p.currentHP = Math.min(p.currentHP, p.maxHP);
         p.armor -= this.armorBonus;
         p.attackDamage -= this.attackBonus;
         p.abilityPower -= this.abilityBonus;

@@ -191,11 +191,11 @@ public class Darkness extends Map {
 			current.draw(g, xoffset, yoffset);
 		}
 		// Draw Minimap
-		g.translate(1200, 0);
-		roomTree.draw(g);
+		g.translate(1700, 25);
+		roomTree.drawMap(g);
 		g.setColor(Color.RED);
 		g.fillOval(playerX, playerY, 10, 10);
-		g.translate(-1200, 0);
+		g.translate(-1700, -25);
 		super.draw(g, xoffset, yoffset);
 	}
 
