@@ -50,6 +50,7 @@ public class Options extends JPanel{
 		backB.setHorizontalTextPosition(JButton.CENTER);
 		backB.setVerticalTextPosition(JButton.CENTER);
 		backB.setOpaque(false);
+		backB.setContentAreaFilled(false);
 		backB.setBorder(BorderFactory.createEmptyBorder());
 		backB.setBounds((Constants.SCREEN_X - Constants.BUTTON_X) / 2, (Constants.SCREEN_Y - Constants.BUTTON_Y)/ 2,Constants.BUTTON_X, Constants.BUTTON_Y);
 		try {
