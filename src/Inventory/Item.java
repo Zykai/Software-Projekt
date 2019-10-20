@@ -44,6 +44,12 @@ public class Item {
         name = "Item";
     }
 
+    public Item(String[] values){
+        this.name = values[0];
+        this.rarity = Rarity.valueOf(values[1]);
+        this.type = ItemType.valueOf(values[2]);
+    }
+
     public String getName(){
         return name;
     }
@@ -92,5 +98,9 @@ public class Item {
         g.setFont(Inventory.cursive);
         g.setColor(getColor());
         g.drawString(getName(), hoverX + 10, hoverY + 30);
+	}
+
+	public String toCSV() {   
+		return name + "/" + rarity + "/" + type;
 	}
 }

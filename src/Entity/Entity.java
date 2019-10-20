@@ -58,8 +58,8 @@ public abstract class Entity {
 		this.currentAnimationDuration += deltaTime;
 		if(state == MOVING) {
 			this.currentAnimation = getMove();
-			double newX = xPosition + xdirection * deltaTime * movespeed;
-			double newY = yPosition + ydirection * deltaTime * movespeed;
+			double newX = xPosition + xdirection * deltaTime * movespeed / 100;
+			double newY = yPosition + ydirection * deltaTime * movespeed / 100;
 			int moves = 0;
 			if(map.isCorrectPosition(newX, yPosition, this.width, this.height) || floating) {
 				xPosition = newX;

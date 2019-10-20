@@ -31,7 +31,7 @@ public class Hero extends Player {
 		attackIndex = 0;
 		this.height = 100;
 		this.width = 80;
-		this.movespeed = 0.45f;
+		this.movespeed = 45f;
 		this.attackDamage = 15;
 		this.critChance = 20;
 		this.currentAnimation = PLAYER_IDLE[0];

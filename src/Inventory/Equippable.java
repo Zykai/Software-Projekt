@@ -19,8 +19,7 @@ public class Equippable extends Item {
     public static Weight[] WEIGHTS = Weight.values();
     public static ArmorType[] ARMORTYPES = ArmorType.values();
     public static Image[][][] armorImages;
-    public static Image[][][] armorIcons;
-    private static int[][] MULTIPLIER = new int[][]{getLightMultiplier(), getNormalMultiplier(), getHeavyMultiplier()};
+    private static double[][] MULTIPLIER = new double[][]{getLightMultiplier(), getNormalMultiplier(), getHeavyMultiplier()};
 
 
     public Weight weight;
@@ -36,6 +35,30 @@ public class Equippable extends Item {
 	public int coolDownReductionBonus;
 	public double attackSpeedBonus;
 	public float movespeedBonus;
+
+    public String toCSV() {
+        String res = super.toCSV();
+        res += "/" + weight + "/" + xpBonus + "/" + hpRegenBonus + "/" + critChance + "/" + hpBonus + "/" + armorBonus + "/" + attackBonus 
+            + "/" + abilityBonus + "/" + lifeStealBonus + "/" + coolDownReductionBonus + "/" + attackSpeedBonus + "/" + movespeedBonus;
+		return res;
+	}
+
+    public Equippable(String[] values){
+        super(values);
+        this.weight = Weight.valueOf(values[3]);
+        this.xpBonus = Integer.valueOf(values[4]);
+        this.hpRegenBonus = Integer.valueOf(values[5]);
+        this.critChance = Integer.valueOf(values[6]);
+        this.hpBonus = Integer.valueOf(values[7]);
+        this.armorBonus = Integer.valueOf(values[8]);
+        this.attackBonus = Integer.valueOf(values[9]);
+        this.abilityBonus = Integer.valueOf(values[10]);
+        this.lifeStealBonus = Integer.valueOf(values[11]);
+        this.coolDownReductionBonus = Integer.valueOf(values[12]);
+        this.attackSpeedBonus = Double.valueOf(values[13]);
+        this.movespeedBonus = Float.valueOf(values[14]);
+        this.image = armorImages[rarity.ordinal()][weight.ordinal()][type.ordinal()-2];
+    }
 
     enum AttributeType{
         xpBonus,hpRegenBonus,critChance,hpBonus,armorBonus,attackBonus,abilityBonus,lifeStealBonus,coolDownReductionBonus,attackSpeedBonus,movespeedBonus,
@@ -218,8 +241,8 @@ public class Equippable extends Item {
             g.drawString(getBonusString((int)attackSpeedBonus) + " Angriffsgeschwindigkeit 🗡", hoverX+10, yoffset);
             yoffset += 32;
         }
-        if(movespeedBonus != 0){
-            g.drawString(getBonusString((int)movespeedBonus) + " Bewegungsgeschwindigkeit 🏃", hoverX+10, yoffset);
+        if(movespeedBonus != 0.0){
+            g.drawString(getBonusString((int)(movespeedBonus)) + " Bewegungsgeschwindigkeit 🏃", hoverX+10, yoffset);
             yoffset += 32;
         }
     }
@@ -228,7 +251,7 @@ public class Equippable extends Item {
         int nAttributes = getNumberOfAttributes();
         ArrayList<AttributeType> types = new ArrayList<AttributeType>(Arrays.asList(AttributeType.values()));
         Collections.shuffle(types);
-        int[] attributes = new int[types.size()];
+        float[] attributes = new float[types.size()];
         int discarded = 0;
         for(int i = 0; i < nAttributes + discarded; i++){
             AttributeType currentType = types.get(i);
@@ -244,12 +267,13 @@ public class Equippable extends Item {
                 continue;
             }
             int base = Constants.random(min, max);
-            attributes[currentType.ordinal()] = base + base * MULTIPLIER[this.weight.ordinal()][currentType.ordinal()] * (this.rarity.ordinal()+1) / 100;
+            attributes[currentType.ordinal()] = (float) (base * MULTIPLIER[this.weight.ordinal()][currentType.ordinal()]
+                    * (1 + 2 * (this.rarity.ordinal() + 1) / 10));
         }
         applyStats(attributes);
     }
 
-    private void applyStats(int[] stats){
+    private void applyStats(float[] stats){
         this.xpBonus += stats[AttributeType.xpBonus.ordinal()];
         this.hpRegenBonus += stats[AttributeType.hpRegenBonus.ordinal()];
         this.critChance += stats[AttributeType.critChance.ordinal()];
@@ -278,51 +302,51 @@ public class Equippable extends Item {
         }
     }
 
-    private static int[] getHeavyMultiplier(){
-        int[] mulitplier = new int[11];
-        mulitplier[AttributeType.xpBonus.ordinal()] = 0;
-        mulitplier[AttributeType.hpRegenBonus.ordinal()] = 3;
-        mulitplier[AttributeType.critChance.ordinal()] = 0;
-        mulitplier[AttributeType.hpBonus.ordinal()] = 15;
-        mulitplier[AttributeType.armorBonus.ordinal()] = 20;
-        mulitplier[AttributeType.attackBonus.ordinal()] = 5;
+    private static double[] getHeavyMultiplier(){
+        double[] mulitplier = new double[11];
+        mulitplier[AttributeType.xpBonus.ordinal()] = 1;
+        mulitplier[AttributeType.hpRegenBonus.ordinal()] = 1.03;
+        mulitplier[AttributeType.critChance.ordinal()] = 1;
+        mulitplier[AttributeType.hpBonus.ordinal()] = 1.15;
+        mulitplier[AttributeType.armorBonus.ordinal()] = 1.60;
+        mulitplier[AttributeType.attackBonus.ordinal()] = 1.05;
         mulitplier[AttributeType.abilityBonus.ordinal()] = 0;
-        mulitplier[AttributeType.lifeStealBonus.ordinal()] = 3;
-        mulitplier[AttributeType.coolDownReductionBonus.ordinal()] = 0;
-        mulitplier[AttributeType.attackSpeedBonus.ordinal()] = 0;
-        mulitplier[AttributeType.movespeedBonus.ordinal()] = 0;
+        mulitplier[AttributeType.lifeStealBonus.ordinal()] = 1.03;
+        mulitplier[AttributeType.coolDownReductionBonus.ordinal()] = 1;
+        mulitplier[AttributeType.attackSpeedBonus.ordinal()] = 1;
+        mulitplier[AttributeType.movespeedBonus.ordinal()] = 0.90;
         return mulitplier;
     }
 
-    private static int[] getNormalMultiplier(){
-        int[] mulitplier = new int[11];
-        mulitplier[AttributeType.xpBonus.ordinal()] = 5;
-        mulitplier[AttributeType.hpRegenBonus.ordinal()] = 5;
-        mulitplier[AttributeType.critChance.ordinal()] = 15;
-        mulitplier[AttributeType.hpBonus.ordinal()] = 8;
-        mulitplier[AttributeType.armorBonus.ordinal()] = 10;
-        mulitplier[AttributeType.attackBonus.ordinal()] = 5;
-        mulitplier[AttributeType.abilityBonus.ordinal()] = 2;
+    private static double[] getNormalMultiplier(){
+        double[] mulitplier = new double[11];
+        mulitplier[AttributeType.xpBonus.ordinal()] = 1.05;
+        mulitplier[AttributeType.hpRegenBonus.ordinal()] = 1.05;
+        mulitplier[AttributeType.critChance.ordinal()] = 1.015;
+        mulitplier[AttributeType.hpBonus.ordinal()] = 1.08;
+        mulitplier[AttributeType.armorBonus.ordinal()] = 1.3;
+        mulitplier[AttributeType.attackBonus.ordinal()] = 1.05;
+        mulitplier[AttributeType.abilityBonus.ordinal()] = 1.02;
+        mulitplier[AttributeType.lifeStealBonus.ordinal()] = 1.01;
+        mulitplier[AttributeType.coolDownReductionBonus.ordinal()] = 1.05;
+        mulitplier[AttributeType.attackSpeedBonus.ordinal()] = 1.10;
+        mulitplier[AttributeType.movespeedBonus.ordinal()] = 1.25;
+        return mulitplier;
+    }
+
+    private static double[] getLightMultiplier(){
+        double[] mulitplier = new double[11];
+        mulitplier[AttributeType.xpBonus.ordinal()] = 1.10;
+        mulitplier[AttributeType.hpRegenBonus.ordinal()] = 1.08;
+        mulitplier[AttributeType.critChance.ordinal()] = 1.10;
+        mulitplier[AttributeType.hpBonus.ordinal()] = 1.05;
+        mulitplier[AttributeType.armorBonus.ordinal()] = 1;
+        mulitplier[AttributeType.attackBonus.ordinal()] = 1;
+        mulitplier[AttributeType.abilityBonus.ordinal()] = 1.15;
         mulitplier[AttributeType.lifeStealBonus.ordinal()] = 1;
-        mulitplier[AttributeType.coolDownReductionBonus.ordinal()] = 5;
-        mulitplier[AttributeType.attackSpeedBonus.ordinal()] = 10;
-        mulitplier[AttributeType.movespeedBonus.ordinal()] = 10;
-        return mulitplier;
-    }
-
-    private static int[] getLightMultiplier(){
-        int[] mulitplier = new int[11];
-        mulitplier[AttributeType.xpBonus.ordinal()] = 10;
-        mulitplier[AttributeType.hpRegenBonus.ordinal()] = 8;
-        mulitplier[AttributeType.critChance.ordinal()] = 10;
-        mulitplier[AttributeType.hpBonus.ordinal()] = 5;
-        mulitplier[AttributeType.armorBonus.ordinal()] = 0;
-        mulitplier[AttributeType.attackBonus.ordinal()] = 0;
-        mulitplier[AttributeType.abilityBonus.ordinal()] = 15;
-        mulitplier[AttributeType.lifeStealBonus.ordinal()] = 0;
-        mulitplier[AttributeType.coolDownReductionBonus.ordinal()] = 10;
-        mulitplier[AttributeType.attackSpeedBonus.ordinal()] = 5;
-        mulitplier[AttributeType.movespeedBonus.ordinal()] = 5;
+        mulitplier[AttributeType.coolDownReductionBonus.ordinal()] = 1.10;
+        mulitplier[AttributeType.attackSpeedBonus.ordinal()] = 1.05;
+        mulitplier[AttributeType.movespeedBonus.ordinal()] = 1.1;
         return mulitplier;
     }
 

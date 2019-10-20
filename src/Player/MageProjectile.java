@@ -31,6 +31,7 @@ public class MageProjectile extends Entity{
         this.height = 40;
         this.moveDif((int)(x-playerX), (int)(y-playerY), false);
         hitList = new ArrayList<>(8);
+        this.movespeed = 60;
     }
 
     public boolean canDamage(Entity e){

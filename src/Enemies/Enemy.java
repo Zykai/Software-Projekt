@@ -20,14 +20,14 @@ public abstract class Enemy extends Entity{
 		
 	public Enemy(int xPos, int yPos) {
 		super();
-		this.maxHP = 10;
-		this.currentHP = 10;
+		this.maxHP = 40;
+		this.currentHP = 40;
 		visionRange = 300;
 		this.attackRange = 100;
 		this.attackDamage = 10;
 		timer = 0;
 		timerEnd = Constants.random(0, 5000);
-		movespeed = 0.35f;
+		movespeed = 35f;
 		this.xPosition = xPos;
 		this.originalX = xPos;
 		this.yPosition = yPos;

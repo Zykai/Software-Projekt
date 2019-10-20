@@ -23,7 +23,6 @@ import javax.swing.KeyStroke;
 import Constants.Constants;
 import Maps.Darkness;
 import Maps.Map;
-import Player.Hero;
 import Player.Mage;
 import Player.Player;
 
@@ -152,6 +151,12 @@ public class Main extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				isPaused = !isPaused;
+			}
+		});
+		createKeyBinding("K", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				player.inventory.saveInventory("test");
 			}
 		});
 		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false),

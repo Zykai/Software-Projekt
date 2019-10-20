@@ -314,10 +314,16 @@ public class Darkness extends Map {
 		if(!super.isCorrectPosition(x, y, width)) {
 			return false;
 		}
-		if(this.tiles[(int) (x+0.5*width) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+0.25*width) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 || this.tiles[(int) ((x+0.75*width)) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 
+		try{
+			if(this.tiles[(int) (x+0.5*width) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+0.25*width) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 || this.tiles[(int) ((x+0.75*width)) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 
 				|| this.tiles[(int) (x+0.5*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+0.25*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+0.75*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 ) {
+				return false;
+			}
+		} catch(Exception e){
+			System.out.println("Caught an index out of bounds exception");
 			return false;
-		}
+		} 
+		
 		return true;
 	}
 }
