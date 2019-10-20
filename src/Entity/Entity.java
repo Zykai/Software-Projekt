@@ -150,6 +150,7 @@ public abstract class Entity {
 		this.heal(heal);
 		// Apply damage
 		e.currentHP -= damage;
+		e.currentHP = Math.max(0, e.currentHP);
 	}
 
 	public void heal(int amount){

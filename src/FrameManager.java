@@ -1,5 +1,6 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.event.SwingPropertyChangeSupport;
 
 
 class FrameManager {
@@ -19,7 +20,6 @@ class FrameManager {
         // public void run() {
     	//lösche alten Screen
         if (current != null) {
-            System.out.println("Deleted old window");
             frame.remove(current);
             frame.validate();
         }
@@ -49,8 +49,7 @@ class FrameManager {
                     frame.add(current);
                     frame.validate();
                     long time = System.currentTimeMillis();
-                    boolean f = false;
-                    while(true){
+                    while(currentScreen == Screen.Game){
                         try {
                             Thread.sleep(7);
                         }

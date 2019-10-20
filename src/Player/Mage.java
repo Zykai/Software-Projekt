@@ -92,6 +92,7 @@ public class Mage extends Player {
 		int heal = this.lifeSteal * damage / 100;
 		this.heal(heal);
 		e.currentHP -= damage;
+		e.currentHP = Math.max(0, e.currentHP);
 	}
 
 	@Override

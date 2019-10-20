@@ -47,7 +47,7 @@ public class Pause {
         g.drawRect(560,250,200, 50);
         g.drawRect(560,320,200, 50);
         g.drawString("Continue", 600, 210);
-        g.drawString("Exit Game", 600, 280);
+        g.drawString("Save Game", 600, 280);
         g.drawString("Back To Menu ", 590, 350);
         }
 }
