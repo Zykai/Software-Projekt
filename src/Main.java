@@ -23,7 +23,6 @@ import javax.swing.KeyStroke;
 import Constants.Constants;
 import Maps.Darkness;
 import Maps.Map;
-import Player.Hero;
 import Player.Mage;
 import Player.Player;
 
@@ -75,11 +74,16 @@ public class Main extends JPanel {
 						isPaused = !isPaused;
 					}
 					if(e.getX() >= 560 && e.getX() <= 760 && e.getY() >= 250 && e.getY() <= 300){// pause exit game
-						System.exit(0);
+						player.inventory.saveInventory(Constants.safeName);
 					}
 					if(e.getX() >= 560 && e.getX() <= 760 && e.getY() >= 320 && e.getY() <= 370){//pause back to menu
 						Constants.PLAYER = null;
 						FrameManager.currentScreen = FrameManager.Screen.Menu;
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e1) {
+							e1.printStackTrace();
+						}
 						FrameManager.run();
 					}
 				}		
@@ -163,19 +167,6 @@ public class Main extends JPanel {
 				player.inventory.setInventory();
 			}
 		});
-		
-		createKeyBinding("P", new AbstractAction() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				isPaused = !isPaused;
-			}
-		});
-		createKeyBinding("K", new AbstractAction() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				player.inventory.saveInventory(Constants.safeName);
-			}
-		});
 		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false),
 				KeyEvent.VK_ESCAPE + "Pressed");
 		this.getActionMap().put(KeyEvent.VK_ESCAPE + "Pressed", escapeAction());
@@ -185,19 +176,8 @@ public class Main extends JPanel {
 	private javax.swing.Action escapeAction() {
 		return new AbstractAction() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				// was passieren soll wenn escape gedrückt wird
-				/**
-				 * Frame.remove(Menu.playScreenP); //System.out.println("asd");
-				 * Frame.add(Menu.startScreenP); validate();
-				 **/
-				FrameManager.currentScreen = FrameManager.Screen.Menu;
-				try {
-					Thread.sleep(300);
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
-				}
-				FrameManager.run();
+			public void actionPerformed(ActionEvent e) {				
+				isPaused = !isPaused;
 			}
 		};
 	}
