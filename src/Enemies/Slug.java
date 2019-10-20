@@ -19,6 +19,11 @@ public class Slug extends Enemy {
 		SLUG_DIE = new Animation("res/monster/Slug/Individual Sprites/slug-die-0", 6, 650);
 	}
 	
+	public void updateAttackSpeed(){
+		SLUG_ATTACK[0].setDuration(1000 / this.attackSpeed);
+		SLUG_ATTACK[1].setDuration(1000 / this.attackSpeed);
+	}
+
 	public Slug(int xPos, int yPos) {
 		super(xPos, yPos);
 		this.height = 60;

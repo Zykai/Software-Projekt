@@ -27,6 +27,8 @@ public abstract class Player extends Entity{
 		this.currentHP = 60;
 		this.maxHP = 100;
 		inventory = new Inventory(Constants.safeName, this);
+		this.attackSpeed = 1.5;
+		this.updateAttackSpeed();
 	}
 	
 

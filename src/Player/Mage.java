@@ -19,10 +19,9 @@ public class Mage extends Player {
 		PLAYER_IDLE[0] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-idle-0", 4, 1000);
 		PLAYER_IDLE[1] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-hurt-0", 3, 1000);
 		PLAYER_RUN = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-move-0", 6, 750);
-		PLAYER_ATTACK = new Animation[3];
+		PLAYER_ATTACK = new Animation[2];
 		PLAYER_ATTACK[0] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-attack-0", 5, 100);
 		PLAYER_ATTACK[1] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-summon-0", 6, 100);
-		PLAYER_ATTACK[2] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-summon-0", 6, 100);
 	}
 
 	private ArrayList<MageProjectile> projectiles;
@@ -44,6 +43,8 @@ public class Mage extends Player {
 		this.currentXP = 6;
 		this.maxXP = 10;
 		projectiles = new ArrayList<MageProjectile>();
+		this.attackSpeed = 3.0;
+		this.updateAttackSpeed();
 	}
 	
 	public void update(float deltaTime, Map map) {
@@ -74,6 +75,11 @@ public class Mage extends Player {
 				}
 			}
 		}
+	}
+
+	public void updateAttackSpeed(){
+		PLAYER_ATTACK[0].setDuration(1000 / this.attackSpeed);
+		PLAYER_ATTACK[1].setDuration(1000 / this.attackSpeed);
 	}
 	
 	@Override
@@ -107,7 +113,7 @@ public class Mage extends Player {
 
 	@Override
 	protected Animation getAttack(){
-		return PLAYER_ATTACK[attackIndex++ % 3];
+		return PLAYER_ATTACK[attackIndex++ % 2];
 	}
 
 	@Override

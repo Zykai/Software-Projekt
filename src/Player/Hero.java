@@ -38,8 +38,16 @@ public class Hero extends Player {
 		this.currentAnimationDuration = 0.0;
 		this.currentXP = 6;
 		this.maxXP = 10;
+		this.attackSpeed = 2.0;
+		this.updateAttackSpeed();
 	}
 	
+	public void updateAttackSpeed(){
+		PLAYER_ATTACK[0].setDuration(1000 / this.attackSpeed);
+		PLAYER_ATTACK[1].setDuration(1000 / this.attackSpeed);
+		PLAYER_ATTACK[1].setDuration(1000 / this.attackSpeed);
+	}
+
 	public void update(float deltaTime, Map map) {
 		super.update(deltaTime, map);
 		if(this.state == Hero.ATTACK) {

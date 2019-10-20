@@ -131,6 +131,7 @@ public class Equippable extends Item {
         p.coolDownReduction += this.coolDownReductionBonus;
         p.attackSpeed += this.attackSpeedBonus;
         p.movespeed += this.movespeedBonus;
+        p.updateAttackSpeed();
     }
 
     @Override
@@ -147,6 +148,7 @@ public class Equippable extends Item {
         p.coolDownReduction -= this.coolDownReductionBonus;
         p.attackSpeed -= this.attackSpeedBonus;
         p.movespeed -= this.movespeedBonus;
+        p.updateAttackSpeed();
     }
 
     @Override
@@ -238,7 +240,7 @@ public class Equippable extends Item {
             yoffset += 32;
         }
         if(attackSpeedBonus != 0){
-            g.drawString(getBonusString((int)attackSpeedBonus) + " Angriffsgeschwindigkeit 🗡", hoverX+10, yoffset);
+            g.drawString((attackSpeedBonus > 0 ? ("+" + attackSpeedBonus) : ""+attackSpeedBonus) + " Angriffsgeschwindigkeit 🗡", hoverX+10, yoffset);
             yoffset += 32;
         }
         if(movespeedBonus != 0.0){
@@ -313,7 +315,7 @@ public class Equippable extends Item {
         mulitplier[AttributeType.abilityBonus.ordinal()] = 0;
         mulitplier[AttributeType.lifeStealBonus.ordinal()] = 1.03;
         mulitplier[AttributeType.coolDownReductionBonus.ordinal()] = 1;
-        mulitplier[AttributeType.attackSpeedBonus.ordinal()] = 1;
+        mulitplier[AttributeType.attackSpeedBonus.ordinal()] = 0.01;
         mulitplier[AttributeType.movespeedBonus.ordinal()] = 0.90;
         return mulitplier;
     }
@@ -329,7 +331,7 @@ public class Equippable extends Item {
         mulitplier[AttributeType.abilityBonus.ordinal()] = 1.02;
         mulitplier[AttributeType.lifeStealBonus.ordinal()] = 1.01;
         mulitplier[AttributeType.coolDownReductionBonus.ordinal()] = 1.05;
-        mulitplier[AttributeType.attackSpeedBonus.ordinal()] = 1.10;
+        mulitplier[AttributeType.attackSpeedBonus.ordinal()] = 0.02;
         mulitplier[AttributeType.movespeedBonus.ordinal()] = 1.25;
         return mulitplier;
     }
@@ -345,7 +347,7 @@ public class Equippable extends Item {
         mulitplier[AttributeType.abilityBonus.ordinal()] = 1.15;
         mulitplier[AttributeType.lifeStealBonus.ordinal()] = 1;
         mulitplier[AttributeType.coolDownReductionBonus.ordinal()] = 1.10;
-        mulitplier[AttributeType.attackSpeedBonus.ordinal()] = 1.05;
+        mulitplier[AttributeType.attackSpeedBonus.ordinal()] = 0.04;
         mulitplier[AttributeType.movespeedBonus.ordinal()] = 1.1;
         return mulitplier;
     }
