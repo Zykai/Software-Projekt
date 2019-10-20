@@ -26,7 +26,7 @@ public abstract class Player extends Entity{
 		width = 30;
 		this.currentHP = 60;
 		this.maxHP = 100;
-		inventory = new Inventory("test", this);
+		inventory = new Inventory(Constants.safeName, this);
 	}
 	
 

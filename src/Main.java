@@ -23,6 +23,7 @@ import javax.swing.KeyStroke;
 import Constants.Constants;
 import Maps.Darkness;
 import Maps.Map;
+import Player.Hero;
 import Player.Mage;
 import Player.Player;
 
@@ -56,6 +57,11 @@ public class Main extends JPanel {
 			player = new Mage();
 		default:
 		}
+		if(Constants.PLAYER == null){
+			player = new Mage();
+		} else {
+			player = Constants.PLAYER;
+		}
 		map = new Darkness();
 		pause = new Pause();
 		player.setX(map.getStartingX());
@@ -72,6 +78,7 @@ public class Main extends JPanel {
 						System.exit(0);
 					}
 					if(e.getX() >= 560 && e.getX() <= 760 && e.getY() >= 320 && e.getY() <= 370){//pause back to menu
+						Constants.PLAYER = null;
 						FrameManager.currentScreen = FrameManager.Screen.Menu;
 						FrameManager.run();
 					}
@@ -167,7 +174,7 @@ public class Main extends JPanel {
 		createKeyBinding("K", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				player.inventory.saveInventory("test");
+				player.inventory.saveInventory(Constants.safeName);
 			}
 		});
 		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false),
