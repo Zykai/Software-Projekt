@@ -23,7 +23,6 @@ import javax.swing.KeyStroke;
 import Constants.Constants;
 import Maps.Darkness;
 import Maps.Map;
-import Player.Hero;
 import Player.Mage;
 import Player.Player;
 
@@ -65,6 +64,19 @@ public class Main extends JPanel {
 		this.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(isPaused) {
+					if(e.getX() >= 560 && e.getX() <= 760 && e.getY() >= 180 && e.getY() <= 230){// Pause continue
+						isPaused = !isPaused;
+					}
+					if(e.getX() >= 560 && e.getX() <= 760 && e.getY() >= 250 && e.getY() <= 300){// pause exit game
+						System.exit(0);
+					}
+					if(e.getX() >= 560 && e.getX() <= 760 && e.getY() >= 320 && e.getY() <= 370){//pause back to menu
+						FrameManager.currentScreen = FrameManager.Screen.Menu;
+						FrameManager.run();
+					}
+				}
+					
 			}
 
 			@Override
@@ -150,6 +162,12 @@ public class Main extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				isPaused = !isPaused;
+			}
+		});
+		createKeyBinding("K", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				player.inventory.saveInventory("test");
 			}
 		});
 		this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false),

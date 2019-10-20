@@ -16,6 +16,7 @@ import DungeonGenerator.DungeonGenerator;
 import DungeonGenerator.Room;
 import DungeonGenerator.RoomTree;
 import Enemies.Enemy;
+import Inventory.DropItem;
 import Player.Player;
 
 public class Darkness extends Map {
@@ -44,6 +45,8 @@ public class Darkness extends Map {
 	private ArrayList<Room> roomList;
 	private RoomTree roomTree;
 	
+	private ArrayList<DropItem> dropItems;
+
 	private Image randomSpace() {
 		if (rand.nextInt(5)<3) {
 			return scaledAll[0][8];
@@ -106,6 +109,7 @@ public class Darkness extends Map {
 	
 	public Darkness() {
 		super();
+		dropItems = new ArrayList<>();
 		rand = new Random();
 		backgroundColor = new Color(38, 30, 48, 255);
 		this.xSize = Map.TILE_SIZE * Darkness.X_TILES;
@@ -190,12 +194,15 @@ public class Darkness extends Map {
 			Enemy current = this.dyingEnemies.get(i);
 			current.draw(g, xoffset, yoffset);
 		}
+		for(int i = 0; i < this.dropItems.size(); i++){
+			this.dropItems.get(i).draw(g, xoffset, yoffset);
+		}
 		// Draw Minimap
-		g.translate(1200, 0);
-		roomTree.draw(g);
+		g.translate(1700, 25);
+		roomTree.drawMap(g);
 		g.setColor(Color.RED);
 		g.fillOval(playerX, playerY, 10, 10);
-		g.translate(-1200, 0);
+		g.translate(-1700, -25);
 		super.draw(g, xoffset, yoffset);
 	}
 
@@ -222,13 +229,16 @@ public class Darkness extends Map {
 		this.playerX = (int)p.getX() / Map.TILE_SIZE;
 		this.playerY = (int)p.getY() / Map.TILE_SIZE;
 		setActiveRoom(p);
-		// Adds enemies in vision range to active enemies
-		if(this.currentRoom != null) {
-			//Iterator<Enemy> iter = this.currentRoom.enemies.iterator();
-			ArrayList<Enemy> current = currentRoom.enemies;
+		// Adds enemies in vision range to active enemies and update all enemies
+		for(int r = 0; r < roomList.size(); r++){
+			Room loopRoom = roomList.get(r);
+			ArrayList<Enemy> current = loopRoom.enemies;
 			for(int i = 0; i < current.size(); i++){
 				Enemy e = current.get(i);
 				e.update(deltaTime, this);
+				if(!(loopRoom == currentRoom)){
+					continue;
+				}
 				double xDistance = e.getX() - p.getX();
 				double yDistance = e.getY() - p.getY();
 				if(Math.sqrt(xDistance * xDistance + yDistance * yDistance)< e.visionRange) {
@@ -257,7 +267,24 @@ public class Darkness extends Map {
 			if (current.updateDead(deltaTime)) {
 				this.dyingEnemies.remove(current);
 				i--;
+				if(Constants.random(0, 100) < 33){
+					this.dropItems.add(new DropItem(current.getHitCenterX(), current.getHitCenterY()));
+				}
 		    }
+		}
+		for(int i = 0; i < this.dropItems.size(); i++){
+			DropItem drop = dropItems.get(i);
+			if(drop.intersects(p.getHitCenterX(), p.getHitCenterY())){
+				if(p.inventory.addItem(drop.item)){
+					dropItems.remove(drop);
+					i--;
+					continue;
+				}
+			}
+			if(drop.update(deltaTime)){
+				dropItems.remove(drop);
+				i--;
+			}
 		}
 	}
 	
@@ -287,10 +314,16 @@ public class Darkness extends Map {
 		if(!super.isCorrectPosition(x, y, width)) {
 			return false;
 		}
-		if(this.tiles[(int) (x+0.5*width) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+0.25*width) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 || this.tiles[(int) ((x+0.75*width)) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 
+		try{
+			if(this.tiles[(int) (x+0.5*width) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+0.25*width) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 || this.tiles[(int) ((x+0.75*width)) / Map.TILE_SIZE][(int) (y+height) / Map.TILE_SIZE]==0 
 				|| this.tiles[(int) (x+0.5*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+0.25*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 || this.tiles[(int) (x+0.75*width) / Map.TILE_SIZE][(int) (y+0.75*height) / Map.TILE_SIZE]==0 ) {
+				return false;
+			}
+		} catch(Exception e){
+			System.out.println("Caught an index out of bounds exception");
 			return false;
-		}
+		} 
+		
 		return true;
 	}
 }

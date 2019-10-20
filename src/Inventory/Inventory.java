@@ -4,7 +4,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.imageio.ImageIO;
 
@@ -36,7 +41,7 @@ public class Inventory {
     private Slot hover;
     private int hoverX, hoverY;
 
-    static{
+    static {
         try {
             menuBackground = ImageIO.read(new File("res/dsui/menu_only_bg.png"));
         } catch (Exception e) {
@@ -45,39 +50,34 @@ public class Inventory {
         }
     }
 
-    enum ItemType{
-        weapon(0),
-        ring(1),
-        helmet(2),
-        plate(3),
-        gauntlet(4),
-        boots(5),
-        potion(6),
-        all(7);
+    enum ItemType {
+        weapon(0), ring(1), helmet(2), plate(3), gauntlet(4), boots(5), potion(6), all(7);
 
         public final int value;
-        private ItemType(int value){
+
+        private ItemType(int value) {
             this.value = value;
         }
-        public static ItemType fromArmorType(ArmorType t){
-            switch(t){
-                case helmet:
-                    return ItemType.helmet;
-                case plate:
-                    return ItemType.plate;
-                case gauntlet:
-                    return ItemType.gauntlet;
-                case boots:
-                    return ItemType.boots;
-                default:
-                    // Should never happen
-                    System.exit(0);
-                    return ItemType.all;
+
+        public static ItemType fromArmorType(ArmorType t) {
+            switch (t) {
+            case helmet:
+                return ItemType.helmet;
+            case plate:
+                return ItemType.plate;
+            case gauntlet:
+                return ItemType.gauntlet;
+            case boots:
+                return ItemType.boots;
+            default:
+                // Should never happen
+                System.exit(0);
+                return ItemType.all;
             }
         }
     }
 
-    public Inventory(){
+    public Inventory() {
         activeSlots = new Slot[8];
         int startingX = 500;
         int startingY = 100;
@@ -92,26 +92,23 @@ public class Inventory {
 
         storageSlots = new Slot[42];
         int i = 0;
-        for(int y = 0; y < 14; y++){
-            for(int x = 0; x < 3; x++){
-                storageSlots[i] = new Slot(850+x*160, 50+y*160, ItemType.all);
-                if(y < 8){
-                    storageSlots[i].item = new Equippable();
-                }
+        for (int y = 0; y < 14; y++) {
+            for (int x = 0; x < 3; x++) {
+                storageSlots[i] = new Slot(850 + x * 160, 50 + y * 160, ItemType.all);
                 i++;
             }
         }
-        width = (int)(menuBackground.getWidth(null) * 1.5);
-        height = (int)(menuBackground.getHeight(null) * 1.5);
+        width = (int) (menuBackground.getWidth(null) * 1.5);
+        height = (int) (menuBackground.getHeight(null) * 1.5);
         scroll = 0;
     }
 
-    public void scroll(int amount){
+    public void scroll(int amount) {
         this.scroll += amount * -10;
     }
 
-    public void draw(Graphics g, Player p){
-        if(!isVisible){
+    public void draw(Graphics g, Player p) {
+        if (!isVisible) {
             return;
         }
         g.translate(XOFFSET, YOFFSET);
@@ -138,33 +135,120 @@ public class Inventory {
         g.drawString("Angriffsgeschwindigkeit 🗡: " + p.attackSpeed, 40, 480);
         g.drawString("Bewegungsgeschwindigkeit 🏃: " + p.movespeed, 40, 520);
         g.drawString("Erfahrungsbonus ☀: " + p.xpBoost + "%", 40, 560);
-        for(int i = 0; i < activeSlots.length; i++){
+        for (int i = 0; i < activeSlots.length; i++) {
             activeSlots[i].draw(g);
         }
 
-        g.setClip(0,50, width, height-120);
+        g.setClip(0, 50, width, height - 120);
         g.translate(0, scroll);
-        for(int i = 0; i < storageSlots.length; i++){
+        for (int i = 0; i < storageSlots.length; i++) {
             storageSlots[i].draw(g);
         }
-        if(dragged != null && !draggedFromActive){
+        if (dragged != null && !draggedFromActive) {
             dragged.drawOnlySlot(g);
         }
         g.translate(0, -scroll);
 
-        if(dragged != null && draggedFromActive){
+        if (dragged != null && draggedFromActive) {
             dragged.drawOnlySlot(g);
         }
-        if(dragged != null){
+
+        g.setClip(null);
+
+        if (dragged != null) {
             g.drawImage(dragged.item.image, dragX, dragY, null);
         }
 
         g.translate(-XOFFSET, -YOFFSET);
-        g.setClip(null);
 
-        if(hover != null){
-            hover.item.draw(g, hoverX+10, hoverY + 50);
+        if (hover != null && hover.item != null) {
+            hover.item.draw(g, hoverX + 10, hoverY + 50);
         }
+    }
+
+    public Inventory(String name, Player player) {
+        this();
+        File file = new File("saves/"+name+"/inventory.csv");
+        if (!file.exists()) {
+            return;
+        }
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(file));
+            for (int i = 0; i < activeSlots.length; i++) {
+                try {
+                    String line = br.readLine();
+                    if(line.equals("null")){
+                        continue;
+                    }
+                    String[] values = line.split("/");
+                    if(values.length == 3){
+                        this.activeSlots[i].item = new Item(values);
+                    } else {
+                        Equippable e = new Equippable(values);
+                        e.equip(player);
+                        this.activeSlots[i].item = e;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.exit(0);
+                }
+            }
+            for (int i = 0; i < storageSlots.length; i++) {
+                try {
+                    String line = br.readLine();
+                    if(line.equals("null")){
+                        continue;
+                    }
+                    String[] values = line.split("/");
+                    if(values.length == 3){
+                        this.storageSlots[i].item = new Item(values);
+                    } else {
+                        Equippable e = new Equippable(values);
+                        e.equip(player);
+                        this.storageSlots[i].item = e;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.exit(0);
+                }
+            }
+            
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+            System.exit(0);
+        }
+        
+    }
+
+    public void saveInventory(String name) {
+        try {
+            File file = new File("saves/"+name+"/inventory.csv");
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+            PrintWriter writer = new PrintWriter(file);
+            for(int i = 0; i < this.activeSlots.length; i++){
+                Slot current = activeSlots[i];
+                if(current.item != null){
+                    writer.println(current.item.toCSV());
+                } else {
+                    writer.println("null");
+                }
+            }
+            for(int i = 0; i < this.storageSlots.length; i++){
+                Slot current = storageSlots[i];
+                if(current.item != null){
+                    writer.println(current.item.toCSV());
+                } else {
+                    writer.println("null");
+                }
+            }
+            writer.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.exit(0);
+        }
+
     }
 
     public void setInventory() {
@@ -173,6 +257,16 @@ public class Inventory {
 
     public boolean isVisible(){
         return this.isVisible;
+    }
+
+    public boolean addItem(Item item){
+        for(int i = 0; i < this.storageSlots.length; i++){
+            if(this.storageSlots[i].item == null){
+                this.storageSlots[i].item = item;
+                return true;
+            }
+        }
+        return false;
     }
 
 	public void startDrag(int x, int y) {
@@ -229,6 +323,7 @@ public class Inventory {
             }
         }
         if(goalSlot == null){
+            dragged.item = null;
             dragged = null;
             return;
         }

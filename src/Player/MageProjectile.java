@@ -1,8 +1,8 @@
 package Player;
 
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.geom.AffineTransform;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 import Entity.Animation;
@@ -31,6 +31,7 @@ public class MageProjectile extends Entity{
         this.height = 40;
         this.moveDif((int)(x-playerX), (int)(y-playerY), false);
         hitList = new ArrayList<>(8);
+        this.movespeed = 60;
     }
 
     public boolean canDamage(Entity e){
@@ -69,7 +70,7 @@ public class MageProjectile extends Entity{
 		return null;
     }
     
-    public void draw(java.awt.Graphics g, int xoffset, int yoffset){
+    public void draw(Graphics g, int xoffset, int yoffset){
         Graphics2D g2d = (Graphics2D)g;
         AffineTransform trans = new AffineTransform();
         trans.translate(this.xPosition + xoffset+xdirection, this.yPosition + yoffset+ydirection);

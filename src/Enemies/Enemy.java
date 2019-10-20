@@ -1,9 +1,6 @@
 package Enemies;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.util.Random;
 
 import Constants.Constants;
 import Entity.Entity;
@@ -23,13 +20,14 @@ public abstract class Enemy extends Entity{
 		
 	public Enemy(int xPos, int yPos) {
 		super();
-		this.maxHP = 10;
-		this.currentHP = 10;
+		this.maxHP = 40;
+		this.currentHP = 40;
 		visionRange = 300;
 		this.attackRange = 100;
+		this.attackDamage = 10;
 		timer = 0;
 		timerEnd = Constants.random(0, 5000);
-		movespeed = 0.35f;
+		movespeed = 35f;
 		this.xPosition = xPos;
 		this.originalX = xPos;
 		this.yPosition = yPos;
@@ -45,8 +43,8 @@ public abstract class Enemy extends Entity{
 		if(timer > timerEnd && state == Enemy.IDLE) {
 			timer = 0;
 			timerEnd = Constants.random(2000, 5000);
-			int newx = originalX + Constants.random(-200, 200);
-			int newy = originalY + Constants.random(-200, 200);
+			int newx = originalX + Constants.random(50, 200) * (Math.random() < 0.5 ? -1 : 1);
+			int newy = originalY + Constants.random(50, 150) * (Math.random() < 0.5 ? -1 : 1);
 			this.moveTo(newx, newy);			
 		}
 	}

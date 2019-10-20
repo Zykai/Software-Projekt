@@ -18,6 +18,10 @@ public class Item {
     private static Color rareColor = new Color(119, 221, 237);
     private static Color epicColor = new Color(137, 55, 191);
     private static Color legendaryColor = new Color(189, 191, 55);
+    private static Color commonColorTransparent = new Color(124, 132, 145, 128);
+    private static Color rareColorTransparent = new Color(119, 221, 237, 128);
+    private static Color epicColorTransparent = new Color(137, 55, 191, 128);
+    private static Color legendaryColorTransparent = new Color(189, 191, 55, 128);
     private static Color hoverColor = new Color(0,9,26, 220);
 
     public enum Rarity{
@@ -38,6 +42,12 @@ public class Item {
             System.exit(0);
         }
         name = "Item";
+    }
+
+    public Item(String[] values){
+        this.name = values[0];
+        this.rarity = Rarity.valueOf(values[1]);
+        this.type = ItemType.valueOf(values[2]);
     }
 
     public String getName(){
@@ -63,6 +73,21 @@ public class Item {
         }
     }
 
+    public Color getColorTransparent(){
+        switch(this.rarity){
+            case common:
+                return commonColorTransparent;
+            case rare:
+                return rareColorTransparent;
+            case epic:
+                return epicColorTransparent;
+            case legendary:
+                return legendaryColorTransparent;
+            default:
+                return commonColor;
+        }
+    }
+
     protected int getRows(){
         return 0;
     }
@@ -73,5 +98,9 @@ public class Item {
         g.setFont(Inventory.cursive);
         g.setColor(getColor());
         g.drawString(getName(), hoverX + 10, hoverY + 30);
+	}
+
+	public String toCSV() {   
+		return name + "/" + rarity + "/" + type;
 	}
 }
