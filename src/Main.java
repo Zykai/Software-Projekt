@@ -233,7 +233,14 @@ public class Main extends JPanel {
 		FrameManager.currentScreen = FrameManager.Screen.Menu;
 		FrameManager.run();
 	}
-	/*public Player getCharacter()
+	
+	
+	public void main() {
+	}
+	{
+		setCreator(new Creator());
+	}
+		/*public Player getCharacter()
 	{
 		return Creator.getPlayer();
 	}
