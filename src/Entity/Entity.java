@@ -52,6 +52,9 @@ public abstract class Entity {
 	// Update position and animation state
 	public void update(float deltaTime, Map map){
 		this.currentAnimationDuration += deltaTime;
+		int x = (int)xPosition;
+		int y = (int)yPosition;
+		drawHealth( null, x, y);
 		if(state == MOVING) {
 			this.currentAnimation = getMove();
 			double newX = xPosition + xdirection * deltaTime * movespeed;
