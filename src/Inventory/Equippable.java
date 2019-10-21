@@ -240,7 +240,8 @@ public class Equippable extends Item {
             yoffset += 32;
         }
         if(attackSpeedBonus != 0){
-            g.drawString((attackSpeedBonus > 0 ? ("+" + attackSpeedBonus) : ""+attackSpeedBonus) + " Angriffsgeschwindigkeit 🗡", hoverX+10, yoffset);
+            String as = String.format("%.2f", attackSpeedBonus);
+            g.drawString((attackSpeedBonus > 0 ? ("+" + as) : as) + " Angriffsgeschwindigkeit 🗡", hoverX+10, yoffset);
             yoffset += 32;
         }
         if(movespeedBonus != 0.0){

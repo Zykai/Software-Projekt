@@ -115,6 +115,7 @@ public class Inventory {
 
         g.drawImage(menuBackground, 0, 0, width, height, null);
 
+        String as = String.format("%.2f", p.attackSpeed);
         g.setColor(textColor);
         g.setFont(bigFont);
         g.drawString("Stats 📝", 150, 70);
@@ -132,7 +133,7 @@ public class Inventory {
         g.drawString("Chance kritischer Treffer ⚠: " + p.critChance + "%", 40, 360);
         g.drawString("Lebensraub 🦇: " + p.lifeSteal, 40, 400);
         g.drawString("Abklingzeitverringerung ⌛: " + p.coolDownReduction + "%", 40, 440);
-        g.drawString("Angriffsgeschwindigkeit 🗡: " + p.attackSpeed, 40, 480);
+        g.drawString("Angriffsgeschwindigkeit 🗡: " + as, 40, 480);
         g.drawString("Bewegungsgeschwindigkeit 🏃: " + p.movespeed, 40, 520);
         g.drawString("Erfahrungsbonus ☀: " + p.xpBoost + "%", 40, 560);
         for (int i = 0; i < activeSlots.length; i++) {
