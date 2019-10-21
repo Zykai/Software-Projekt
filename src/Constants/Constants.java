@@ -13,7 +13,9 @@ public class Constants {
 	public static int BUTTON_Y = 150/2;
 	
 	public static String safeName = "Default";
-	public static Player PLAYER = null;
+	public final static int HERO = 0;
+	public final static int MAGE = 1;
+	public static int PLAYER_CLASS = 0;
 
 	public static int random(int min, int max) {
 		return rand.nextInt(max-min+1) + min;

@@ -26,6 +26,7 @@ import javax.swing.KeyStroke;
 import Constants.Constants;
 import Maps.Darkness;
 import Maps.Map;
+import Player.Hero;
 import Player.Mage;
 import Player.Player;
 
@@ -60,11 +61,11 @@ public class Main extends JPanel {
 	public Main() {
 		super();
 		setCreator(new Creator());
-		setBackground(Color.BLUE);			
-		if(Constants.PLAYER == null){
-			player = new Mage();
+		setBackground(Color.BLUE);
+		if(Constants.PLAYER_CLASS == Constants.HERO){
+			player = new Hero();
 		} else {
-			player = Constants.PLAYER;
+			player = new Mage();
 		}
 		map = new Darkness();
 		pause = new Pause();
@@ -82,7 +83,7 @@ public class Main extends JPanel {
 						player.inventory.saveInventory(Constants.safeName);
 					}
 					if(e.getX() >= 560 && e.getX() <= 760 && e.getY() >= 320 && e.getY() <= 370){//pause back to menu
-						Constants.PLAYER = null;
+						player = null;
 						FrameManager.currentScreen = FrameManager.Screen.Menu;
 						try {
 							Thread.sleep(100);

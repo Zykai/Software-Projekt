@@ -91,7 +91,7 @@ public class Mage extends Player {
 	}
 	
 	public void applyDamage(Entity e, double mul){
-		double pureDamage = ((this.attackDamage / 2 + this.abilityPower) * mul * (Constants.random(0,100) > this.critChance ? 1.5 : 1.0));
+		double pureDamage = ((this.attackDamage / 4 + this.abilityPower / 2) * mul * (Constants.random(0,100) > this.critChance ? 1.5 : 1.0));
 		int damage = (int) pureDamage * 100 / (100 + this.armor);
 		int heal = this.lifeSteal * damage / 100;
 		this.heal(heal);

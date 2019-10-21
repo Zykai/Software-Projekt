@@ -1,9 +1,7 @@
 import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.FlowLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -14,7 +12,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,10 +19,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Constants.Constants;
-import Player.Mage;
-import Player.Hero;
-import Player.Player;
 import Inventory.Inventory;
+import Player.Hero;
+import Player.Mage;
+import Player.Player;
 
 public class Creator extends JPanel{
 	
@@ -197,7 +194,7 @@ public class Creator extends JPanel{
 		heroImg.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Constants.PLAYER = new Hero();
+				Constants.PLAYER_CLASS = Constants.HERO;
 				FrameManager.currentScreen = FrameManager.Screen.Game;
 				FrameManager.run();
 			}
@@ -219,7 +216,7 @@ public class Creator extends JPanel{
 			mageImg.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					Constants.PLAYER = new Mage();
+					Constants.PLAYER_CLASS = Constants.MAGE;
 					FrameManager.currentScreen = FrameManager.Screen.Game;
 					FrameManager.run();
 				}
