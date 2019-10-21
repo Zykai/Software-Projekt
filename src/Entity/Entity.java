@@ -208,6 +208,10 @@ public abstract class Entity {
 			return true;
 		} else {
 			this.currentAnimationDuration += deltaTime;
+			if(this.currentAnimation.isFinished(this.currentAnimationDuration)){
+				this.currentAnimationDuration -= deltaTime;
+				return true;
+			}
 			return false;
 		}
 	}

@@ -15,6 +15,7 @@ public class Mage extends Player {
 	private static Animation PLAYER_IDLE[];
 	private static Animation PLAYER_RUN;
 	private static Animation PLAYER_ATTACK[];
+	private static Animation PLAYER_DEATH;
 
 	static {
 		PLAYER_IDLE = new Animation[2];
@@ -24,6 +25,7 @@ public class Mage extends Player {
 		PLAYER_ATTACK = new Animation[2];
 		PLAYER_ATTACK[0] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-attack-0", 5, 100);
 		PLAYER_ATTACK[1] = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-summon-0", 6, 100);
+		PLAYER_DEATH = new Animation("res/monster/Necromancer/Individual Sprites/necromancer-die-0", 10, 1000);
 	}
 
 	private ArrayList<MageProjectile> projectiles;
@@ -41,6 +43,8 @@ public class Mage extends Player {
 		this.hpRegen = 1;
 		this.attackDamage = 0;
 		this.abilityPower = 10;
+		this.currentHP = 100;
+		this.maxHP = 100;
 		this.critChance = 5;
 		this.currentAnimation = PLAYER_IDLE[0];
 		this.currentAnimationDuration = 0.0;
@@ -131,7 +135,7 @@ public class Mage extends Player {
 
 	@Override
 	protected Animation getDie(){
-		return null;
+		return PLAYER_DEATH;
 	}
 	
 	public void draw(Graphics g, int xoffset, int yoffset) {

@@ -14,6 +14,7 @@ public class Hero extends Player {
 	private static Animation PLAYER_IDLE[];
 	private static Animation PLAYER_RUN;
 	private static Animation PLAYER_ATTACK[];
+	private static Animation PLAYER_DEATH;
 
 	static {
 		PLAYER_IDLE = new Animation[2];
@@ -24,6 +25,7 @@ public class Hero extends Player {
 		PLAYER_ATTACK[0] = new Animation("res/hero/adventurer-attack1-0", 5, 500);
 		PLAYER_ATTACK[1] = new Animation("res/hero/adventurer-attack2-0", 6, 500);
 		PLAYER_ATTACK[2] = new Animation("res/hero/adventurer-attack3-0", 6, 500);
+		PLAYER_DEATH = new Animation("res/hero/adventurer-die-0", 7, 700);
 	}
 
 	private int attackIndex;
@@ -116,7 +118,7 @@ public class Hero extends Player {
 
 	@Override
 	protected Animation getDie(){
-		return null;
+		return PLAYER_DEATH;
 	}
 
 	@Override

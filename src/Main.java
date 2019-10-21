@@ -10,7 +10,10 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
@@ -29,6 +32,19 @@ import Player.Player;
 // https://docs.oracle.com/javase/tutorial/2d/geometry/primitives.html
 
 public class Main extends JPanel {
+
+	private static Image DEATH_SCREEN;
+	static{
+		try {
+			DEATH_SCREEN = ImageIO.read(new File("res/dsui/you_died.png"));
+		}
+		catch (IOException e) {
+			System.out.println(e.getMessage());
+			System.exit(0);
+		}
+	}
+	private boolean hasDied;
+	private float deathTimer = 0;;
 
 	private int frameNumber = 1;
 	public float deltaTime;
@@ -54,7 +70,7 @@ public class Main extends JPanel {
 		pause = new Pause();
 		player.setX(map.getStartingX());
 		player.setY(map.getStartingY());
-
+		hasDied = false;
 		this.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -181,7 +197,20 @@ public class Main extends JPanel {
 	public void updateGame(float deltaTime) {
 		if(!isPaused){
 			// update Spielerposition, animationen
-			player.update(deltaTime, map);
+			if(!this.hasDied){
+				player.update(deltaTime, map);
+				if(player.currentHP == 0){
+					hasDied = true;
+					player.setDead();
+				}
+			} else{
+				player.updateDead(deltaTime);
+				deathTimer += deltaTime;
+				if(deathTimer > 3000){
+					FrameManager.currentScreen = FrameManager.Screen.Menu;
+					FrameManager.run();
+				}
+			}
 			// update enemies etc...
 			map.update(deltaTime, player);
 		}
@@ -206,6 +235,13 @@ public class Main extends JPanel {
 		player.draw(g, xoffset, yoffset);
 		g.setColor(new Color(0.0f, 1.0f, 1.0f));
 		g.drawString(String.format("%.2f", fps), 30, 30);
+		if(this.hasDied){
+			double progress = this.deathTimer / 3000;
+			Color deathColor = new Color((int)(progress * 194), (int)(progress * 31), (int)(progress * 45), (int)(progress *120));
+			g.setColor(deathColor);
+			g.fillRect(0,0, Constants.SCREEN_X, Constants.SCREEN_Y);
+			g.drawImage(DEATH_SCREEN, 650, 300, null);
+		}
 		if(isPaused){
 			pause.draw(g);
 		}
