@@ -26,6 +26,7 @@ public class Slug extends Enemy {
 
 	public Slug(int xPos, int yPos) {
 		super(xPos, yPos);
+		this.attackRange = 50;
 		this.height = 60;
 		this.width = 60;
 	}

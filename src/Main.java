@@ -106,7 +106,9 @@ public class Main extends JPanel {
 				if (player.inventory.isVisible()) {
 					player.inventory.endDrag(e.getX(), e.getY(), player);
 				} else {
-					player.moveDif(e.getX() - Constants.SCREEN_X / 2, e.getY() - Constants.SCREEN_Y / 2, true);
+					if(player.state != Player.ATTACK){
+						player.moveDif(e.getX() - Constants.SCREEN_X / 2, e.getY() - Constants.SCREEN_Y / 2, true);
+					}
 				}
 			}
 

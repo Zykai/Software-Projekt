@@ -35,7 +35,6 @@ public abstract class Player extends Entity{
 	}
 
 	public void draw(Graphics g, int xoffset, int yoffset){
-		super.draw(g, xoffset, yoffset);
 		g.setColor(Color.BLACK);
 		int xPos = 800;
 		int yPos = 950;

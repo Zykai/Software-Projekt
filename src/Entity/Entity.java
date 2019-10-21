@@ -44,7 +44,7 @@ public abstract class Entity {
 	protected Animation currentAnimation;
 	protected double currentAnimationDuration;
 	
-	protected int state;
+	public int state;
 	
 	protected boolean floating;
 
@@ -182,9 +182,9 @@ public abstract class Entity {
 	}
 
 	public boolean hitEntity(Entity e){
-		if(this.intersectEntity(e) || e.intersectEntity(this)){
+		if(this.intersectEntity(e) || e.intersectEntity(this) || this.interSectPoint(e, this.getHitCenterX(), this.getHitCenterY())){
 			// Check if facing towards the other entity
-			if(this.direction > 0){
+			if(this.direction < 0){
 				return this.getHitCenterX() - e.getHitWidth() / 4 <= e.getHitCenterX();
 			} else {
 				return this.getHitCenterX() + e.getHitWidth() / 4 >= e.getHitCenterX();	
@@ -266,6 +266,7 @@ public abstract class Entity {
 	
 	public void draw(Graphics g, int xoffset, int yoffset){
 		g.drawRect((int)(this.getHitX() + xoffset), (int)(this.getHitY() + yoffset),(int) this.getHitWidth(), (int)this.getHitHeight());
+		g.drawRect((int)(this.getHitCenterX() + xoffset), (int)(this.getHitY() + yoffset),(int) this.getHitWidth() / 2, (int)this.getHitHeight());
 	}
 
 	public double getHitX(){
@@ -292,8 +293,6 @@ public abstract class Entity {
 		return this.getHitY() + this.getHitHeight() / 2;
 	}
 	
-	int x = (int)xPosition;
-	int y = (int)yPosition;
 	public void drawHealth(Graphics g, int x, int y) {
 		g.setColor(Color.red);
 		g.drawRect(x, y, 100, 20);

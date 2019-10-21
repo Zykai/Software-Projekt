@@ -1,5 +1,6 @@
 package Enemies;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import Constants.Constants;
@@ -21,14 +22,14 @@ public abstract class Enemy extends Entity{
 	public Enemy(int xPos, int yPos) {
 		super();
 		this.hpRegen = 1;
-		this.maxHP = 40;
-		this.currentHP = 40;
+		this.maxHP = Constants.random(30, 50);;
+		this.currentHP = maxHP;
 		visionRange = 300;
-		this.attackRange = 100;
-		this.attackDamage = 10;
+		this.attackRange = this.getHitWidth();
+		this.attackDamage = Constants.random(9, 14);
 		timer = 0;
-		timerEnd = Constants.random(0, 5000);
-		movespeed = 35f;
+		timerEnd = 100;
+		movespeed = Constants.random(30, 45);
 		this.xPosition = xPos;
 		this.originalX = xPos;
 		this.yPosition = yPos;
@@ -55,9 +56,10 @@ public abstract class Enemy extends Entity{
 	// Looks if enemies is in range for attack, if yes, attack, otherwise move closer
 	public void updateActive(float deltaTime, Map map, Player player){
 		super.update(deltaTime, map);
+		int offset = (int) (player.getHitHeight() / 4);
 		if(this.state == Enemy.IDLE){
-			if(Constants.getDistance(this.getCenterX(), this.getCenterY(), player.getCenterX(), player.getCenterY()) > this.attackRange * this.attackRange || ((player.getCenterX() > this.getCenterX() ^ this.direction == 1) && Math.abs(player.getCenterX()-this.getCenterX()) > 20)){
-				this.moveDif((int)(player.getCenterX()-this.getCenterX()), (int)(player.getCenterY() - this.getCenterY()), true);
+			if(Constants.getDistance(this.getHitCenterX(), this.getHitCenterY(), player.getHitCenterX(), player.getHitCenterY()) > this.attackRange * this.attackRange || ((player.getHitCenterX() > this.getHitCenterX() ^ this.direction == 1) && Math.abs(player.getHitCenterX()-this.getHitCenterX()) > 20)){
+				this.moveDif((int)(player.getHitCenterX()-this.getHitCenterX()), (int)(player.getHitCenterY() - this.getHitCenterY()) + Constants.random(-offset, offset), true);
 			} else {
 				this.state = Enemy.ATTACK;
 				this.currentAnimationDuration = 0;
@@ -65,8 +67,8 @@ public abstract class Enemy extends Entity{
 			}
 		}
 		if(this.state == Enemy.MOVING){
-			if(Constants.getDistance(this.xgoal, this.ygoal, player.getCenterX(), player.getCenterY()) > this.attackRange * this.attackRange){
-				this.moveDif((int)(player.getCenterX()-this.getCenterX()), (int)(player.getCenterY() - this.getCenterY()),true);
+			if(Constants.getDistance(this.xgoal, this.ygoal, player.getHitCenterX(), player.getHitCenterY()) > this.attackRange * this.attackRange){
+				this.moveDif((int)(player.getHitCenterX()-this.getHitCenterX()), (int)(player.getHitCenterY() - this.getHitCenterY()) + Constants.random(-offset, offset),true);
 			}
 		}
 		if (this.state == Enemy.ATTACK){
@@ -82,11 +84,19 @@ public abstract class Enemy extends Entity{
 	}
 	
 	public void draw(Graphics g, int xoffset, int yoffset) {
-		super.draw(g, xoffset, yoffset);
 		if(direction < 0) {
 			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), (int)xPosition + xoffset, (int) yPosition + yoffset, (int)this.width, (int)this.height, null);	
 		} else {
 			g.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), (int) (xPosition + xoffset + this.width), (int) yPosition + yoffset, (int)-this.width, (int)this.height, null);
 		}
+		if(this.active){
+			g.setColor(Color.RED);
+		} else {
+			g.setColor(Color.GREEN);
+		}
+		g.fillRect((int)(this.getHitX()+xoffset), (int)(this.getHitY() + this.getHitHeight() + 15 + yoffset), (int)(this.getHitWidth() * this.currentHP / this.maxHP), 5);
+		g.setColor(Color.BLACK);
+		g.drawRect((int)(this.getHitX()+xoffset), (int)(this.getHitY() + this.getHitHeight() + 15 + yoffset), (int)this.getHitWidth(), 5);
+
 	}
 }

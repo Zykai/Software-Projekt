@@ -43,8 +43,8 @@ public class Mage extends Player {
 		this.hpRegen = 1;
 		this.attackDamage = 0;
 		this.abilityPower = 10;
-		this.currentHP = 100;
-		this.maxHP = 100;
+		this.currentHP = 120;
+		this.maxHP = 120;
 		this.critChance = 5;
 		this.currentAnimation = PLAYER_IDLE[0];
 		this.currentAnimationDuration = 0.0;
