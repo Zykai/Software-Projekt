@@ -79,7 +79,6 @@ public class MageProjectile extends Entity{
         trans.scale(1, 2);
 
         g2d.drawImage(this.currentAnimation.getCurrentImage(this.currentAnimationDuration), trans, null);
-        g2d.drawOval((int)this.xPosition + xoffset, (int)this.yPosition + yoffset, (int)5, (int)5);
     }
 
 }
