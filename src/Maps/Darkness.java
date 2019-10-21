@@ -138,6 +138,7 @@ public class Darkness extends Map {
 		roomList = d.tree.getRoomList();
 		currentRoom = d.tree.getLefternMostRoom();
 		currentRoom.visited = true;
+		currentRoom.enemies.removeAll(currentRoom.enemies);
 		this.startingX = currentRoom.cx;
 		this.startingY = currentRoom.cy;
 

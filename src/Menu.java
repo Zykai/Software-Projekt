@@ -39,7 +39,7 @@ public class Menu extends JPanel{
 
 		//Create Button
 		
-		createB = new JButton("Create Character");
+		createB = new JButton("Choose Character");
 		createB.setFont(new Font("SERIF", Font.PLAIN, 25));
 		createB.setForeground(Color.WHITE);
 		createB.setHorizontalTextPosition(JButton.CENTER);

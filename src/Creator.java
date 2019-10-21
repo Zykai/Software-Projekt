@@ -195,7 +195,7 @@ public class Creator extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Constants.PLAYER_CLASS = Constants.HERO;
-				FrameManager.currentScreen = FrameManager.Screen.Game;
+				FrameManager.currentScreen = FrameManager.Screen.Menu;
 				FrameManager.run();
 			}
 		});
@@ -217,7 +217,7 @@ public class Creator extends JPanel{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					Constants.PLAYER_CLASS = Constants.MAGE;
-					FrameManager.currentScreen = FrameManager.Screen.Game;
+					FrameManager.currentScreen = FrameManager.Screen.Menu;
 					FrameManager.run();
 				}
 			});
