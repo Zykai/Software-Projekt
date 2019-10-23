@@ -1,3 +1,5 @@
+package Frames;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -19,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Constants.Constants;
+import Frames.FrameManager.Screen;
 
 public class Menu extends JPanel{
 	

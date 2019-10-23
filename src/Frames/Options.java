@@ -1,3 +1,5 @@
+package Frames;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -16,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.BorderFactory;
 import Constants.Constants;
+import Frames.FrameManager.Screen;
 
 public class Options extends JPanel{
 	
@@ -68,6 +71,33 @@ public class Options extends JPanel{
 			}
 		});
 		panel.add(backB);
+		changeSize = new JButton("Change Screen Size");
+		changeSize.setFont(new Font("SERIF", Font.PLAIN, 25));
+		changeSize.setForeground(Color.WHITE);
+		changeSize.setHorizontalTextPosition(JButton.CENTER);
+		changeSize.setVerticalTextPosition(JButton.CENTER);
+		changeSize.setOpaque(false);
+		changeSize.setContentAreaFilled(false);
+		changeSize.setBorder(BorderFactory.createEmptyBorder());
+		changeSize.setBounds((Constants.SCREEN_X - Constants.BUTTON_X) / 2, (Constants.SCREEN_Y - Constants.BUTTON_Y)/ 2,Constants.BUTTON_X, Constants.BUTTON_Y);
+		changeSize.setIcon(new ImageIcon(backI));
+		changeSize.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(Constants.SCREEN_X == 1920){
+					FrameManager.frame.setSize(1720, 880);
+					Constants.SCREEN_X = 1720;
+					Constants.SCREEN_Y = 880;
+				} else {
+					FrameManager.frame.setSize(1920, 1080);
+					Constants.SCREEN_X = 1920;
+					Constants.SCREEN_Y = 1080;
+				}
+				
+			}
+			
+		});
+		panel.add(changeSize);
 		FrameManager.frame.validate();
 	}
 	public void paintComponent(Graphics g)

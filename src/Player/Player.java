@@ -36,8 +36,8 @@ public abstract class Player extends Entity{
 
 	public void draw(Graphics g, int xoffset, int yoffset){
 		g.setColor(Color.BLACK);
-		int xPos = 800;
-		int yPos = 950;
+		int xPos = Constants.SCREEN_X / 2 - 200;
+		int yPos = Constants.SCREEN_Y - 130;
 		g.fillRect(xPos, yPos, 400, 50);
 		g.setColor(Color.RED);
 		g.fillRect(xPos+10, yPos+10, (int)(380 * this.currentHP / this.maxHP), 30);

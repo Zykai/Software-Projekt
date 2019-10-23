@@ -1,9 +1,11 @@
+package Frames;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.event.SwingPropertyChangeSupport;
 
 
-class FrameManager {
+
+public class FrameManager {
     public static JFrame frame;
 
     enum Screen {

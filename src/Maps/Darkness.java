@@ -16,6 +16,7 @@ import DungeonGenerator.DungeonGenerator;
 import DungeonGenerator.Room;
 import DungeonGenerator.RoomTree;
 import Enemies.Enemy;
+import Frames.FrameManager;
 import Inventory.DropItem;
 import Player.Player;
 
@@ -199,11 +200,12 @@ public class Darkness extends Map {
 			this.dropItems.get(i).draw(g, xoffset, yoffset);
 		}
 		// Draw Minimap
-		g.translate(1700, 25);
+		int minimapX = FrameManager.frame.getWidth() - 200;
+		g.translate(minimapX, 25);
 		roomTree.drawMap(g);
 		g.setColor(Color.RED);
 		g.fillOval(playerX, playerY, 10, 10);
-		g.translate(-1700, -25);
+		g.translate(-minimapX, -25);
 		super.draw(g, xoffset, yoffset);
 	}
 

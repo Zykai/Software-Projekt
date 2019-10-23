@@ -1,3 +1,5 @@
+package Frames;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -24,6 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 import Constants.Constants;
+import Frames.FrameManager.Screen;
 import Maps.Darkness;
 import Maps.Map;
 import Player.Hero;
@@ -243,7 +246,7 @@ public class Main extends JPanel {
 			Color deathColor = new Color((int)(progress * 194), (int)(progress * 31), (int)(progress * 45), (int)(progress *120));
 			g.setColor(deathColor);
 			g.fillRect(0,0, Constants.SCREEN_X, Constants.SCREEN_Y);
-			g.drawImage(DEATH_SCREEN, 650, 300, null);
+			g.drawImage(DEATH_SCREEN, Constants.SCREEN_X / 2 - DEATH_SCREEN.getWidth(null) / 2, Constants.SCREEN_Y / 2 - DEATH_SCREEN.getHeight(null) / 2, null);
 		}
 		if(isPaused){
 			pause.draw(g);

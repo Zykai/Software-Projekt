@@ -113,6 +113,11 @@ public class Mage extends Player {
 	}
 	
 	@Override
+	public void eAbility(int xMouse, int yMouse, Map map) {
+		this.heal(30);
+	}
+	
+	@Override
 	public void wAbility(int xMouse, int yMouse, Map map) {
 		this.xPosition = map.getStartingX();
 		this.yPosition = map.getStartingY();

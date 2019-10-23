@@ -13,14 +13,14 @@ import java.io.PrintWriter;
 
 import javax.imageio.ImageIO;
 
+import Frames.FrameManager;
 import Inventory.Equippable.ArmorType;
 import Player.Player;
 
 public class Inventory {
 
     private static Image menuBackground;
-    private static int XOFFSET = 200, YOFFSET = 100;
-
+    private static int STARTING_X, STARTING_Y;
     public static Color xpColor = new Color(209, 91, 36);
     public static Color textColor = new Color(204, 204, 204);
     public static Font cursive = new Font("Yu Gothic", Font.ITALIC, 26);
@@ -40,7 +40,7 @@ public class Inventory {
 
     private Slot hover;
     private int hoverX, hoverY;
-
+    
     static {
         try {
             menuBackground = ImageIO.read(new File("res/dsui/menu_only_bg.png"));
@@ -78,27 +78,31 @@ public class Inventory {
     }
 
     public Inventory() {
+    	int yoff = (int) ((FrameManager.frame.getHeight() - Inventory.menuBackground.getHeight(null) * 1.5) / 2);
+    	int xoff = (int) ((FrameManager.frame.getWidth() - Inventory.menuBackground.getWidth(null) * 1.7) / 2);
         activeSlots = new Slot[8];
-        int startingX = 500;
-        int startingY = 100;
-        activeSlots[0] = new Slot(startingX + 0 * 160, startingY + 0 * 160, ItemType.weapon);
-        activeSlots[1] = new Slot(startingX + 1 * 160, startingY + 0 * 160, ItemType.ring);
-        activeSlots[2] = new Slot(startingX + 0 * 160, startingY + 1 * 160, ItemType.helmet);
-        activeSlots[3] = new Slot(startingX + 1 * 160, startingY + 1 * 160, ItemType.plate);
-        activeSlots[4] = new Slot(startingX + 0 * 160, startingY + 2 * 160, ItemType.gauntlet);
-        activeSlots[5] = new Slot(startingX + 1 * 160, startingY + 2 * 160, ItemType.boots);
-        activeSlots[6] = new Slot(startingX + 0 * 160, startingY + 3 * 160, ItemType.potion);
-        activeSlots[7] = new Slot(startingX + 1 * 160, startingY + 3 * 160, ItemType.potion);
+        STARTING_X = xoff;
+        STARTING_Y = yoff;
+        int storage_x = STARTING_X + 530;
+        int storage_y = STARTING_Y + 100;
+        activeSlots[0] = new Slot(storage_x + 0 * 160, storage_y + 0 * 160, ItemType.weapon);
+        activeSlots[1] = new Slot(storage_x + 1 * 160, storage_y + 0 * 160, ItemType.ring);
+        activeSlots[2] = new Slot(storage_x + 0 * 160, storage_y + 1 * 160, ItemType.helmet);
+        activeSlots[3] = new Slot(storage_x + 1 * 160, storage_y + 1 * 160, ItemType.plate);
+        activeSlots[4] = new Slot(storage_x + 0 * 160, storage_y + 2 * 160, ItemType.gauntlet);
+        activeSlots[5] = new Slot(storage_x + 1 * 160, storage_y + 2 * 160, ItemType.boots);
+        activeSlots[6] = new Slot(storage_x + 0 * 160, storage_y + 3 * 160, ItemType.potion);
+        activeSlots[7] = new Slot(storage_x + 1 * 160, storage_y + 3 * 160, ItemType.potion);
 
         storageSlots = new Slot[42];
         int i = 0;
         for (int y = 0; y < 14; y++) {
             for (int x = 0; x < 3; x++) {
-                storageSlots[i] = new Slot(850 + x * 160, 50 + y * 160, ItemType.all);
+                storageSlots[i] = new Slot(storage_x + 350 + x * 160, y + 50 + y * 160, ItemType.all);
                 i++;
             }
         }
-        width = (int) (menuBackground.getWidth(null) * 1.5);
+        width = (int) (menuBackground.getWidth(null) * 1.7);
         height = (int) (menuBackground.getHeight(null) * 1.5);
         scroll = 0;
     }
@@ -111,10 +115,10 @@ public class Inventory {
         if (!isVisible) {
             return;
         }
-        g.translate(XOFFSET, YOFFSET);
 
-        g.drawImage(menuBackground, 0, 0, width, height, null);
-
+        g.drawImage(menuBackground, STARTING_X, STARTING_Y, width, height, null);
+        
+        g.translate(STARTING_X, STARTING_Y);
         String as = String.format("%.2f", p.attackSpeed);
         g.setColor(textColor);
         g.setFont(bigFont);
@@ -136,6 +140,8 @@ public class Inventory {
         g.drawString("Angriffsgeschwindigkeit 🗡: " + as, 40, 480);
         g.drawString("Bewegungsgeschwindigkeit 🏃: " + p.movespeed, 40, 520);
         g.drawString("Erfahrungsbonus ☀: " + p.xpBoost + "%", 40, 560);
+        g.translate(-STARTING_X, -STARTING_Y);
+        
         for (int i = 0; i < activeSlots.length; i++) {
             activeSlots[i].draw(g);
         }
@@ -159,8 +165,6 @@ public class Inventory {
         if (dragged != null) {
             g.drawImage(dragged.item.image, dragX, dragY, null);
         }
-
-        g.translate(-XOFFSET, -YOFFSET);
 
         if (hover != null && hover.item != null) {
             hover.item.draw(g, hoverX + 10, hoverY + 50);
@@ -273,24 +277,24 @@ public class Inventory {
 	public void startDrag(int x, int y) {
         for(int i = 0; i < activeSlots.length; i++){
             Slot active = activeSlots[i];
-            if(active.isClicked(x - XOFFSET, y - YOFFSET) && active.item != null){
+            if(active.isClicked(x, y) && active.item != null){
                 dragged = active;
-                dragOffsetX = x - XOFFSET - active.x;
-                dragOffsetY = y - YOFFSET - active.y;
-                dragX = x - XOFFSET - dragOffsetX;
-                dragY = y - YOFFSET - dragOffsetY;
+                dragOffsetX = x - active.x;
+                dragOffsetY = y - active.y;
+                dragX = x - dragOffsetX;
+                dragY = y - dragOffsetY;
                 draggedFromActive = true;
                 return;
             }
         }
         for(int i = 0; i < storageSlots.length; i++){
             Slot active = storageSlots[i];
-            if(active.isClicked(x - XOFFSET, y - YOFFSET - scroll) && active.item != null){
+            if(active.isClicked(x, y - scroll) && active.item != null){
                 dragged = active;
-                dragOffsetX = x - XOFFSET - active.x;
-                dragOffsetY = y - YOFFSET - active.y - scroll;
-                dragX = x - XOFFSET - dragOffsetX;
-                dragY = y - YOFFSET - dragOffsetY;
+                dragOffsetX = x - active.x;
+                dragOffsetY = y - active.y - scroll;
+                dragX = x - dragOffsetX;
+                dragY = y - dragOffsetY;
                 draggedFromActive = false;
                 return;
             }
@@ -300,8 +304,8 @@ public class Inventory {
     public void continueDrag(int x, int y){
         hoverX = x;
         hoverY = y;
-        dragX = x - XOFFSET - dragOffsetX;
-        dragY = y - YOFFSET - dragOffsetY;
+        dragX = x - dragOffsetX;
+        dragY = y - dragOffsetY;
     }
 
     public void endDrag(int x, int y, Player p){
@@ -312,14 +316,14 @@ public class Inventory {
         }
         for(int i = 0; i < activeSlots.length; i++){
             Slot active = activeSlots[i];
-            if(active.isClicked(x - XOFFSET, y - YOFFSET)){
+            if(active.isClicked(x, y)){
                 goalSlot = active;
                 toActive = true;
             }
         }
         for(int i = 0; i < storageSlots.length; i++){
             Slot active = storageSlots[i];
-            if(active.isClicked(x - XOFFSET, y - YOFFSET - scroll)){
+            if(active.isClicked(x, y - scroll)){
                 goalSlot = active;
             }
         }
@@ -352,7 +356,7 @@ public class Inventory {
 	public void hover(int x, int y) {
         for(int i = 0; i < activeSlots.length; i++){
             Slot active = activeSlots[i];
-            if(active.isClicked(x - XOFFSET, y - YOFFSET) && active.item != null){
+            if(active.isClicked(x, y) && active.item != null){
                 hover = active;
                 hoverX = x;
                 hoverY = y;
@@ -361,7 +365,7 @@ public class Inventory {
         }
         for(int i = 0; i < storageSlots.length; i++){
             Slot active = storageSlots[i];
-            if(active.isClicked(x - XOFFSET, y - YOFFSET - scroll) && active.item != null){
+            if(active.isClicked(x, y - scroll) && active.item != null){
                 hover = active;
                 hoverX = x;
                 hoverY = y;

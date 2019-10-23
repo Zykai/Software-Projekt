@@ -1,3 +1,5 @@
+package Frames;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -19,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.BorderFactory;
 import Constants.Constants;
+import Frames.FrameManager.Screen;
 
 public class Saves extends JPanel{
 	
