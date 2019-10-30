@@ -1,0 +1,995 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.3" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="Frames.Main" project="Software-Projekt" 
+    file="/Software-Projekt/src/Frames/Main.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="405" width="246" x="1703" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="Frames.Menu" project="Software-Projekt" 
+    file="/Software-Projekt/src/Frames/Menu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="387" width="178" x="46" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="Frames.Creator" project="Software-Projekt" 
+    file="/Software-Projekt/src/Frames/Creator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="765" width="178" x="1640" y="1837"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="Frames.FrameManager" project="Software-Projekt" 
+    file="/Software-Projekt/src/Frames/FrameManager.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="110" x="468" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="5" language="java" name="Frames.FrameManager.Screen" project="Software-Projekt" 
+    file="/Software-Projekt/src/Frames/FrameManager.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="119" x="468" y="644"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="6" language="java" name="Frames.Options" project="Software-Projekt" 
+    file="/Software-Projekt/src/Frames/Options.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="178" x="837" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="Frames.Pause" project="Software-Projekt" 
+    file="/Software-Projekt/src/Frames/Pause.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="148" x="1201" y="644"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="Frames.Saves" project="Software-Projekt" 
+    file="/Software-Projekt/src/Frames/Saves.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="178" x="1358" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="Player.Player" project="Software-Projekt" 
+    file="/Software-Projekt/src/Player/Player.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="155" x="1703" y="3200"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="Player.Mage" project="Software-Projekt" 
+    file="/Software-Projekt/src/Player/Mage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="405" width="182" x="1703" y="3537"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="Player.Hero" project="Software-Projekt" 
+    file="/Software-Projekt/src/Player/Hero.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="351" width="182" x="1806" y="4198"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="Player.MageProjectile" project="Software-Projekt" 
+    file="/Software-Projekt/src/Player/MageProjectile.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="240" x="400" y="4198"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="Maps.Map" project="Software-Projekt" file="/Software-Projekt/src/Maps/Map.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="293" x="1389" y="644"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="Maps.TestMap" project="Software-Projekt" 
+    file="/Software-Projekt/src/Maps/TestMap.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="155" x="962" y="963"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="Maps.Darkness" project="Software-Projekt" 
+    file="/Software-Projekt/src/Maps/Darkness.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="531" width="293" x="629" y="963"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="16" language="java" name="Inventory.Inventory.ItemType" project="Software-Projekt" 
+    file="/Software-Projekt/src/Inventory/Inventory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="207" x="2216" y="4589"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="17" language="java" name="Inventory.Inventory" project="Software-Projekt" 
+    file="/Software-Projekt/src/Inventory/Inventory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="621" width="165" x="2028" y="3537"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="Inventory.DropItem" project="Software-Projekt" 
+    file="/Software-Projekt/src/Inventory/DropItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="190" x="427" y="1534"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="19" language="java" name="Inventory.Equippable.Weight" project="Software-Projekt" 
+    file="/Software-Projekt/src/Inventory/Equippable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="119" x="2304" y="644"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="20" language="java" name="Inventory.Equippable" project="Software-Projekt" 
+    file="/Software-Projekt/src/Inventory/Equippable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="567" width="257" x="2118" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="21" language="java" name="Inventory.Equippable.ArmorType" project="Software-Projekt" 
+    file="/Software-Projekt/src/Inventory/Equippable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="122" x="1879" y="644"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="22" language="java" name="Inventory.Equippable.AttributeType" project="Software-Projekt" 
+    file="/Software-Projekt/src/Inventory/Equippable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="223" x="2041" y="644"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="23" language="java" name="Inventory.Slot" project="Software-Projekt" 
+    file="/Software-Projekt/src/Inventory/Slot.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="167" x="2028" y="4198"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="Inventory.Usable" project="Software-Projekt" 
+    file="/Software-Projekt/src/Inventory/Usable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="87" x="1576" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="Entity.Animation" project="Software-Projekt" 
+    file="/Software-Projekt/src/Entity/Animation.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="176" x="1382" y="4589"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="Entity.Entity" project="Software-Projekt" 
+    file="/Software-Projekt/src/Entity/Entity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1323" width="236" x="381" y="1837"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="Enemies.Enemy" project="Software-Projekt" 
+    file="/Software-Projekt/src/Enemies/Enemy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="261" width="198" x="1190" y="3537"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="Enemies.EnemyGenerator" project="Software-Projekt" 
+    file="/Software-Projekt/src/Enemies/EnemyGenerator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="179" x="618" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="Enemies.EnemyGenInformation" project="Software-Projekt" 
+    file="/Software-Projekt/src/Enemies/EnemyGenInformation.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="164" x="264" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="Enemies.Ghoul" project="Software-Projekt" 
+    file="/Software-Projekt/src/Enemies/Ghoul.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="130" x="1382" y="4198"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="Enemies.Imp" project="Software-Projekt" 
+    file="/Software-Projekt/src/Enemies/Imp.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="130" x="850" y="4198"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="Enemies.Phantom" project="Software-Projekt" 
+    file="/Software-Projekt/src/Enemies/Phantom.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="130" x="1552" y="4198"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="Enemies.Reaper" project="Software-Projekt" 
+    file="/Software-Projekt/src/Enemies/Reaper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="130" x="680" y="4198"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="Enemies.Slug" project="Software-Projekt" 
+    file="/Software-Projekt/src/Enemies/Slug.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="152" x="1190" y="4198"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="Enemies.Undead" project="Software-Projekt" 
+    file="/Software-Projekt/src/Enemies/Undead.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="130" x="1020" y="4198"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="DungeonGenerator.DungeonGenerator" project="Software-Projekt" 
+    file="/Software-Projekt/src/DungeonGenerator/DungeonGenerator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="211" x="1157" y="963"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="DungeonGenerator.Room" project="Software-Projekt" 
+    file="/Software-Projekt/src/DungeonGenerator/Room.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="155" x="659" y="3200"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="DungeonGenerator.RoomBox" project="Software-Projekt" 
+    file="/Software-Projekt/src/DungeonGenerator/RoomBox.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="145" x="699" y="1837"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="DungeonGenerator.RoomTree" project="Software-Projekt" 
+    file="/Software-Projekt/src/DungeonGenerator/RoomTree.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="189" x="699" y="1534"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="Constants.Constants" project="Software-Projekt" 
+    file="/Software-Projekt/src/Constants/Constants.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="263" x="1055" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="41">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="42" name="IMP_DIE"/>      
+      <multiplicity id="43" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="44">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="45" name="REAPER_MOVE"/>      
+      <multiplicity id="46" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="47">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="48" name="SLUG_DIE"/>      
+      <multiplicity id="49" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="50">    
+    <bendpoint x="1733" y="4198"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="51" name="PLAYER_DEATH"/>      
+      <multiplicity id="52" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="53">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="54" name="dragged"/>      
+      <multiplicity id="55" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="56">    
+    <bendpoint x="628" y="3200"/>    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="26"/>  
+  </generalization>  
+  <generalization id="57">    
+    <bendpoint x="390" y="3537"/>    
+    <bendpoint x="390" y="3200"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="26"/>  
+  </generalization>  
+  <association id="58">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="59" name="roomTree"/>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="61">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="62" name="UNDEAD_MOVE"/>      
+      <multiplicity id="63" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="64">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="65" name="pause"/>      
+      <multiplicity id="66" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="67">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="68" name="SLUG_MOVE"/>      
+      <multiplicity id="69" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="71" name="IMP_ATTACK"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="74" name="type"/>      
+      <multiplicity id="75" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="77" name="hover"/>      
+      <multiplicity id="78" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="80" name="IMP_MOVE"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="83" name="GHOUL_ATTACK"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="85">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="86" name="REAPER_ATTACK"/>      
+      <multiplicity id="87" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="88">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="89" name="map"/>      
+      <multiplicity id="90" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="91">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <association id="92">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="93" name="left"/>      
+      <multiplicity id="94" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="95">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="26"/>  
+  </generalization>  
+  <association id="96">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="97" name="projectiles"/>      
+      <multiplicity id="98" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="99">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <association id="100">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="101" name="PLAYER_DEATH"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <bendpoint x="1398" y="963"/>    
+    <bendpoint x="1398" y="1534"/>    
+    <bendpoint x="1398" y="1837"/>    
+    <bendpoint x="1398" y="3200"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="104" name="activeEnemies"/>      
+      <multiplicity id="105" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <bendpoint x="668" y="1534"/>    
+    <bendpoint x="668" y="1837"/>    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="107" name="currentRoom"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="109">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="110" name="PLAYER_RUN"/>      
+      <multiplicity id="111" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="112">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="113" name="m"/>      
+      <multiplicity id="114" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="115">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="116" name="UNDEAD_DIE"/>      
+      <multiplicity id="117" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="118">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="119" name="room"/>      
+      <multiplicity id="120" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="121">    
+    <bendpoint x="2225" y="4198"/>    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="16"/>  
+  </nesting>  
+  <association id="122">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="123" name="PHANTOM_DIE"/>      
+      <multiplicity id="124" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="125">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <association id="126">    
+    <bendpoint x="1712" y="4198"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="127" name="PLAYER_RUN"/>      
+      <multiplicity id="128" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="129">    
+    <bendpoint x="647" y="1534"/>    
+    <bendpoint x="647" y="1837"/>    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="130" name="roomList"/>      
+      <multiplicity id="131" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="132">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </nesting>  
+  <association id="133">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="134" name="activeSlots"/>      
+      <multiplicity id="135" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="136">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="137" name="h"/>      
+      <multiplicity id="138" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="139">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="140" name="PHANTOM_IDLE"/>      
+      <multiplicity id="141" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="142">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="143" name="PLAYER_IDLE"/>      
+      <multiplicity id="144" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="145">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="146" name="REAPER_DIE"/>      
+      <multiplicity id="147" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="148">    
+    <bendpoint x="1915" y="3537"/>    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <association id="149">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="150" name="UNDEAD_IDLE"/>      
+      <multiplicity id="151" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="152">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="153" name="GHOUL_DIE"/>      
+      <multiplicity id="154" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="155">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="156" name="GHOUL_MOVE"/>      
+      <multiplicity id="157" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="158">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <association id="159">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="160" name="leaf"/>      
+      <multiplicity id="161" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="162">    
+    <bendpoint x="1712" y="644"/>    
+    <bendpoint x="1712" y="963"/>    
+    <bendpoint x="1712" y="1534"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="163" name="creator"/>      
+      <multiplicity id="164" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="165">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="166" name="right"/>      
+      <multiplicity id="167" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="168">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="169" name="currentScreen"/>      
+      <multiplicity id="170" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="171">    
+    <bendpoint x="1754" y="4198"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="172" name="PLAYER_IDLE"/>      
+      <multiplicity id="173" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="174">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="175" name="player"/>      
+      <multiplicity id="176" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="177">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <association id="178">    
+    <bendpoint x="1775" y="4198"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="179" name="PLAYER_ATTACK"/>      
+      <multiplicity id="180" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="181">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="182" name="SLUG_ATTACK"/>      
+      <multiplicity id="183" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="184">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="185" name="PHANTOM_ATTACK"/>      
+      <multiplicity id="186" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="187">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="188" name="SLUG_IDLE"/>      
+      <multiplicity id="189" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="190">    
+    <bendpoint x="1848" y="644"/>    
+    <bendpoint x="1848" y="963"/>    
+    <bendpoint x="1848" y="1534"/>    
+    <bendpoint x="1848" y="1837"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="191" name="player"/>      
+      <multiplicity id="192" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="193">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="194" name="weight"/>      
+      <multiplicity id="195" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="196">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <nesting id="197">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="21"/>  
+  </nesting>  
+  <association id="198">    
+    <bendpoint x="369" y="3200"/>    
+    <bendpoint x="369" y="3537"/>    
+    <bendpoint x="369" y="4198"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="199" name="currentAnimation"/>      
+      <multiplicity id="200" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="201">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="202" name="inventory"/>      
+      <multiplicity id="203" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="204">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="205" name="tree"/>      
+      <multiplicity id="206" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="207">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="208" name="PHANTOM_MOVE"/>      
+      <multiplicity id="209" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="210">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="211" name="IMP_IDLE"/>      
+      <multiplicity id="212" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="213">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <association id="214">    
+    <bendpoint x="411" y="3537"/>    
+    <bendpoint x="411" y="3200"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="215" name="hitList"/>      
+      <multiplicity id="216" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="217">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="218" name="UNDEAD_ATTACK"/>      
+      <multiplicity id="219" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="220">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="221" name="dropItems"/>      
+      <multiplicity id="222" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="223">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <association id="224">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="225" name="REAPER_IDLE"/>      
+      <multiplicity id="226" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="227">    
+    <bendpoint x="1419" y="963"/>    
+    <bendpoint x="1419" y="1534"/>    
+    <bendpoint x="1419" y="1837"/>    
+    <bendpoint x="1419" y="3200"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="228" name="dyingEnemies"/>      
+      <multiplicity id="229" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="230">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="231" name="ARMORTYPES"/>      
+      <multiplicity id="232" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="233">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="234" name="PROJECTILE_MOVE"/>      
+      <multiplicity id="235" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="236">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <association id="237">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="238" name="PLAYER_ATTACK"/>      
+      <multiplicity id="239" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="240">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="241" name="GHOUL_IDLE"/>      
+      <multiplicity id="242" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="243">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="244" name="enemies"/>      
+      <multiplicity id="245" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="246">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="247" name="storageSlots"/>      
+      <multiplicity id="248" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="249">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="19"/>  
+  </nesting>  
+  <association id="250">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="251" name="WEIGHTS"/>      
+      <multiplicity id="252" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="253">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="22"/>  
+  </nesting>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
